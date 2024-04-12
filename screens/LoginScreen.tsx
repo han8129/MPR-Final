@@ -31,6 +31,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
     if (email !== "" && password !== "") {
       // call service to sign in
+      navigation.navigate("Game");
     }
   };
 
