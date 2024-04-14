@@ -75,7 +75,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
           />
 
           <CustomButton onPress={handleSignUp} title="Sign up" />
-          <View style={{ marginTop: 50, alignItems: "center" }}>
+          <View style={{ marginTop: 20, alignItems: "center" }}>
             <Text>Already have an account ?</Text>
             <TouchableOpacity onPress={handleLogin}>
               <Text style={styles.toSignUp}>Login here</Text>
