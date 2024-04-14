@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions } from "react-native";
 import { Color } from "../constants/Color";
 import { StatusBar } from "expo-status-bar";
 import Header from "../components/game/Header";
 import AgeStatus from "../components/game/AgeStatus";
 import PlayerStats from "../components/game/PlayerStats";
 
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 const image = require("../assets/images/High.png");
 
 interface Props {
@@ -21,6 +23,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const [title, setTitle] = useState("Student");
   const [username, setUsername] = useState("John Doe");
 
+  const navigateDailyLogin = () => {
+    navigation.navigate("DailyLogin");
+  };
 
   return (
     <>
@@ -29,8 +34,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <Header username={username} userTitle={title} balance={money} />
         <AgeStatus age={age} value={50} color={Color.red} />
         <Image source={image} style={styles.image} resizeMode="contain" />
-        <TouchableOpacity style={styles.exitButton}>
-          <Text style={styles.exitText}>Exit</Text>
+        <TouchableOpacity style={styles.dailyLoginbutton} onPress={navigateDailyLogin}>
+          <Text style={styles.dailyText}>Daily Gift</Text>
         </TouchableOpacity>
         <PlayerStats health={health} smarts={smarts} />
       </View>
@@ -47,21 +52,21 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
   },
-  exitButton: {
-    height: 50,
-    width: 70,
+  dailyLoginbutton: {
+    height: 40,
+    width: 80,
     backgroundColor: Color.red,
-    top: 500,
+    top: 0.57 * height,
     right: 30,
     position: "absolute",
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
   },
-  exitText: {
+  dailyText: {
     color: Color.white,
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 12,
   },
 });
 

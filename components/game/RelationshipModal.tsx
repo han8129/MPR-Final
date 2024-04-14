@@ -5,20 +5,19 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
-  Button,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Job } from "../../screens/CareerScreen";
+import { Relationship } from "../../screens/ActivityScreen";
 import { Color } from "../../constants/Color";
 
-interface JobModalProps {
-  job: Job | null;
+interface RelationshipModalProps {
+  rel: Relationship | null;
   closeModal: () => void;
-  applyJob: () => void;
+  handleInteraction: () => void;
 }
 
-const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob }) => {
-  if (!job) return null;
+const RelationshipModal: React.FC<RelationshipModalProps> = ({ rel, closeModal, handleInteraction }) => {
+  if (!rel) return null;
 
   return (
     <Modal
@@ -30,25 +29,18 @@ const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob }) => {
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>{job.name}</Text>
+            <Text style={styles.modalTitle}>{rel.name}</Text>
             <TouchableOpacity onPress={closeModal}>
               <Ionicons name="close" size={24} color="#333" />
             </TouchableOpacity>
           </View>
-          <Text style={styles.modalDescription}>{job.desc}</Text>
-          <Text style={styles.detail}>Type: {job.type}</Text>
-          <Text style={styles.detail}>Rate: ${job.rate}/hour</Text>
-          <Text style={styles.detail}>Age Needed: {job.ageNeeded}</Text>
-          <Text style={styles.detail}>Health Effect: {job.healthEffect}</Text>
-          <Text style={styles.detail}>Money Effect: {job.moneyEffect}</Text>
-          <Text style={styles.detail}>Smarts Effect: {job.smartsEffect}</Text>
-          <Text style={styles.detail}>
-            Prerequisites:{" "}
-            {job.prerequisites.length ? job.prerequisites.join(", ") : "None"}
-          </Text>
-          <View style={{alignItems: "center"}}>
-            <TouchableOpacity style={styles.button} onPress={applyJob}>
-              <Text style={styles.buttonText}>Apply</Text>
+          <Text style={styles.modalDescription}>{rel.desc}</Text>
+          <Text style={styles.modalDescription}>Marital Status: {rel.maritalStatus}</Text>
+          <Text style={styles.modalDescription}>Job: {rel.work}</Text>
+
+          <View style={{ alignItems: "center" }}>
+            <TouchableOpacity style={styles.button} onPress={handleInteraction}>
+              <Text style={styles.buttonText}>End Relation</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -85,10 +77,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
   },
-  detail: {
-    fontSize: 14,
-    marginBottom: 5,
-  },
   button: {
     backgroundColor: Color.red,
     padding: 10,
@@ -103,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JobModal;
+export default RelationshipModal;
