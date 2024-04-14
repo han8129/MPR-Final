@@ -5,20 +5,19 @@ import {
   StyleSheet,
   Modal,
   TouchableOpacity,
-  Button,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Job } from "../../screens/CareerScreen";
 import { Color } from "../../constants/Color";
+import { Activity } from "../../screens/ActivityScreen";
 
-interface JobModalProps {
-  job: Job | null;
+interface ActivityModalProps {
+  act: Activity | null;
   closeModal: () => void;
-  applyJob: () => void;
+  applyActivity: () => void;
 }
 
-const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob }) => {
-  if (!job) return null;
+const ActivityModal: React.FC<ActivityModalProps> = ({ act, closeModal, applyActivity }) => {
+  if (!act) return null;
 
   return (
     <Modal
@@ -30,24 +29,22 @@ const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob }) => {
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>{job.name}</Text>
+            <Text style={styles.modalTitle}>{act.name}</Text>
             <TouchableOpacity onPress={closeModal}>
               <Ionicons name="close" size={24} color="#333" />
             </TouchableOpacity>
           </View>
-          <Text style={styles.modalDescription}>{job.desc}</Text>
-          <Text style={styles.detail}>Type: {job.type}</Text>
-          <Text style={styles.detail}>Rate: ${job.rate}/hour</Text>
-          <Text style={styles.detail}>Age Needed: {job.ageNeeded}</Text>
-          <Text style={styles.detail}>Health Effect: {job.healthEffect}</Text>
-          <Text style={styles.detail}>Money Effect: {job.moneyEffect}</Text>
-          <Text style={styles.detail}>Smarts Effect: {job.smartsEffect}</Text>
+          <Text style={styles.modalDescription}>{act.desc}</Text>
+          <Text style={styles.detail}>Duration: {act.duration} month</Text>
+          <Text style={styles.detail}>Age Needed: {act.ageNeeded}</Text>
+          <Text style={styles.detail}>Health Effect: {act.healthEffect}</Text>
+          <Text style={styles.detail}>Money Effect: {act.moneyEffect}</Text>
           <Text style={styles.detail}>
             Prerequisites:{" "}
-            {job.prerequisites.length ? job.prerequisites.join(", ") : "None"}
+            {act.prerequisites.length ? act.prerequisites.join(", ") : "None"}
           </Text>
-          <View style={{alignItems: "center"}}>
-            <TouchableOpacity style={styles.button} onPress={applyJob}>
+          <View style={{ alignItems: "center" }}>
+            <TouchableOpacity style={styles.button} onPress={applyActivity}>
               <Text style={styles.buttonText}>Apply</Text>
             </TouchableOpacity>
           </View>
@@ -103,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default JobModal;
+export default ActivityModal;
