@@ -1,102 +1,84 @@
-import {View, Text} from 'react-native';
-import {GameContext} from '../store/GameContext'
-import { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Color } from "../constants/Color";
+import { StatusBar } from "expo-status-bar";
+import Header from "../components/game/Header";
+import AgeStatus from "../components/game/AgeStatus";
+import Player from "../models/Player";
+import PlayerStats from "../components/game/PlayerStats";
+import store from "../store/store";
+import { PlayerState } from "../store/playerReducers";
+import { useSelector } from "react-redux";
 
-const INTERVAL = 300;
-export default function HomeScreen() {
-    const context = useContext(GameContext);
-    const loop = useRef(setInterval( () => {}, INTERVAL ))
-    const month = useRef(0)
+const image = require("../assets/images/Infant.png");
 
-    useEffect(() => startLoop(), []);
-
-    function startLoop() {
-    clearInterval(loop.current);
-
-    loop.current = setInterval(() => {
-        let currentDays = context.days;
-        let currentMonth = context.month
-      context.setDays(currentDays + 1);
-
-      monthCount.current += 1;
-      let currentHealth = health;
-      if (context.money <= 0) {
-        currentHealth -= MAX_HEALTH * 0.05;
-      }
-
-      events.current = events.current.filter(
-        (e) => days < e.startDate + e.duration,
-      );
-
-      events.current.forEach((e: Event) => {
-        currentHealth += e.effect.health;
-        money.current += e.effect.money;
-        happy.current += e.effect.happy;
-      });
-
-      setHealth(currentHealth);
-      console.log(currentHealth);
-      if (currentHealth <= 0) {
-        clearInterval(loop.current);
-        alert("You have died");
-        return;
-      }
-
-      // a random number in range [0, 9]
-      // 20% for event
-      if (monthCount.current > 29) {
-        monthCount.current = 0;
-        if ([0].includes(Math.floor(Math.random() * 3))) {
-          clearInterval(loop.current);
-          const randIndex = Math.floor(Math.random() * ALL_EVENTS.length);
-          const event = ALL_EVENTS[randIndex];
-          Alert.alert(`${event.name} happened`, "What will you do?", [
-            {
-              text: "A",
-              onPress: () => {
-                setHealth((current) => current + event.effect.health);
-                console.log("Pick A");
-                startLoop();
-              },
-            },
-            {
-              text: "B",
-              onPress: () => {
-                money.current += event.effect.money;
-                happy.current += event.effect.happy;
-                console.log("Pick B");
-                startLoop();
-              },
-            },
-          ]);
-          event.startDate = days;
-
-          events.current.push(event);
-        }
-      }
-
-    }, INTERVAL);
-  }
-
-    return (
-        <View style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            flex: 1,
-            backgroundColor: 'steelblue'
-        }}>
-            <Text style={{
-                color: 'white',
-                fontSize: 24
-            }}>
-                You health {context.health}
-            </Text>
-            <Text style={{
-                color: 'white',
-                fontSize: 24
-            }}>
-                Days lived {context.days}
-            </Text>
-        </View>
-    );
+interface Props {
+  navigation: any;
 }
+
+const HomeScreen: React.FC<Props> = ({ navigation }) => {
+
+  const player = Player.getInstance();
+
+  const { health, smarts, money, age, title, username } = useSelector(
+    (state: PlayerState) => state
+  );
+
+  useEffect(() => {
+    store.dispatch({
+      type: "SET_PLAYER_DATA",
+      payload: {
+        health: player.getHealth(),
+        smarts: player.getSmarts(),
+        money: player.getMoney(),
+        age: player.getAge(),
+        title: player.getTitle(),
+        username: player.getName(),
+      },
+    });
+  }, []);
+
+  return (
+    <>
+      <StatusBar hidden={true} />
+      <View style={styles.container}>
+        <Header username={username} userTitle={title} balance={money} />
+        <AgeStatus age={age} value={50} color={Color.red} />
+        <Image source={image} style={styles.image} resizeMode="contain" />
+        <TouchableOpacity style={styles.exitButton}>
+          <Text style={styles.exitText}>Exit</Text>
+        </TouchableOpacity>
+        <PlayerStats health={health} smarts={smarts} />
+      </View>
+    </>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Color.white,
+    alignItems: "center",
+  },
+  image: {
+    flex: 1,
+  },
+  exitButton: {
+    height: 50,
+    width: 70,
+    backgroundColor: Color.red,
+    top: 500,
+    right: 30,
+    position: "absolute",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  exitText: {
+    color: Color.white,
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+});
+
+export default HomeScreen;
