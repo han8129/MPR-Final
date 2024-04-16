@@ -1,6 +1,7 @@
 import { createContext, useState, useRef, useEffect, useCallback } from 'react';
 import { Alert } from 'react-native';
 import { Event, Activity } from '../model/models';
+import useInterval from '../hooks/useInterval';
 
 export const GameContext = createContext({
     health: 100,
@@ -9,12 +10,6 @@ export const GameContext = createContext({
     events: Array<Event>,
     activities: Array<Activity>,
     days: 1,
-    setHealth: (num: number) => {},
-    setDays: (days: number) => {},
-    monthCount: 0,
-    setMonthCount: (num: number) => {},
-    setMoney: (num: number) => {},
-    setHappy: (num: number) => {},
     setEvents: (e: Object) => {},
 });
 
@@ -26,10 +21,17 @@ export default function GameContextProvider({ children }) {
     const [activities, setActivities] = useState(new Array<Object>());
     const [days, setDays] = useState(100);
     const [monthCount, setMonthCount] = useState(0);
-    const [isLooping, setIsLooping] = useState(true);
-    const callbackMemo = useRef(callBackHandler);
+    const [isPause, setIsPause] = useState(false);
 
-    function callBackHandler() {
+    useInterval(callback, INTERVAL, isPause, [
+        days,
+        monthCount,
+        health,
+        happy,
+        money,
+    ]);
+
+    function callback() {
         let currentDays = days;
         let currentMonthCount = monthCount;
         let currentHealth = health;
@@ -41,7 +43,7 @@ export default function GameContextProvider({ children }) {
         setHealth(currentHealth);
 
         if (currentHealth <= 0) {
-            setIsLooping(false);
+            setIsPause(true);
             alert('You have died');
             return;
         }
@@ -49,8 +51,8 @@ export default function GameContextProvider({ children }) {
         // a random number in range [0, 9]
         // 20% for event
         if (currentMonthCount > 29) {
-            if ([0].includes(Math.floor(Math.random() * 3))) {
-                setIsLooping(false);
+            if ([0].includes(Math.floor(Math.random() * 2))) {
+                setIsPause(true);
 
                 const randIndex = Math.floor(Math.random() * ALL_EVENTS.length);
                 const event = ALL_EVENTS[randIndex];
@@ -61,7 +63,7 @@ export default function GameContextProvider({ children }) {
                             currentHealth += event.effect.health;
                             setHealth(currentHealth);
                             console.log('Pick A');
-                            setIsLooping(true);
+                            setIsPause(false);
                         },
                     },
                     {
@@ -70,7 +72,7 @@ export default function GameContextProvider({ children }) {
                             setMoney((current) => current + event.effect.money);
                             setHappy((current) => current + event.effect.happy);
                             console.log('Pick B');
-                            setIsLooping(true);
+                            setIsPause(false);
                         },
                     },
                 ]);
@@ -89,23 +91,6 @@ export default function GameContextProvider({ children }) {
         setMonthCount(currentMonthCount);
     }
 
-    useEffect(() => {
-        callbackMemo.current = callBackHandler;
-    }, [callBackHandler]);
-
-    useEffect(() => {
-        if (isLooping) {
-            let loop = setInterval(() => {
-                callbackMemo.current();
-            }, INTERVAL);
-            return () => clearInterval(loop);
-        }
-    }, [isLooping]);
-
-    function changeMonthCount(num: number) {
-        setMonthCount(num);
-    }
-
     const context = {
         health: health,
         money: money,
@@ -113,12 +98,6 @@ export default function GameContextProvider({ children }) {
         events: events,
         activities: activities,
         days: days,
-        setHealth: setHealth,
-        setDays: setDays,
-        monthCount: monthCount,
-        setMonthCount: changeMonthCount,
-        setMoney: setMoney,
-        setHappy: setHappy,
         setEvents: setEvents,
     };
 
