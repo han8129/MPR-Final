@@ -26,9 +26,10 @@ export default function GameContextProvider({ children }) {
     const [activities, setActivities] = useState(new Array<Object>());
     const [days, setDays] = useState(100);
     const [monthCount, setMonthCount] = useState(0);
-    const loop = useRef(setInterval(() => {}, INTERVAL));
+    const [isLooping, setIsLooping] = useState(true);
+    const callbackMemo = useRef(callBackHandler);
 
-    const callBackHandler = useCallback(() => {
+    function callBackHandler() {
         let currentDays = days;
         let currentMonthCount = monthCount;
         let currentHealth = health;
@@ -40,7 +41,7 @@ export default function GameContextProvider({ children }) {
         setHealth(currentHealth);
 
         if (currentHealth <= 0) {
-            clearInterval(loop.current);
+            setIsLooping(false);
             alert('You have died');
             return;
         }
@@ -48,10 +49,9 @@ export default function GameContextProvider({ children }) {
         // a random number in range [0, 9]
         // 20% for event
         if (currentMonthCount > 29) {
-            setMonthCount(0);
-
             if ([0].includes(Math.floor(Math.random() * 3))) {
-                clearInterval(loop.current)
+                setIsLooping(false);
+
                 const randIndex = Math.floor(Math.random() * ALL_EVENTS.length);
                 const event = ALL_EVENTS[randIndex];
                 Alert.alert(`${event.name} happened`, 'What will you do?', [
@@ -61,36 +61,25 @@ export default function GameContextProvider({ children }) {
                             currentHealth += event.effect.health;
                             setHealth(currentHealth);
                             console.log('Pick A');
-                            loop.current = setInterval(
-                                callBackHandler,
-                                INTERVAL
-                            );
+                            setIsLooping(true);
                         },
                     },
                     {
                         text: 'B',
                         onPress: () => {
-                            setMoney(
-                                (current) => current + event.effect.money
-                            );
-                            setHappy(
-                                (current) => current + event.effect.happy
-                            );
+                            setMoney((current) => current + event.effect.money);
+                            setHappy((current) => current + event.effect.happy);
                             console.log('Pick B');
-                            loop.current = setInterval(
-                                callBackHandler,
-                                INTERVAL
-                            );
+                            setIsLooping(true);
                         },
                     },
                 ]);
-                event.startDate = currentDays;
-
-                setEvents((current) => [...current, event]);
-
-                return;
             }
 
+            setMonthCount(0);
+            currentDays += 1;
+            currentMonthCount += 1;
+            setDays(currentDays);
             return;
         }
 
@@ -98,13 +87,20 @@ export default function GameContextProvider({ children }) {
         currentMonthCount += 1;
         setDays(currentDays);
         setMonthCount(currentMonthCount);
-    }, [health, money, happy, days, monthCount]);
+    }
 
     useEffect(() => {
-        loop.current = setInterval(callBackHandler, INTERVAL);
-        console.log(monthCount)
-        return () => clearInterval(loop.current);
-    }, [health, money, happy, days, monthCount]);
+        callbackMemo.current = callBackHandler;
+    }, [callBackHandler]);
+
+    useEffect(() => {
+        if (isLooping) {
+            let loop = setInterval(() => {
+                callbackMemo.current();
+            }, INTERVAL);
+            return () => clearInterval(loop);
+        }
+    }, [isLooping]);
 
     function changeMonthCount(num: number) {
         setMonthCount(num);
