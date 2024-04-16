@@ -50,6 +50,10 @@ export default function GameContextProvider({ children }: { children: React.Reac
       // a random number in range [0, 9]
       const randInt = Math.floor(Math.random() * 10);
 
+    timer.current = setInterval(() => {
+      // a random number in range [0, 9]
+      const randInt = Math.floor(Math.random() * 10);
+
       console.log(health.current);
       if ([0, 9].includes(randInt)) {
         health.current = health.current - 10;
