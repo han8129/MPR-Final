@@ -13,7 +13,7 @@ class Player {
   private constructor() {
     // call service to get data
     this.name = "Player";
-    this.age = 1;
+    this.age = 19;
     this.title = "Infant";
     this.health = 30;
     this.money = 0;
