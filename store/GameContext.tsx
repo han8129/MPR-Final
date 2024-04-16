@@ -1,147 +1,132 @@
-import { createContext, useState, useRef, useEffect } from "react";
-import { Alert } from "react-native";
+import { createContext, useState } from 'react';
+import { Alert } from 'react-native';
+import { Event, Activity } from '../model/models';
+import useInterval from '../hooks/useInterval';
 
 export const GameContext = createContext({
-  health: 100,
-  money: 100000,
-  happy: 100,
-  events: Array<Event>,
-  activities: Array<Activity>,
+    health: 100,
+    money: 100000,
+    happy: 100,
+    events: Array<Event>,
+    activities: Array<Activity>,
     days: 1,
+    setEvents: (e: Object) => {},
 });
 
-const INTERVAL = 200;
-
 export default function GameContextProvider({ children }) {
-  const health = useRef(100);
-  const money = useRef(10000);
-  const happy = useRef(100);
-  const events = useRef(new Array<Event>());
-  const activities = useRef(new Array<Activity>());
-  const loop = useRef(setInterval(() => {}, INTERVAL));
-  const [days, setDays] = useState(100);
-  const monthCount = useRef(0);
+    const [health, setHealth] = useState(100);
+    const [money, setMoney] = useState(10000);
+    const [happy, setHappy] = useState(100);
+    const [events, setEvents] = useState(new Array<Object>());
+    const [activities, setActivities] = useState(new Array<Object>());
+    const [days, setDays] = useState(100);
+    const [monthCount, setMonthCount] = useState(0);
+    const [isPause, setIsPause] = useState(false);
 
-  useEffect(() => startLoop(), []);
+    useInterval(callback, INTERVAL, isPause, [
+        days,
+        monthCount,
+        health,
+        happy,
+        money,
+    ]);
 
-  const context = {
-    health: health.current,
-    money: money,
-    happy: happy,
-    events: events.current,
-    activities: activities.current,
-      days: days
-    // setHealth: setHealth,
-  };
+    function callback() {
+        let currentDays = days;
+        let currentMonthCount = monthCount;
+        let currentHealth = health;
 
-  function startLoop() {
-    clearInterval(loop.current);
-
-    loop.current = setInterval(() => {
-        console.log(days);
-        setDays((current) => current + 1);
-      monthCount.current += 1;
-      if (money.current <= 0) {
-        health.current -= MAX_HEALTH * 0.05;
-      }
-
-      events.current = events.current.filter(
-        (e) => days < e.startDate + e.duration,
-      );
-
-      events.current.forEach((e: Event) => {
-        health.current += e.effect.health;
-        money.current += e.effect.money;
-        happy.current += e.effect.happy;
-      });
-
-      if (health.current <= 0) {
-        clearInterval(loop.current);
-          alert('You have died')
-          return;
-      }
-
-      // a random number in range [0, 9]
-      // 20% for event
-      if (monthCount.current > 29) {
-        monthCount.current = 0;
-        if ([0].includes(Math.floor(Math.random() * 3))) {
-          clearInterval(loop.current);
-          const randIndex = Math.floor(Math.random() * ALL_EVENTS.length);
-          const event = ALL_EVENTS[randIndex];
-          Alert.alert(`${event.name} happened`, "What will you do?", [
-            {
-              text: "A",
-              onPress: () => {
-                health.current += event.effect.health;
-                console.log("Pick A");
-                startLoop();
-              },
-            },
-            {
-              text: "B",
-              onPress: () => {
-                money.current += event.effect.money;
-                happy.current += event.effect.happy;
-                console.log("Pick B");
-                startLoop();
-              },
-            },
-          ]);
-          event.startDate = days;
-
-          events.current.push(event);
+        if (money <= 0) {
+            currentHealth -= MAX_HEALTH * 0.05;
         }
-      }
-    }, INTERVAL);
-  }
 
-  return (
-    <GameContext.Provider value={context}>{children}</GameContext.Provider>
-  );
+        setHealth(currentHealth);
+
+        if (currentHealth <= 0) {
+            setIsPause(true);
+            alert('You have died');
+            return;
+        }
+
+        // a random number in range [0, 9]
+        // 20% for event
+        if (currentMonthCount > 29) {
+            if ([0].includes(Math.floor(Math.random() * 2))) {
+                setIsPause(true);
+
+                const randIndex = Math.floor(Math.random() * ALL_EVENTS.length);
+                const event = ALL_EVENTS[randIndex];
+                Alert.alert(`${event.name} happened`, 'What will you do?', [
+                    {
+                        text: 'A',
+                        onPress: () => {
+                            currentHealth += event.effect.health;
+                            setHealth(currentHealth);
+                            console.log('Pick A');
+                            setIsPause(false);
+                        },
+                    },
+                    {
+                        text: 'B',
+                        onPress: () => {
+                            setMoney((current) => current + event.effect.money);
+                            setHappy((current) => current + event.effect.happy);
+                            console.log('Pick B');
+                            setIsPause(false);
+                        },
+                    },
+                ]);
+            }
+
+            setMonthCount(0);
+            currentDays += 1;
+            currentMonthCount += 1;
+            setDays(currentDays);
+            return;
+        }
+
+        currentDays += 1;
+        currentMonthCount += 1;
+        setDays(currentDays);
+        setMonthCount(currentMonthCount);
+    }
+
+    const context = {
+        health: health,
+        money: money,
+        happy: happy,
+        events: events,
+        activities: activities,
+        days: days,
+        setEvents: setEvents,
+    };
+
+    return (
+        <GameContext.Provider value={context}>{children}</GameContext.Provider>
+    );
 }
 
 const MAX_HEALTH = 100;
-
 const ALL_EVENTS: Event[] = [
-  {
-    name: "Depression",
-    effect: {
-      health: -10,
-      money: -5,
-      happy: -15,
+    {
+        name: 'Depression',
+        effect: {
+            health: -10,
+            money: -5,
+            happy: -15,
+        },
+        startDate: 0,
+        duration: 1,
     },
-    startDate: 0,
-    duration: 1,
-  },
-  {
-    name: "Getting Fired",
-    effect: {
-      health: -2,
-      money: -100,
-      happy: -15,
+    {
+        name: 'Getting Fired',
+        effect: {
+            health: -2,
+            money: -100,
+            happy: -15,
+        },
+        startDate: 0,
+        duration: 60,
     },
-    startDate: 0,
-    duration: 60,
-  },
 ];
-
-export interface Event {
-  name: string;
-  effect: {
-    health: number;
-    money: number;
-    happy: number;
-  };
-  startDate: number;
-  duration: number;
-}
-
-export interface Activity {
-  name: string;
-  effect: {
-    health: number;
-    money: number;
-    happy: number;
-  };
-}
+const INTERVAL = 200;
