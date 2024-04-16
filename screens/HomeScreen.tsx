@@ -4,13 +4,9 @@ import { Color } from "../constants/Color";
 import { StatusBar } from "expo-status-bar";
 import Header from "../components/game/Header";
 import AgeStatus from "../components/game/AgeStatus";
-import Player from "../models/Player";
 import PlayerStats from "../components/game/PlayerStats";
-import store from "../store/store";
-import { PlayerState } from "../store/playerReducers";
-import { useSelector } from "react-redux";
 
-const image = require("../assets/images/Infant.png");
+const image = require("../assets/images/High.png");
 
 interface Props {
   navigation: any;
@@ -18,25 +14,13 @@ interface Props {
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
-  const player = Player.getInstance();
+  const [health, setHealth] = useState(100);
+  const [smarts, setSmarts] = useState(100);
+  const [money, setMoney] = useState(100);
+  const [age, setAge] = useState(18);
+  const [title, setTitle] = useState("Student");
+  const [username, setUsername] = useState("John Doe");
 
-  const { health, smarts, money, age, title, username } = useSelector(
-    (state: PlayerState) => state
-  );
-
-  useEffect(() => {
-    store.dispatch({
-      type: "SET_PLAYER_DATA",
-      payload: {
-        health: player.getHealth(),
-        smarts: player.getSmarts(),
-        money: player.getMoney(),
-        age: player.getAge(),
-        title: player.getTitle(),
-        username: player.getName(),
-      },
-    });
-  }, []);
 
   return (
     <>
