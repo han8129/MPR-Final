@@ -59,11 +59,11 @@ const EducationModal: React.FC<ModalProps> = ({
               ? education.prerequisites.join(", ")
               : "None"}
           </Text>
-          <View style={{ alignItems: "center" }}>
-            <TouchableOpacity style={styles.button} onPress={takeCourse}>
-              <Text style={styles.buttonText}>Take Course</Text>
-            </TouchableOpacity>
-          </View>
+          <Button
+            title="Take Course"
+            onPress={takeCourse}
+            color={Color.black}
+          />
         </View>
       </View>
     </Modal>
@@ -101,19 +101,6 @@ const styles = StyleSheet.create({
   detail: {
     fontSize: 14,
     marginBottom: 5,
-  },
-  button: {
-    backgroundColor: Color.red,
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-    marginTop: 10,
-    width: "50%",
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
   },
 });
 

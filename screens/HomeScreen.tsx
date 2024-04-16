@@ -6,8 +6,6 @@ import Header from "../components/game/Header";
 import AgeStatus from "../components/game/AgeStatus";
 import PlayerStats from "../components/game/PlayerStats";
 
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
 const image = require("../assets/images/High.png");
 
 interface Props {
@@ -23,9 +21,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const [title, setTitle] = useState("Student");
   const [username, setUsername] = useState("John Doe");
 
-  const navigateDailyLogin = () => {
-    navigation.navigate("DailyLogin");
-  };
 
   return (
     <>
