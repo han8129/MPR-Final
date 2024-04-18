@@ -44,11 +44,13 @@ const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob }) => {
           <Text style={styles.detail}>Smarts Effect: {job.smartsEffect}</Text>
           <Text style={styles.detail}>
             Prerequisites:{" "}
-            {job.prerequisites.length
-              ? job.prerequisites.join(", ")
-              : "None"}
+            {job.prerequisites.length ? job.prerequisites.join(", ") : "None"}
           </Text>
-          <Button title="Apply" onPress={applyJob} color={Color.black} />
+          <View style={{alignItems: "center"}}>
+            <TouchableOpacity style={styles.button} onPress={applyJob}>
+              <Text style={styles.buttonText}>Apply</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -86,6 +88,18 @@ const styles = StyleSheet.create({
   detail: {
     fontSize: 14,
     marginBottom: 5,
+  },
+  button: {
+    backgroundColor: Color.red,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    width: "50%",
+  },
+  buttonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
   },
 });
 
