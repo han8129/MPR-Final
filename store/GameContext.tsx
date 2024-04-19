@@ -44,6 +44,7 @@ export default function GameContextProvider({ children }) {
 
         if (currentHealth <= 0) {
             setIsPause(true);
+            setHealth(0);
             alert('You have died');
             return;
         }
