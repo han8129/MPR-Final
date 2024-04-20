@@ -7,32 +7,36 @@ import { Color } from "../../constants/Color";
 interface PlayerStatsProps {
   health: number;
   smarts: number;
+  happiness: number;
 }
 
-const PlayerStats: React.FC<PlayerStatsProps> = ({ health, smarts }) => {
+const PlayerStats: React.FC<PlayerStatsProps> = ({ health, smarts, happiness }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.statCont}>
-        <Text style={{ textAlign: "center", fontSize: 24, fontWeight: "bold" }}>
-          Player's Stats
-        </Text>
-
-        <View style={styles.stat}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Health</Text>
-            <Ionicons name="heart" size={24} color={Color.black} />
+      <View style={styles.container}>
+          <View style={styles.statCont}>
+              <View style={styles.stat}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      <Text>Health</Text>
+                      <Ionicons name='heart' size={24} color={Color.black} />
+                  </View>
+                  <ProgressBar value={health} color={Color.black} />
+              </View>
+              <View style={styles.stat}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      <Text>Happiness</Text>
+                      <Ionicons name='heart' size={24} color={Color.black} />
+                  </View>
+                  <ProgressBar value={happiness} color={Color.black} />
+              </View>
+              <View style={styles.stat}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      <Text>Smarts</Text>
+                      <Ionicons name='person' size={24} color={Color.black} />
+                  </View>
+                  <ProgressBar value={smarts} color={Color.black} />
+              </View>
           </View>
-          <ProgressBar value={health} color={Color.black} />
-        </View>
-        <View style={styles.stat}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Smarts</Text>
-            <Ionicons name="person" size={24} color={Color.black} />
-          </View>
-          <ProgressBar value={smarts} color={Color.black} />
-        </View>
       </View>
-    </View>
   );
 };
 

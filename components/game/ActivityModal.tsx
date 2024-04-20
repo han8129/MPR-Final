@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Color } from "../../constants/Color";
-import { Activity } from "../../screens/ActivityScreen";
+import { Activity } from "../../models";
 
 interface ActivityModalProps {
   act: Activity | null;
@@ -35,13 +35,14 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ act, closeModal, applyAct
             </TouchableOpacity>
           </View>
           <Text style={styles.modalDescription}>{act.desc}</Text>
-          <Text style={styles.detail}>Duration: {act.duration} month</Text>
           <Text style={styles.detail}>Age Needed: {act.ageNeeded}</Text>
-          <Text style={styles.detail}>Health Effect: {act.healthEffect}</Text>
-          <Text style={styles.detail}>Money Effect: {act.moneyEffect}</Text>
+          <Text style={styles.detail}>Health Effect: {act.effect.health}</Text>
+          <Text style={styles.detail}>Money Effect: {act.effect.money}</Text>
+          <Text style={styles.detail}>Happiness Effect: {act.effect.happiness}</Text>
+          <Text style={styles.detail}>Smarts Effect: {act.effect.smarts}</Text>
           <Text style={styles.detail}>
             Prerequisites:{" "}
-            {act.prerequisites.length ? act.prerequisites.join(", ") : "None"}
+            {act.prerequisite ? act.prerequisite : "None"}
           </Text>
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity style={styles.button} onPress={applyActivity}>
