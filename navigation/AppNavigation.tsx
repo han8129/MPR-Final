@@ -42,7 +42,6 @@ const AppNavigation = () => {
                 options={{ headerShown: false }}
                 component={ChooseGenderScreen}
             />
-
             <Stack.Screen
                 name='DailyLogin'
                 options={{ headerShown: false }}

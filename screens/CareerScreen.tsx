@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     ScrollView,
+    Alert,
 } from 'react-native';
 import { Color } from '../constants/Color';
 import { StatusBar } from 'expo-status-bar';
@@ -18,8 +19,7 @@ import JobModal from '../components/game/JobModal';
 
 const CareerScreen: React.FC = () => {
     const context = React.useContext(GameContext);
-
-    const [jobs, setJobs] = useState<Job[]>([]);
+    const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
 
     const [selectedJob, setSelectedJob] = useState<Job | null>();
 
@@ -30,8 +30,10 @@ const CareerScreen: React.FC = () => {
             try {
                 // Get the data from Firebase
                 const jobData = await getJobData();
-                // Update the state with the fetched data
-                setJobs(jobData);
+                const filteredJobs = jobData.filter(
+                    (job) => job.ageNeeded <= age
+                );
+                setFilteredJobs(filteredJobs);
             } catch (error) {
                 console.error('Error fetching job data:', error);
             }
@@ -39,18 +41,55 @@ const CareerScreen: React.FC = () => {
 
         // Call the fetchjobData function
         fetchjobData();
-    }, []);
+    }, [selectedJob]);
 
     const handleJobPress = (index: number) => {
-        setSelectedJob(jobs[index]);
+        setSelectedJob(filteredJobs[index]);
     };
 
-    const getAvailableJobs = () => {
-        return jobs.filter((job) => job.ageNeeded <= age);
-    };
+    const applyJob = () => {
+        if (selectedJob) {
+            if (age < selectedJob.ageNeeded) {
+                Alert.alert(
+                    'You are not old enough to apply for this job',
+                    'You must be at least ' +
+                        selectedJob.ageNeeded +
+                        ' years old to apply for this job'
+                );
+                return;
+            }
 
-    const availableJobs = getAvailableJobs();
-    const applyJob = () => {};
+            if (
+                selectedJob.prerequisite &&
+                !context.coursesTaken?.includes(
+                    selectedJob.prerequisite as never
+                )
+            ) {
+                Alert.alert(
+                    'You do not have the prerequisite for this job',
+                    'You must take ' +
+                        selectedJob.prerequisite +
+                        ' before you can apply for this job'
+                );
+                return;
+            }
+
+            context.setJobs([
+                ...(context.jobs || []),
+                selectedJob.name as never,
+            ]);
+
+            Alert.alert(
+                'Job Taken',
+                'You have successfully taken the job: ' +
+                    selectedJob.name +
+                    ' and earned $' +
+                    selectedJob.effect.money +
+                    ' per month.'
+            );
+            setSelectedJob(null);
+        }
+    };
 
     return (
         <>
@@ -64,7 +103,7 @@ const CareerScreen: React.FC = () => {
                 <ScrollView style={{ width: '100%' }}>
                     <SectionHeader heading='Available Jobs' />
                     <ListScrollView
-                        itemList={availableJobs}
+                        itemList={filteredJobs}
                         onPressItem={handleJobPress}
                     />
                 </ScrollView>

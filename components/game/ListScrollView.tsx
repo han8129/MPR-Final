@@ -12,6 +12,7 @@ import { Color } from '../../constants/Color';
 interface ListItemWithName {
     name: string;
     desc: string;
+    type?: string;
     // Add any other required properties here
 }
 
@@ -41,9 +42,16 @@ const ListScrollView = <T extends ListItemWithName>({
                     onPress={() => onPressItem(index)}
                 >
                     <View style={styles.item}>
-                        <View>
+                        <View style={{width: "100%"}}>
                             <Text style={styles.title}>{item.name}</Text>
                             <Text style={styles.description}>{item.desc}</Text>
+
+                            {item.type && (
+                                <Text style={styles.progressText}>
+                                    {item.type}
+                                </Text>
+                            )}
+
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -65,8 +73,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: Color.red,
         position: 'absolute',
-        right: 16,
-        top: 0,
+        top: -10,
+        right: 0,
     },
     title: {
         fontSize: 16,

@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect } from 'react';
 import { Alert } from 'react-native';
-import { Event, Activity, Player } from '../models';
+import { Event, Player } from '../models';
 import useInterval from '../hooks/useInterval';
 import { getEventData } from '../data';
-import { set } from 'firebase/database';
+import { savePlayerData } from '../services/PlayerService';
 
 export const GameContext = createContext({
     health: 0,
@@ -19,7 +19,7 @@ export const GameContext = createContext({
     title: '',
     gender: '',
     setGender: (e: string) => {},
-    setTitle : (e: string) => {},
+    setTitle: (e: string) => {},
     isTakeDailyLogin: false,
     setIsDailyLogin: (e: boolean) => {},
     setUsername: (e: string) => {},
@@ -100,8 +100,58 @@ export default function GameContextProvider({ children }: Props) {
         let currentMoney = money;
         let currentSmarts = smarts;
 
+        if (days / 360 == 18) {
+            currentMoney += 10000;
+        }
+
         if (money == 0) {
             currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
+        }
+
+        if (happiness == 0) {
+            currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
+        }
+
+        if (smarts == 0) {
+            currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
+        }
+
+        if (smarts == 100) {
+            currentHealth += Number((MAX_HEALTH * 0.005).toFixed(2));
+        }
+
+        if (happiness == 100) {
+            currentHealth += Number((MAX_HEALTH * 0.005).toFixed(2));
+        }
+
+        if (days % 360 == 0 && days != 0) {
+            currentHealth += 5;
+            currentHappiness += 5;
+            currentSmarts += 5;
+        }
+
+        if (currentHealth > 100) {
+            currentHealth = 100;
+        }
+
+        if (currentHappiness > 100) {
+            currentHappiness = 100;
+        }
+
+        if (currentSmarts > 100) {
+            currentSmarts = 100;
+        }
+
+        if (currentHealth < 0) {
+            currentHealth = 0;
+        }
+
+        if (currentHappiness < 0) {
+            currentHappiness = 0;
+        }
+
+        if (currentSmarts < 0) {
+            currentSmarts = 0;
         }
 
         setHealth(currentHealth);
@@ -139,8 +189,9 @@ export default function GameContextProvider({ children }: Props) {
 
         // a random number in range [0, 9]
         // 20% for event
-        if (currentMonthCount > 29 && currentDays > (6 * 360)) {
-            if ([0].includes(Math.floor(Math.random() * 2))) {
+        // each month checks if player is doing some jobs, then aplly the effect of that job to player stats
+        if (currentMonthCount > 29 && currentDays > 6 * 360) {
+            if ([0].includes(Math.floor(Math.random() * 10))) {
                 setIsPause(true);
 
                 const randIndex = Math.floor(Math.random() * events.length);

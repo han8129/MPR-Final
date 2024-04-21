@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
   progressText: {
     position: "absolute",
-    top: 20,
+    top: 10,
     left: 0,
     right: -300,
     bottom: 0,

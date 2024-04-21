@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     ScrollView,
+    Alert,
 } from 'react-native';
 import { Color } from '../constants/Color';
 import { StatusBar } from 'expo-status-bar';
@@ -17,8 +18,7 @@ import { Activity } from '../models';
 import { getActivitiesData } from '../data';
 import { GameContext } from '../store/GameContext';
 
-
-interface Relationship {
+export interface Relationship {
     name: string;
     desc: string;
     maritalStatus: string;
@@ -37,7 +37,9 @@ const ActivityScreen: React.FC = () => {
 
     const age = Math.floor(context.days / 360);
 
-    const [activities, setActivities] = useState<Activity[]>([]);
+    const [filteredActivities, setFilteredActivities] = useState<Activity[]>(
+        []
+    );
 
     const relationships: Relationship[] = [
         {
@@ -59,8 +61,13 @@ const ActivityScreen: React.FC = () => {
             try {
                 // Get the data from Firebase
                 const activitiesData = await getActivitiesData();
-                // Update the state with the fetched data
-                setActivities(activitiesData);
+
+                const filteredActivities = activitiesData.filter(
+                    (activity: Activity) =>
+                        activity.ageNeeded <= age &&
+                        !context.activities?.includes(activity.name as never)
+                );
+                setFilteredActivities(filteredActivities);
             } catch (error) {
                 console.error('Error fetching activities data:', error);
             }
@@ -68,23 +75,59 @@ const ActivityScreen: React.FC = () => {
 
         // Call the fetchActivitiesData function
         fetchActivitiesData();
-    }, []);
+    }, [selectedActivity]);
 
     const handleRelPress = (index: number) => {
         setSelectedRelationship(relationships[index]);
     };
 
-    const getAvailableActivities = () => {
-        return activities.filter((activity) => activity.ageNeeded <= age);
-    };
-
-    const availableActivities = getAvailableActivities();
-
     const handleActivityPress = (index: number) => {
-        setSelectedActivity(activities[index]);
+        setSelectedActivity(filteredActivities[index]);
     };
 
-    const handleApplyActivity = () => {};
+    const handleApplyActivity = () => {
+        if (selectedActivity) {
+            
+            if (age < selectedActivity.ageNeeded) {
+                Alert.alert(
+                    'You are not old enough to apply for this activity',
+                    'You must be at least ' +
+                        selectedActivity.ageNeeded +
+                        ' years old to apply for this activity'
+                );
+                return;
+            }
+
+            if (context.money < +selectedActivity.effect.money) {
+                Alert.alert(
+                    'You do not have enough money to apply for this activity',
+                    'You need at least $' +
+                        selectedActivity.effect.money +
+                        ' to apply for this activity'
+                );
+                return;
+            }
+
+            context.setMoney(context.money + selectedActivity.effect.money);
+            context.setHealth(context.health + selectedActivity.effect.health);
+            context.setHappiness(
+                context.happiness + selectedActivity.effect.happiness
+            );
+            context.setSmarts(context.smarts + selectedActivity.effect.smarts);
+
+            context.setActivities([
+                ...(context.activities || []),
+                selectedActivity.name as never,
+            ]);
+        
+            setSelectedActivity(null);
+        }
+    };
+
+    const handleRelInteraction = () => {
+        context.setMoney(context.money + 50);
+        setSelectedRelationship(null);
+    };
 
     return (
         <>
@@ -96,21 +139,21 @@ const ActivityScreen: React.FC = () => {
                     balance={context.money}
                 />
                 <ScrollView style={{ width: '100%' }}>
-                    <SectionHeader heading='Your Relationships' />
+                    <SectionHeader heading='Your Parents' />
                     <ListScrollView
                         itemList={relationships}
                         onPressItem={handleRelPress}
                     />
                     <SectionHeader heading='Available Activities' />
                     <ListScrollView
-                        itemList={availableActivities}
+                        itemList={filteredActivities}
                         onPressItem={handleActivityPress}
                     />
                 </ScrollView>
                 <RelationshipModal
                     rel={selectedRelationship}
                     closeModal={() => setSelectedRelationship(null)}
-                    handleInteraction={() => {}}
+                    handleInteraction={handleRelInteraction}
                 />
                 <ActivityModal
                     act={selectedActivity}
