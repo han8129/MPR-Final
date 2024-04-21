@@ -90,6 +90,10 @@ export default function GameContextProvider({ children }: Props) {
             currentMoney += 10000;
         }
 
+        if (days / 360 == 18) {
+            currentMoney += 10000;
+        }
+
         if (money == 0) {
             currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
         }
