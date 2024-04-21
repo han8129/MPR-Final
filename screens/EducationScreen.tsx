@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     ScrollView,
+    Alert,
 } from 'react-native';
 import { Color } from '../constants/Color';
 import { StatusBar } from 'expo-status-bar';
@@ -19,9 +20,11 @@ import EducationModal from '../components/game/EducationalModal';
 const EducationScreen: React.FC = () => {
     const context = React.useContext(GameContext);
 
-    const [education, setEducation] = useState<Education[]>([]);
+    const [availableEducation, setAvailableEducation] = useState<Education[]>(
+        []
+    );
 
-    const age = Math.floor(context.days / 360); 
+    const age = Math.floor(context.days / 360);
 
     const [selectedEducation, setSelectedEducation] =
         useState<Education | null>();
@@ -31,30 +34,83 @@ const EducationScreen: React.FC = () => {
             try {
                 // Get the data from Firebase
                 const educationData = await getEducationData();
-                setEducation(educationData);
+
+                // Set the education data in the context
+                const filteredEdus = educationData.filter(
+                    (edu) =>
+                        edu.ageNeeded <= age &&
+                        !context.coursesTaken?.includes(edu.name as never)
+                );
+                setAvailableEducation(filteredEdus);
             } catch (error) {
                 console.error('Error fetching education data:', error);
             }
         };
-
         // Call the fetchEducationData function
         fetchEducationData();
-    }, []);
-
-    const getAvailableEducation = () => {
-        return education.filter(
-            (edu) =>
-                edu.ageNeeded <= age && !context.coursesTaken?.includes(edu.name as never)
-        );
-    }
-
-    const availableEducation = getAvailableEducation();
+    }, [selectedEducation]);
 
     const handleEduPress = (index: number) => {
-        setSelectedEducation(education[index]);
+        setSelectedEducation(availableEducation[index]);
     };
 
-    const handleTake = () => {};
+    const handleTake = () => {
+        if (selectedEducation) {
+            if (age < selectedEducation.ageNeeded) {
+                Alert.alert(
+                    'You are not old enough to take this course',
+                    'You must be at least ' +
+                        selectedEducation.ageNeeded +
+                        ' years old to take this course'
+                );
+                return;
+            }
+
+            if (context.money < +selectedEducation.effect.money) {
+                Alert.alert(
+                    'You do not have enough money to take this course',
+                    'You need at least $' +
+                        selectedEducation.effect.money +
+                        ' to take this course'
+                );
+                return;
+            }
+
+            if (
+                selectedEducation.prerequisite &&
+                !context.coursesTaken?.includes(
+                    selectedEducation.prerequisite as never
+                )
+            ) {
+                Alert.alert(
+                    'You do not have the prerequisite for this course',
+                    'You must take ' +
+                        selectedEducation.prerequisite +
+                        ' before you can take this course'
+                );
+                return;
+            }
+
+            context.setMoney(context.money + selectedEducation.effect.money);
+            context.setHealth(context.health + selectedEducation.effect.health);
+            context.setHappiness(
+                context.happiness + selectedEducation.effect.happiness
+            );
+            context.setSmarts(context.smarts + selectedEducation.effect.smarts);
+
+            context.setCoursesTaken([
+                ...(context.coursesTaken || []),
+                selectedEducation.name as never,
+            ]);
+
+            Alert.alert(
+                'Course Taken',
+                'You have successfully taken the course: ' +
+                    selectedEducation.name
+            );
+            setSelectedEducation(null);
+        }
+    };
 
     return (
         <>

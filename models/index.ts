@@ -58,3 +58,16 @@ export interface Event {
     name: string;
     options: Option[];
 }
+
+export interface NPC {
+    name: string;
+    desc: string;
+    age: number;
+    health: number;
+    happiness: number;
+    smarts: number;
+    money: number;
+    relationshipType: string;
+    maritalStatus?: string;
+    work?: string;
+}

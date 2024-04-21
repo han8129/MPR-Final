@@ -11,7 +11,7 @@ interface AgeStatusProps {
 const AgeStatus: React.FC<AgeStatusProps> = ({ age, value, color }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.ageText}>Your current age: {age}</Text>
+      <Text style={styles.ageText}>Age {age}</Text>
       <ProgressBar value={value} color={color}  />
     </View>
   );
@@ -20,17 +20,13 @@ const AgeStatus: React.FC<AgeStatusProps> = ({ age, value, color }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 16,
     justifyContent: "center",
     width: "80%",
   },
   ageText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 10,
-  },
-  timeText: {
-    fontSize: 16,
     marginBottom: 10,
   },
 });

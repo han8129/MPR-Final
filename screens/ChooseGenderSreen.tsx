@@ -9,7 +9,7 @@ interface Props {
 
 const ChooseGenderScreen: React.FC<Props> = ({ navigation }) => {
     const context = useContext(GameContext);
-    const [isMale, setIsMale] = useState<boolean>();
+    const [isMale, setIsMale] = useState<boolean>(true);
 
     const handleConfirmGender = () => {
         context.setGender(isMale ? 'male' : 'female');
@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     genderImage: {
-        width: 100,
-        height: 100,
+        width: 160,
+        height: 200,
         marginRight: 20,
     },
     selectedGenderImage: {

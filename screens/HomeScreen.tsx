@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
     View,
     Text,
@@ -6,6 +6,8 @@ import {
     TouchableOpacity,
     Image,
     Dimensions,
+    BackHandler,
+    Alert,
 } from 'react-native';
 import { Color } from '../constants/Color';
 import { StatusBar } from 'expo-status-bar';
@@ -13,6 +15,10 @@ import Header from '../components/game/Header';
 import AgeStatus from '../components/game/AgeStatus';
 import PlayerStats from '../components/game/PlayerStats';
 import { GameContext } from '../store/GameContext';
+import CommonButton from '../components/auth/CommonButton';
+import { savePlayerData } from '../services/PlayerService';
+import { Player } from '../models';
+import ExitModal from '../components/game/ExitModal';
 
 const { height } = Dimensions.get('window');
 
@@ -25,6 +31,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
     const age = Math.floor(context.days / 360); // get quotient
     const progress = Number((((context.days % 360) / 360) * 100).toFixed(2));
+
+    const [isExitModalOpened, setIsExitModalOpened] = React.useState(false);
+
+    useEffect(() => {
+        context.setIsPause(!context.isPause);
+    }, []);
 
     let image;
     let title;
@@ -91,18 +103,14 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         context.setDays(6 * 360);
     };
 
-    const renderSkipToAge6Button = () => {
-        if (age < 6) {
-            return (
-                <TouchableOpacity
-                    style={styles.skipAge6Button}
-                    onPress={skipToAge6}
-                >
-                    <Text style={styles.skipAge6Text}>Skip to Age 6</Text>
-                </TouchableOpacity>
-            );
-        }
-        return null;
+    const closeExitModal = () => {
+        setIsExitModalOpened(false);
+        context.setIsPause(false);
+    };
+
+    const toggleExitModal = () => {
+        setIsExitModalOpened(true);
+        context.setIsPause(true);
     };
 
     return (
@@ -126,11 +134,28 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 >
                     <Text style={styles.dailyText}>Daily Gift</Text>
                 </TouchableOpacity>
-                {renderSkipToAge6Button()}
+                {age < 6 && (
+                    <TouchableOpacity
+                        style={styles.skipAge6Button}
+                        onPress={skipToAge6}
+                    >
+                        <Text style={styles.skipAge6Text}>Skip to Age 6</Text>
+                    </TouchableOpacity>
+                )}
+                <TouchableOpacity
+                    style={styles.exitButton}
+                    onPress={toggleExitModal}
+                >
+                    <Text style={styles.dailyText}>Exit Game</Text>
+                </TouchableOpacity>
                 <PlayerStats
                     health={context.health}
                     smarts={context.smarts}
                     happiness={context.happiness}
+                />
+                <ExitModal
+                    isOpened={isExitModalOpened}
+                    closeModal={closeExitModal}
                 />
             </View>
         </>
@@ -152,6 +177,17 @@ const styles = StyleSheet.create({
         backgroundColor: Color.red,
         top: 0.57 * height,
         right: 30,
+        position: 'absolute',
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    exitButton: {
+        height: 40,
+        width: 80,
+        backgroundColor: Color.black,
+        top: 0.2 * height,
+        left: 30,
         position: 'absolute',
         borderRadius: 10,
         justifyContent: 'center',

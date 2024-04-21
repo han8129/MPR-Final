@@ -1,9 +1,10 @@
-import { User } from '../models';
+import { Player, User } from '../models';
 import {
     getDatabase,
     ref,
     set,
     get,
+    update,
 } from 'firebase/database'; // Import necessary functions
 
 import app from '../config/firebase';
@@ -81,33 +82,34 @@ export const Login = async (username: string, password: string): Promise<User | 
     }
 }
 
-export const savePlayerData = async (user: User): Promise<User | null> => {
+export const savePlayerData = async (
+    username: string,
+    player: Player
+): Promise<string | null> => {
     try {
-        const userSnapshotRef = ref(db, `user`);
+        const userSnapshotRef = ref(db, 'user');
         const userSnapshot = await get(userSnapshotRef);
 
-        let foundUser: User | null = null;
+        let foundUserKey: string | null = null;
 
         userSnapshot.forEach((childSnapshot) => {
             const snapshotUser = childSnapshot.val();
-            if (snapshotUser.username === user.username) {
-                foundUser = snapshotUser;
+            if (snapshotUser.username === username) {
+                foundUserKey = childSnapshot.key;
                 return true; // Stop looping
             }
         });
 
-        if (foundUser === null) {
+        if (foundUserKey === null) {
             return null; // User not found
         }
 
-        const userIndex = userSnapshot.key;
-        const userRef = ref(db, `user/${userIndex}`);
-        await set(userRef, {
-            username: user.username,
-            password: user.password,
-            player: user.player,
+        const userRef = ref(db, `user/${foundUserKey}`);
+        await update(userRef, {
+            player: player,
         });
-        return user;
+
+        return username;
     } catch (error) {
         throw error;
     }

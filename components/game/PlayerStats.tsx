@@ -16,22 +16,28 @@ const PlayerStats: React.FC<PlayerStatsProps> = ({ health, smarts, happiness }) 
           <View style={styles.statCont}>
               <View style={styles.stat}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      <Text>Health</Text>
-                      <Ionicons name='heart' size={24} color={Color.black} />
+                      <Text style={{ fontWeight: 'bold', color: Color.red }}>
+                          Health{' '}
+                      </Text>
+                      <Ionicons name='heart' size={24} color={Color.red} />
                   </View>
                   <ProgressBar value={health} color={Color.black} />
               </View>
               <View style={styles.stat}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      <Text>Happiness</Text>
-                      <Ionicons name='heart' size={24} color={Color.black} />
+                      <Text style={{ fontWeight: 'bold', color: Color.red }}>
+                          Happiness{' '}
+                      </Text>
+                      <Ionicons name='happy' size={24} color={Color.red} />
                   </View>
                   <ProgressBar value={happiness} color={Color.black} />
               </View>
               <View style={styles.stat}>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                      <Text>Smarts</Text>
-                      <Ionicons name='person' size={24} color={Color.black} />
+                      <Text style={{ fontWeight: 'bold', color: Color.red }}>
+                          Smarts{' '}
+                      </Text>
+                      <Ionicons name='book' size={24} color={Color.red} />
                   </View>
                   <ProgressBar value={smarts} color={Color.black} />
               </View>
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
   stat: {
     justifyContent: "space-around",
     alignItems: "flex-start",
-    height: 60,
+    height: 55,
   },
 });
 

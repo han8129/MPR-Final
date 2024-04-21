@@ -40,7 +40,7 @@ const RelationshipModal: React.FC<RelationshipModalProps> = ({ rel, closeModal, 
 
           <View style={{ alignItems: "center" }}>
             <TouchableOpacity style={styles.button} onPress={handleInteraction}>
-              <Text style={styles.buttonText}>End Relation</Text>
+              <Text style={styles.buttonText}>Ask for money</Text>
             </TouchableOpacity>
           </View>
         </View>
