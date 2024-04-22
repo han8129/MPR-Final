@@ -146,11 +146,11 @@ export default function GameContextProvider({ children }: Props) {
             // Events may occur at the start of the month
             if (currentDayInMonth > 28) {
                 // Each month a job will generate money
-                    const total = jobs
-                        .map((job) => job.effect.money)
-                        .reduce((sum, curr) => sum + curr, 0);
+                const total = jobs
+                    .map((job) => job.effect.money)
+                    .reduce((sum, curr) => sum + curr, 0);
 
-                    setMoney((current) => current + total);
+                setMoney((current) => current + total);
                 // generate a random integer from 0 to n -1
                 if ([0].includes(Math.floor(Math.random() * 2))) {
                     setIsPause(true);

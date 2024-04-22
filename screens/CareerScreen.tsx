@@ -49,6 +49,30 @@ const CareerScreen: React.FC = () => {
 
     const applyJob = () => {
         if (selectedJob) {
+            // Check in the context.jobs, this should only contains 1 partime job and 1 fulltime job,
+            context?.jobs?.forEach((job: Job) => {
+                if (
+                    job?.type === 'Part-time' &&
+                    selectedJob.type === 'Part-time'
+                ) {
+                    Alert.alert(
+                        'You already have a part-time job',
+                        'You must quit your current part-time job before you can apply for a new one'
+                    );
+                    return;
+                }
+                if (
+                    job?.type === 'Full-time' &&
+                    selectedJob.type === 'Full-time'
+                ) {
+                    Alert.alert(
+                        'You already have a full-time job',
+                        'You must quit your current full-time job before you can apply for a new one'
+                    );
+                    return;
+                }
+            });
+
             if (age < selectedJob.ageNeeded) {
                 Alert.alert(
                     'You are not old enough to apply for this job',
@@ -74,10 +98,7 @@ const CareerScreen: React.FC = () => {
                 return;
             }
 
-            context.setJobs([
-                ...(context.jobs || []),
-                selectedJob.name as never,
-            ]);
+            context.setJobs([...(context.jobs || []), selectedJob]);
 
             Alert.alert(
                 'Job Taken',
@@ -86,6 +107,17 @@ const CareerScreen: React.FC = () => {
                     ' and earned $' +
                     selectedJob.effect.money +
                     ' per month.'
+            );
+            setSelectedJob(null);
+        }
+    };
+
+    const quitJob = () => {
+        if (selectedJob) {
+            context.setJobs(context.jobs.filter((job) => job !== selectedJob));
+            Alert.alert(
+                'Job Quit',
+                'You have successfully quit the job: ' + selectedJob.name
             );
             setSelectedJob(null);
         }
@@ -111,6 +143,7 @@ const CareerScreen: React.FC = () => {
                     job={selectedJob}
                     closeModal={() => setSelectedJob(null)}
                     applyJob={applyJob}
+                    quitJob={quitJob}
                 />
             </View>
         </>

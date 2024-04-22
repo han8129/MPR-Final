@@ -10,16 +10,22 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Job } from '../../models';
 import { Color } from '../../constants/Color';
+import { GameContext } from '../../store/GameContext';
 
 interface JobModalProps {
     job: Job | null | undefined;
     closeModal: () => void;
     applyJob: () => void;
+    quitJob: () => void;
 }
 
-const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob }) => {
-    if (!job) return null;
+const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob, quitJob }) => {
 
+    const context = React.useContext(GameContext);
+    const isDoing = context?.jobs?.find((j: Job) => j.name === job?.name);
+
+    if (!job) return null;
+    
     return (
         <Modal
             visible={true}
@@ -54,12 +60,21 @@ const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob }) => {
                         {job.prerequisite ? job.prerequisite : 'None'}
                     </Text>
                     <View style={{ alignItems: 'center' }}>
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={applyJob}
-                        >
-                            <Text style={styles.buttonText}>Apply</Text>
-                        </TouchableOpacity>
+                        {isDoing ? (
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={quitJob}
+                            >
+                                <Text style={styles.buttonText}>Quit</Text>
+                            </TouchableOpacity>
+                        ) : (
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={applyJob}
+                            >
+                                <Text style={styles.buttonText}>Apply</Text>
+                            </TouchableOpacity>
+                        )}
                     </View>
                 </View>
             </View>
