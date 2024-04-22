@@ -50,28 +50,31 @@ const CareerScreen: React.FC = () => {
     const applyJob = () => {
         if (selectedJob) {
             // Check in the context.jobs, this should only contains 1 partime job and 1 fulltime job,
-            context?.jobs?.forEach((job: Job) => {
-                if (
-                    job?.type === 'Part-time' &&
-                    selectedJob.type === 'Part-time'
-                ) {
-                    Alert.alert(
-                        'You already have a part-time job',
-                        'You must quit your current part-time job before you can apply for a new one'
-                    );
-                    return;
+            if (context?.jobs?.length > 0) {
+                for (const job of context.jobs) {
+                    const j: Job = job;
+                    if (
+                        j.type === 'Part-time' &&
+                        selectedJob.type === 'Part-time'
+                    ) {
+                        Alert.alert(
+                            'You already have a part-time job',
+                            'You must quit your current part-time job before you can apply for a new one'
+                        );
+                        return;
+                    }
+                    if (
+                        j.type === 'Full-time' &&
+                        selectedJob.type === 'Full-time'
+                    ) {
+                        Alert.alert(
+                            'You already have a full-time job',
+                            'You must quit your current full-time job before you can apply for a new one'
+                        );
+                        return;
+                    }
                 }
-                if (
-                    job?.type === 'Full-time' &&
-                    selectedJob.type === 'Full-time'
-                ) {
-                    Alert.alert(
-                        'You already have a full-time job',
-                        'You must quit your current full-time job before you can apply for a new one'
-                    );
-                    return;
-                }
-            });
+            }
 
             if (age < selectedJob.ageNeeded) {
                 Alert.alert(
@@ -114,7 +117,9 @@ const CareerScreen: React.FC = () => {
 
     const quitJob = () => {
         if (selectedJob) {
-            context.setJobs(context.jobs.filter((job) => job !== selectedJob));
+            context.setJobs(
+                context.jobs.filter((job: Job) => job.name !== selectedJob.name)
+            );
             Alert.alert(
                 'Job Quit',
                 'You have successfully quit the job: ' + selectedJob.name
