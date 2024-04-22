@@ -48,7 +48,7 @@ export default function GameContextProvider({ children }: Props) {
     const [activities, setActivities] = useState<string[]>([]); // Initialize activities as an empty array
     const [smarts, setSmarts] = useState(10);
     const [days, setDays] = useState(0);
-    const [jobs, setJobs] = useState<string[]>([]);
+    const [jobs, setJobs] = useState<Job[]>([]);
     const [username, setUsername] = useState<string>(''); // Initialize username as an empty string
     const [coursesTaken, setCoursesTaken] = useState<string[]>([]);
     const [isTakeDailyLogin, setIsTakeDailyLogin] = useState(false);
@@ -151,6 +151,13 @@ export default function GameContextProvider({ children }: Props) {
                 if ([0].includes(Math.floor(Math.random() * 2))) {
                     setIsPause(true);
                     applyRandomEvent();
+
+                    // total rate (money effect) of all jobs
+                    const total = jobs
+                        .map((job) => job.effect.money)
+                        .reduce((sum, curr) => sum + curr);
+
+                    setMoney((current) => current + total);
                 }
 
         // a random number in range [0, 9]
