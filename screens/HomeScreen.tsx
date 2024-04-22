@@ -34,10 +34,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
     const [isExitModalOpened, setIsExitModalOpened] = React.useState(false);
 
-    useEffect(() => {
-        context.setIsPause(false);
-    }, []);
-
     let image;
     let title;
 
