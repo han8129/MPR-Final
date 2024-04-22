@@ -1,9 +1,8 @@
 import { createContext, useState, useEffect } from 'react';
-import { Alert } from 'react-native';
+import { Alert, BackHandler } from 'react-native';
 import { Event, Job } from '../models';
 import useInterval from '../hooks/useInterval';
 import { getEventData } from '../data';
-import { savePlayerData } from '../services/PlayerService';
 
 export const GameContext = createContext({
     health: 0,
@@ -150,7 +149,7 @@ export default function GameContextProvider({ children }: Props) {
                     .map((job) => job.effect.money)
                     .reduce((sum, curr) => sum + curr, 0);
 
-                setMoney((current) => current + total);
+                currentMoney += total;
                 // generate a random integer from 0 to n -1
                 if ([0].includes(Math.floor(Math.random() * 2))) {
                     setIsPause(true);
@@ -189,7 +188,7 @@ export default function GameContextProvider({ children }: Props) {
             {
                 text: 'No',
                 onPress: () => {
-                    setIsPause(true);
+                    BackHandler.exitApp();
                 },
             },
         ]);

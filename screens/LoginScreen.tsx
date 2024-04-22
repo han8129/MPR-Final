@@ -53,6 +53,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     context.setActivities(res.player.activities);
                     context.setJobs(res.player.jobs);
                     context.setCoursesTaken(res.player.coursesTaken);
+                    context.setGender(res.player.gender);
 
                     if (!res.player.gender) {
                         navigation.navigate('ChooseGender');

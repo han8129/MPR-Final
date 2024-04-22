@@ -32,6 +32,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const age = Math.floor(context.days / 360); // get quotient
     const progress = Number((((context.days % 360) / 360) * 100).toFixed(2));
 
+    const [isExitModalOpened, setIsExitModalOpened] = React.useState(false);
+
     let image;
     let title;
 
@@ -78,6 +80,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         }
         title = 'Old Age';
     }
+
+    useEffect(() => {
+        context.setIsPause(false);
+    }, []);
 
     useEffect(() => {
         context.setTitle(title);

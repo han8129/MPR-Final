@@ -22,7 +22,7 @@ interface JobModalProps {
 const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob, quitJob }) => {
 
     const context = React.useContext(GameContext);
-    const isDoing = context?.jobs?.find((j: Job) => j.name === job?.name);
+    const isDoing = context?.jobs?.find((j: Job) => j?.name === job?.name);
 
     if (!job) return null;
     

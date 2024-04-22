@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Color } from '../../constants/Color';
-import { Player } from '../../models';
+import { Job, Player } from '../../models';
 import { savePlayerData } from '../../services/PlayerService';
 import { GameContext } from '../../store/GameContext';
 
@@ -65,7 +65,9 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
                             <Ionicons name='close' size={24} color='#333' />
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.modalDescription}>Stats To Be Saved</Text>
+                    <Text style={styles.modalDescription}>
+                        Stats To Be Saved
+                    </Text>
                     <Text style={styles.detail}>Current Age: {age}</Text>
                     <Text style={styles.detail}>
                         Current Money: ${context.money}
@@ -81,7 +83,9 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
                     </Text>
                     <Text style={styles.detail}>
                         Jobs Done:{' '}
-                        {context.jobs ? context.jobs.join(', ') : 'None'}
+                        {context.jobs
+                            ? context.jobs.map((job: Job) => job.name)
+                            : 'None'}
                     </Text>
                     <Text style={styles.detail}>
                         Courses Completed:{' '}
