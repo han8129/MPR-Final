@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import { Alert } from 'react-native';
-import { Event, Job } from '../models';
+import { Event, Activity, Player } from '../models';
 import useInterval from '../hooks/useInterval';
 import { getEventData } from '../data';
 import { savePlayerData } from '../services/PlayerService';
@@ -47,7 +47,8 @@ export default function GameContextProvider({ children }: Props) {
     const [activities, setActivities] = useState<string[]>([]); // Initialize activities as an empty array
     const [smarts, setSmarts] = useState(10);
     const [days, setDays] = useState(0);
-    const [jobs, setJobs] = useState<Job[]>([]);
+    const [monthCount, setMonthCount] = useState(0);
+    const [jobs, setJobs] = useState<string[]>([]);
     const [username, setUsername] = useState<string>(''); // Initialize username as an empty string
     const [coursesTaken, setCoursesTaken] = useState<string[]>([]);
     const [isTakeDailyLogin, setIsTakeDailyLogin] = useState(false);
@@ -84,82 +85,10 @@ export default function GameContextProvider({ children }: Props) {
         let currentHealth = health;
         let currentHappiness = happiness;
         let currentSmarts = smarts;
-        let currentMoney = money;
-
-        if (days / 360 == 18) {
-            currentMoney += 10000;
-        }
 
         if (money == 0) {
             currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
         }
-
-        if (happiness == 0) {
-            currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
-        }
-
-        if (smarts == 0) {
-            currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
-        }
-
-        if (smarts == 100) {
-            currentHealth += Number((MAX_HEALTH * 0.005).toFixed(2));
-        }
-
-        if (happiness == 100) {
-            currentHealth += Number((MAX_HEALTH * 0.005).toFixed(2));
-        }
-
-        if (days % 360 == 0 && days != 0) {
-            currentHealth += 5;
-            currentHappiness += 5;
-            currentSmarts += 5;
-        }
-
-        if (currentHealth > 100) {
-            currentHealth = 100;
-        }
-
-        if (currentHappiness > 100) {
-            currentHappiness = 100;
-        }
-
-        if (currentSmarts > 100) {
-            currentSmarts = 100;
-        }
-
-        if (currentHealth <= 0) {
-            resetGame();
-            return;
-        }
-
-        if (currentHappiness < 0) {
-            currentHappiness = 0;
-        }
-
-        if (currentSmarts < 0) {
-            currentSmarts = 0;
-        }
-
-        // Events only occur after the age of 6
-        if (currentDays > 12 * DAY_IN_MONTH) {
-            // Events may occur at the start of the month
-            if (currentDayInMonth > 28) {
-                // Each month a job will generate money
-                const total = jobs
-                    .map((job) => job.effect.money)
-                    .reduce((sum, curr) => sum + curr, 0);
-
-                setMoney((current) => current + total);
-                // generate a random integer from 0 to n -1
-                if ([0].includes(Math.floor(Math.random() * 2))) {
-                    setIsPause(true);
-                    applyRandomEvent();
-                }
-            }
-        }
-
-        currentDays += 1;
 
         setHealth(currentHealth);
         setMoney(currentMoney);
@@ -168,62 +97,74 @@ export default function GameContextProvider({ children }: Props) {
         setDays(currentDays);
     }
 
-    function resetGame() {
-        setIsPause(true);
-        setHealth(0);
-        Alert.alert('You have died', 'Play again?', [
-            {
-                text: 'Yes',
-                onPress: () => {
-                    setHealth(100);
-                    setMoney(10);
-                    setHappiness(100);
-                    setSmarts(10);
-                    setDays(0);
-                    setJobs([]);
-                    setCoursesTaken([]);
-                    setActivities([]);
-                    setIsPause(false);
+        if (currentHealth <= 0) {
+            setIsPause(true);
+            setHealth(0);
+            Alert.alert('You have died', 'Play again?', [
+                {
+                    text: 'Yes',
+                    onPress: () => {
+                        setHealth(100);
+                        setMoney(10);
+                        setHappiness(100);
+                        setSmarts(10);
+                        setDays(0);
+                        setJobs([]);
+                        setCoursesTaken([]);
+                        setActivities([]);
+                        setIsPause(false);
+                    },
                 },
-            },
-            {
-                text: 'No',
-                onPress: () => {
-                    setIsPause(true);
+                {
+                    text: 'No',
+                    onPress: () => {
+                        setIsPause(true);
+                    },
                 },
-            },
-        ]);
-    }
+            ]);
+            return;
+        }
 
-    function applyRandomEvent() {
-        const randIndex = Math.floor(Math.random() * events.length);
-        const event = events[randIndex];
-        Alert.alert(
-            `${event.name}`,
-            event.desc,
-            event.options.map((option) => ({
-                text: option.desc,
-                onPress: () => {
-                    // Update player stats based on selected option
-                    const newHealth = Math.max(
-                        MIN_HEALTH,
-                        Math.min(MAX_HEALTH, health + option.effect.health)
-                    );
-                    const newMoney = Math.max(
-                        MIN_MONEY,
-                        money + option.effect.money
-                    );
-                    const newHappiness = Math.max(
-                        MIN_HAPPINESS,
-                        Math.min(
-                            MAX_HAPPINESS,
-                            happiness + option.effect.happiness
-                        )
-                    );
-                    const newSmarts = Math.max(
-                        MIN_SMARTS,
-                        Math.min(MAX_SMARTS, smarts + option.effect.smarts)
-                    );
+        // a random number in range [0, 9]
+        // 20% for event
+        if (currentMonthCount > 29 && currentDays > (6 * 360)) {
+            if ([0].includes(Math.floor(Math.random() * 2))) {
+                setIsPause(true);
+
+                const randIndex = Math.floor(Math.random() * events.length);
+                const event = events[randIndex];
+                Alert.alert(
+                    `${event.name}`,
+                    event.desc,
+                    event.options.map((option) => ({
+                        text: option.desc,
+                        onPress: () => {
+                            // Update player stats based on selected option
+                            const newHealth = Math.max(
+                                MIN_HEALTH,
+                                Math.min(
+                                    MAX_HEALTH,
+                                    health + option.effect.health
+                                )
+                            );
+                            const newMoney = Math.max(
+                                MIN_MONEY,
+                                money + option.effect.money
+                            );
+                            const newHappiness = Math.max(
+                                MIN_HAPPINESS,
+                                Math.min(
+                                    MAX_HAPPINESS,
+                                    happiness + option.effect.happiness
+                                )
+                            );
+                            const newSmarts = Math.max(
+                                MIN_SMARTS,
+                                Math.min(
+                                    MAX_SMARTS,
+                                    smarts + option.effect.smarts
+                                )
+                            );
 
                     // Update player stats based on selected option
                     setHealth(newHealth);
