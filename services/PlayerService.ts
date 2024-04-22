@@ -67,6 +67,9 @@ export const Login = async (username: string, password: string): Promise<User | 
         userSnapshot.forEach((childSnapshot) => {
             const user = childSnapshot.val();
             if (user.username === username && user.password === password) {
+                if (user.player.jobs == undefined) {
+                    user.player.jobs = [];
+                }
                 foundUser = user;
                 return true; // Stop looping
             }
