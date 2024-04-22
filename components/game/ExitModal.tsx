@@ -68,16 +68,16 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
                     <Text style={styles.modalDescription}>Stats To Be Saved</Text>
                     <Text style={styles.detail}>Current Age: {age}</Text>
                     <Text style={styles.detail}>
-                        Current Money: {context.money}
+                        Current Money: ${context.money}
                     </Text>
                     <Text style={styles.detail}>
-                        Current Health: {context.health}
+                        Current Health: {context.health}%
                     </Text>
                     <Text style={styles.detail}>
-                        Current Happiness: {context.happiness}
+                        Current Happiness: {context.happiness}%
                     </Text>
                     <Text style={styles.detail}>
-                        Current Smarts: {context.smarts}
+                        Current Smarts: {context.smarts}%
                     </Text>
                     <Text style={styles.detail}>
                         Jobs Done:{' '}

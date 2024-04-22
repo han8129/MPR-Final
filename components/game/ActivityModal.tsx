@@ -13,10 +13,10 @@ import { Activity } from "../../models";
 interface ActivityModalProps {
   act: Activity | null;
   closeModal: () => void;
-  applyActivity: () => void;
+  joinActivity: () => void;
 }
 
-const ActivityModal: React.FC<ActivityModalProps> = ({ act, closeModal, applyActivity }) => {
+const ActivityModal: React.FC<ActivityModalProps> = ({ act, closeModal, joinActivity }) => {
   if (!act) return null;
 
   return (
@@ -45,8 +45,8 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ act, closeModal, applyAct
             {act.prerequisite ? act.prerequisite : "None"}
           </Text>
           <View style={{ alignItems: "center" }}>
-            <TouchableOpacity style={styles.button} onPress={applyActivity}>
-              <Text style={styles.buttonText}>Apply</Text>
+            <TouchableOpacity style={styles.button} onPress={joinActivity}>
+              <Text style={styles.buttonText}>Join</Text>
             </TouchableOpacity>
           </View>
         </View>

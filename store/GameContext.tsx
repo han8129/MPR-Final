@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import { Alert } from 'react-native';
-import { Event, Player } from '../models';
+import { Event, Job, Player } from '../models';
 import useInterval from '../hooks/useInterval';
 import { getEventData } from '../data';
 import { savePlayerData } from '../services/PlayerService';
@@ -23,7 +23,7 @@ export const GameContext = createContext({
     isTakeDailyLogin: false,
     setIsDailyLogin: (e: boolean) => {},
     setUsername: (e: string) => {},
-    setJobs: (e: string[]) => {},
+    setJobs: (e: Job[]) => {},
     setCoursesTaken: (e: string[]) => {},
     setDays: (e: number) => {},
     setHealth: (e: number) => {},
@@ -49,7 +49,7 @@ export default function GameContextProvider({ children }: Props) {
     const [smarts, setSmarts] = useState(10);
     const [days, setDays] = useState(0);
     const [monthCount, setMonthCount] = useState(0);
-    const [jobs, setJobs] = useState<string[]>([]);
+    const [jobs, setJobs] = useState<Job[]>([]);
     const [username, setUsername] = useState<string>(''); // Initialize username as an empty string
     const [coursesTaken, setCoursesTaken] = useState<string[]>([]);
     const [isTakeDailyLogin, setIsTakeDailyLogin] = useState(false);

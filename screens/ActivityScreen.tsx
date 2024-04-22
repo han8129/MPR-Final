@@ -85,7 +85,7 @@ const ActivityScreen: React.FC = () => {
         setSelectedActivity(filteredActivities[index]);
     };
 
-    const handleApplyActivity = () => {
+    const handleJoin = () => {
         if (selectedActivity) {
             
             if (age < selectedActivity.ageNeeded) {
@@ -158,7 +158,7 @@ const ActivityScreen: React.FC = () => {
                 <ActivityModal
                     act={selectedActivity}
                     closeModal={() => setSelectedActivity(null)}
-                    applyActivity={handleApplyActivity}
+                    joinActivity={handleJoin}
                 />
             </View>
         </>
