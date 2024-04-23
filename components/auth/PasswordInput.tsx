@@ -1,4 +1,3 @@
-// PasswordInput.js
 import React from "react";
 import { View, TextInput, StyleSheet, Text } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";

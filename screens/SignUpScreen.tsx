@@ -45,7 +45,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     gender: "",
                     days: 0,
                     health: 100,
-					happiness: 100,
+					happiness: 10,
                     money: 5,
                     smarts: 10,
                     coursesTaken: [],

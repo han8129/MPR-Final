@@ -151,7 +151,10 @@ export default function GameContextProvider({ children }: Props) {
 
                 currentMoney += total;
                 // generate a random integer from 0 to n -1
-                if ([0].includes(Math.floor(Math.random() * 2))) {
+                if (
+                    [0].includes(Math.floor(Math.random() * 2)) &&
+                    days > 6 * 360
+                ) {
                     setIsPause(true);
                     applyRandomEvent();
                 }
@@ -176,7 +179,7 @@ export default function GameContextProvider({ children }: Props) {
                 onPress: () => {
                     setHealth(100);
                     setMoney(10);
-                    setHappiness(100);
+                    setHappiness(10);
                     setSmarts(10);
                     setDays(0);
                     setJobs([]);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     View,
     Text,
@@ -83,7 +83,7 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
                     </Text>
                     <Text style={styles.detail}>
                         Jobs Done:{' '}
-                        {context.jobs
+                        {context.jobs.length > 0
                             ? context.jobs.map((job: Job) => job.name)
                             : 'None'}
                     </Text>

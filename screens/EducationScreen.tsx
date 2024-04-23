@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
     View,
-    Text,
     StyleSheet,
-    TouchableOpacity,
     ScrollView,
     Alert,
 } from 'react-native';
@@ -48,7 +46,7 @@ const EducationScreen: React.FC = () => {
         };
         // Call the fetchEducationData function
         fetchEducationData();
-    }, [selectedEducation]);
+    }, [context.days]);
 
     const handleEduPress = (index: number) => {
         setSelectedEducation(availableEducation[index]);

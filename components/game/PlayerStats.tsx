@@ -1,6 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Import Ionicons
+import { View, StyleSheet, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import ProgressBar from "./ProgressBar";
 import { Color } from "../../constants/Color";
 

@@ -6,8 +6,6 @@ import {
     TouchableOpacity,
     Image,
     Dimensions,
-    BackHandler,
-    Alert,
 } from 'react-native';
 import { Color } from '../constants/Color';
 import { StatusBar } from 'expo-status-bar';
@@ -15,9 +13,6 @@ import Header from '../components/game/Header';
 import AgeStatus from '../components/game/AgeStatus';
 import PlayerStats from '../components/game/PlayerStats';
 import { GameContext } from '../store/GameContext';
-import CommonButton from '../components/auth/CommonButton';
-import { savePlayerData } from '../services/PlayerService';
-import { Player } from '../models';
 import ExitModal from '../components/game/ExitModal';
 
 const { height } = Dimensions.get('window');

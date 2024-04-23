@@ -1,6 +1,4 @@
-// AppNavigation.js
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LoginScreen from '../screens/LoginScreen';
@@ -90,11 +88,15 @@ const GameNavigation = () => {
                 }}
             />
             <Tabs.Screen
-                name='Activity'
+                name='Social'
                 component={ActivityScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name='bar-chart' color={color} size={size} />
+                        <Ionicons
+                            name='share-social'
+                            color={color}
+                            size={size}
+                        />
                     ),
                     tabBarActiveTintColor: Color.red,
                     headerShown: false,
