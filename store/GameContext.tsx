@@ -67,7 +67,7 @@ export default function GameContextProvider({ children }: Props) {
         }
 
         fetchEventData(); // Call the fetchEventData function
-    }, []); // llogin vao game thi false
+    }, []);
 
     useInterval(callback, INTERVAL, isPause, [
         days,
@@ -151,9 +151,9 @@ export default function GameContextProvider({ children }: Props) {
 
                 currentMoney += total;
                 // generate a random integer from 0 to n -1
+                // 20% for an event to happen
                 if (
-                    [0].includes(Math.floor(Math.random() * 2)) &&
-                    days > 6 * 360
+                    [0].includes(Math.floor(Math.random() * 5))
                 ) {
                     setIsPause(true);
                     applyRandomEvent();
@@ -282,4 +282,4 @@ const MIN_SMARTS = 0;
 const MIN_HAPPINESS = 0;
 const MIN_MONEY = 0;
 const DAY_IN_MONTH = 30;
-const INTERVAL = 20;
+const INTERVAL = 2000;
