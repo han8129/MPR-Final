@@ -39,7 +39,7 @@ const CareerScreen: React.FC = () => {
 
         // Call the fetchjobData function
         fetchjobData();
-    }, [selectedJob]);
+    }, [context.days]);
 
     const handleJobPress = (index: number) => {
         setSelectedJob(filteredJobs[index]);
@@ -100,6 +100,7 @@ const CareerScreen: React.FC = () => {
             }
 
             context.setJobs([...(context.jobs || []), selectedJob]);
+            context.setTitle(selectedJob.name);
 
             Alert.alert(
                 'Job Taken',
