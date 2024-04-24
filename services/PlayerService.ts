@@ -8,7 +8,6 @@ import {
 } from 'firebase/database'; // Import necessary functions
 
 import app from '../config/firebase';
-import { Alert } from 'react-native';
 
 const db = getDatabase(app);
 
