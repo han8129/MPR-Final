@@ -37,7 +37,7 @@ const CareerScreen: React.FC = () => {
 
         // Call the fetchjobData function
         fetchjobData();
-    }, [selectedJob]);
+    }, [context.days]);
 
     const handleJobPress = (index: number) => {
         setSelectedJob(filteredJobs[index]);

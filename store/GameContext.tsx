@@ -15,7 +15,7 @@ export const GameContext = createContext({
     jobs: new Array<Job>(),
     coursesTaken: [],
     username: '',
-    title: '',
+    title: 'No Title Yet',
     gender: '',
     setGender: (e: string) => {},
     setTitle: (e: string) => {},
@@ -170,7 +170,10 @@ export default function GameContextProvider({ children }: Props) {
                 setJobs(validJobs);
                 // generate a random integer from 0 to n -1
                 // 20% for an event to happen
-                if ([0].includes(Math.floor(Math.random() * 5))) {
+                if (
+                    [0].includes(Math.floor(Math.random() * 5)) &&
+                    days > 6 * 360
+                ) {
                     setIsPause(true);
                     applyRandomEvent();
                 }
