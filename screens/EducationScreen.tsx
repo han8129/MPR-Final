@@ -46,7 +46,7 @@ const EducationScreen: React.FC = () => {
         };
         // Call the fetchEducationData function
         fetchEducationData();
-    }, [context.days]);
+    }, [context.days, context.coursesTaken]);
 
     const handleEduPress = (index: number) => {
         setSelectedEducation(availableEducation[index]);
