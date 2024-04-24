@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -27,6 +27,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     const [passwordError, setPasswordError] = useState<boolean>(false);
 
     const context = React.useContext(GameContext);
+    useEffect(() => context.setIsPause(true), []);
 
     const handleLogin = async () => {
         setEmailError(email === '');
@@ -58,6 +59,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                         navigation.navigate('ChooseGender');
                     } else {
                         navigation.navigate('Game');
+                        context.setIsPause(false);
                     }
                 }
             } catch (error) {

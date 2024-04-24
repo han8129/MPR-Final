@@ -77,10 +77,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     useEffect(() => {
-        context.setIsPause(false);
-    }, []);
-
-    useEffect(() => {
         context.setTitle(title);
     }, [
         context.money,
