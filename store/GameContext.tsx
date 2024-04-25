@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from 'react';
 import { Alert, BackHandler } from 'react-native';
 import { Event, Job } from '../models';
 import useInterval from '../hooks/useInterval';
-import { getEventData } from '../data';
+import { getData } from '../data';
 import { PLAYER_CONSTANTS, GAME_TEXT_CONSTANTS } from '../constants';
 
 export const GameContext = createContext({
@@ -62,7 +62,7 @@ export default function GameContextProvider({ children }: Props) {
         // Fetch event data when the component mounts
         async function fetchEventData() {
             try {
-                const eventData = await getEventData();
+                const eventData = await getData<Event>('event');
                 setEvents(eventData); // Update events state with fetched data
             } catch (error) {
                 console.error('Error fetching event data:', error);
