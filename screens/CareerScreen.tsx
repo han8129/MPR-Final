@@ -8,9 +8,6 @@ import ListScrollView from '../components/game/ListScrollView';
 import { Job } from '../models';
 import { getData } from '../data';
 import { GameContext } from '../store/GameContext';
-import CommonModal from '../components/game/CommonModal';
-import LoadingScreen from './LoadingScreen';
-import { DIMENSION } from '../styles';
 
 const CareerScreen: React.FC = () => {
     const context = React.useContext(GameContext);
