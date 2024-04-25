@@ -24,7 +24,7 @@ const CareerScreen: React.FC = () => {
                 // Get the data from Firebase
                 const jobData = await getJobData();
                 const filteredJobs = jobData.filter(
-                    (job) => job.ageNeeded <= age
+                    (job) => job.requirement.age <= age
                 );
                 setFilteredJobs(filteredJobs);
             } catch (error) {
@@ -87,15 +87,6 @@ const CareerScreen: React.FC = () => {
                     selectedJob.requirement.education +
                     ' before you can apply for this job'
             );
-            return false;
-        }
-
-        if (selectedJob.requirement.health > context.health) {
-            Alert.alert(
-                'You are not healthy enough for this job',
-                `You health must be at least ${context.health} to apply`
-            );
-
             return false;
         }
 
