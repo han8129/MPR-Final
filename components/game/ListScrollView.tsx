@@ -42,7 +42,7 @@ const ListScrollView = <T extends ListItemWithName>({
                     onPress={() => onPressItem(index)}
                 >
                     <View style={styles.item}>
-                        <View style={{width: "100%"}}>
+                        <View style={styles.itemDiv}>
                             <Text style={styles.title}>{item.name}</Text>
                             <Text style={styles.description}>{item.desc}</Text>
 
@@ -51,7 +51,6 @@ const ListScrollView = <T extends ListItemWithName>({
                                     {item.type}
                                 </Text>
                             )}
-
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -93,6 +92,9 @@ const styles = StyleSheet.create({
     emptyText: {
         fontSize: 16,
         color: Color.black,
+    },
+    itemDiv: {
+        width: '100%',
     },
 });
 

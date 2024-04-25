@@ -13,7 +13,7 @@ import ListScrollView from '../components/game/ListScrollView';
 import { Education } from '../models';
 import { getData } from '../data';
 import { GameContext } from '../store/GameContext';
-import EducationModal from '../components/game/EducationalModal';
+import CommonModal from '../components/game/CommonModal';
 
 const EducationScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -126,10 +126,11 @@ const EducationScreen: React.FC = () => {
                         onPressItem={handleEduPress}
                     />
                 </ScrollView>
-                <EducationModal
-                    education={selectedEducation}
+                <CommonModal
+                    modalObject={selectedEducation}
                     closeModal={() => setSelectedEducation(null)}
-                    takeCourse={handleTake}
+                    handlePress={handleTake}
+                    buttonText='Take Course'
                 />
             </View>
         </>

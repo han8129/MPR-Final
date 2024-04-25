@@ -99,7 +99,7 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
                             ? context.activities.join(', ')
                             : 'None'}
                     </Text>
-                    <View style={{ alignItems: 'center' }}>
+                    <View style={styles.buttonDiv}>
                         <TouchableOpacity
                             style={styles.button}
                             onPress={ExitAndSave}
@@ -164,6 +164,9 @@ const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'center',
         fontWeight: 'bold',
+    },
+    buttonDiv: {
+        alignItems: 'center',
     },
 });
 
