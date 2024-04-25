@@ -3,19 +3,20 @@ import { Alert, BackHandler } from 'react-native';
 import { Event, Job } from '../models';
 import useInterval from '../hooks/useInterval';
 import { getEventData } from '../data';
+import { PLAYER_CONSTANTS, GAME_TEXT_CONSTANTS } from '../constants';
 
 export const GameContext = createContext({
-    health: 0,
-    money: 0,
-    happiness: 0,
-    smarts: 0,
+    health: PLAYER_CONSTANTS.ZERO,
+    money: PLAYER_CONSTANTS.ZERO,
+    happiness: PLAYER_CONSTANTS.ZERO,
+    smarts: PLAYER_CONSTANTS.ZERO,
     events: [],
     activities: [],
-    days: 0,
-    jobs: new Array<Job>(),
+    days: PLAYER_CONSTANTS.ZERO,
+    jobs: [],
     coursesTaken: [],
     username: '',
-    title: 'No Title Yet',
+    title: PLAYER_CONSTANTS.INITIAL_TITLE,
     gender: '',
     setGender: (e: string) => {},
     setTitle: (e: string) => {},
@@ -39,13 +40,15 @@ interface Props {
     children: any;
 }
 export default function GameContextProvider({ children }: Props) {
-    const [health, setHealth] = useState(100);
-    const [money, setMoney] = useState(10);
-    const [happiness, setHappiness] = useState(100);
+    const [health, setHealth] = useState(PLAYER_CONSTANTS.INITIAL_HEALTH);
+    const [money, setMoney] = useState(PLAYER_CONSTANTS.INITIAL_MONEY);
+    const [happiness, setHappiness] = useState(
+        PLAYER_CONSTANTS.INITIAL_HAPPINESS
+    );
     const [events, setEvents] = useState<Event[]>([]); // Initialize events as an empty array
     const [activities, setActivities] = useState<string[]>([]); // Initialize activities as an empty array
-    const [smarts, setSmarts] = useState(10);
-    const [days, setDays] = useState(0);
+    const [smarts, setSmarts] = useState(PLAYER_CONSTANTS.INITIAL_SMARTS);
+    const [days, setDays] = useState(PLAYER_CONSTANTS.INITIAL_DAY);
     const [jobs, setJobs] = useState<Job[]>([]);
     const [username, setUsername] = useState<string>(''); // Initialize username as an empty string
     const [coursesTaken, setCoursesTaken] = useState<string[]>([]);
@@ -69,7 +72,7 @@ export default function GameContextProvider({ children }: Props) {
         fetchEventData(); // Call the fetchEventData function
     }, []);
 
-    useInterval(callback, INTERVAL, isPause, [
+    useInterval(callback, PLAYER_CONSTANTS.DAY_INTERVAL, isPause, [
         days,
         health,
         happiness,
@@ -79,52 +82,52 @@ export default function GameContextProvider({ children }: Props) {
 
     function callback() {
         let currentDays = days;
-        let currentDayInMonth = currentDays % DAY_IN_MONTH;
+        let currentDayInMonth = currentDays % PLAYER_CONSTANTS.DAY_IN_MONTH;
         let currentHealth = health;
         let currentHappiness = happiness;
         let currentSmarts = smarts;
         let currentMoney = money;
 
-        if (days / 360 == 18) {
-            currentMoney += 10000;
+        if (days / PLAYER_CONSTANTS.DAY_IN_YEAR == 18) {
+            currentMoney += PLAYER_CONSTANTS.MONEY_AT_18;
         }
 
-        if (money == 0) {
-            currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
+        if (money == PLAYER_CONSTANTS.ZERO) {
+            currentHealth -= PLAYER_CONSTANTS.HEALTH_RATE;
         }
 
-        if (happiness == 0) {
-            currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
+        if (happiness == PLAYER_CONSTANTS.ZERO) {
+            currentHealth -= PLAYER_CONSTANTS.HEALTH_RATE;
         }
 
-        if (smarts == 0) {
-            currentHealth -= Number((MAX_HEALTH * 0.005).toFixed(2));
+        if (smarts == PLAYER_CONSTANTS.ZERO) {
+            currentHealth -= PLAYER_CONSTANTS.HEALTH_RATE;
         }
 
-        if (smarts == 100) {
-            currentHealth += Number((MAX_HEALTH * 0.005).toFixed(2));
+        if (smarts == PLAYER_CONSTANTS.MAX_SMARTS) {
+            currentHealth += PLAYER_CONSTANTS.HEALTH_RATE;
         }
 
-        if (happiness == 100) {
-            currentHealth += Number((MAX_HEALTH * 0.005).toFixed(2));
+        if (happiness == PLAYER_CONSTANTS.MAX_HAPPINESS) {
+            currentHealth += PLAYER_CONSTANTS.HEALTH_RATE;
         }
 
-        if (days % 360 == 0 && days != 0) {
-            currentHealth += 5;
-            currentHappiness += 5;
-            currentSmarts += 5;
+        if (days % PLAYER_CONSTANTS.DAY_IN_YEAR == 0 && days != 0) {
+            currentHealth += PLAYER_CONSTANTS.NEW_AGE_VALUE;
+            currentHappiness += PLAYER_CONSTANTS.NEW_AGE_VALUE;
+            currentSmarts += PLAYER_CONSTANTS.NEW_AGE_VALUE;
         }
 
-        if (currentHealth > 100) {
-            currentHealth = 100;
+        if (currentHealth > PLAYER_CONSTANTS.MAX_HEALTH) {
+            currentHealth = PLAYER_CONSTANTS.MAX_HEALTH;
         }
 
-        if (currentHappiness > 100) {
-            currentHappiness = 100;
+        if (currentHappiness > PLAYER_CONSTANTS.MAX_HAPPINESS) {
+            currentHappiness = PLAYER_CONSTANTS.MAX_HAPPINESS;
         }
 
-        if (currentSmarts > 100) {
-            currentSmarts = 100;
+        if (currentSmarts > PLAYER_CONSTANTS.MAX_SMARTS) {
+            currentSmarts = PLAYER_CONSTANTS.MAX_SMARTS;
         }
 
         if (currentHealth <= 0) {
@@ -141,7 +144,7 @@ export default function GameContextProvider({ children }: Props) {
         }
 
         // Events only occur after the age of 6
-        if (currentDays > 7 * 12 * DAY_IN_MONTH) {
+        if (currentDays > 7 * 12 * PLAYER_CONSTANTS.DAY_IN_MONTH) {
             // Events may occur at the start of the month
             if (currentDayInMonth > 28) {
                 // Each month a job will generate money
@@ -172,7 +175,7 @@ export default function GameContextProvider({ children }: Props) {
                 // 20% for an event to happen
                 if (
                     [0].includes(Math.floor(Math.random() * 5)) &&
-                    days > 6 * 360
+                    days > 6 * PLAYER_CONSTANTS.DAY_IN_YEAR
                 ) {
                     setIsPause(true);
                     applyRandomEvent();
@@ -192,58 +195,62 @@ export default function GameContextProvider({ children }: Props) {
     function resetGame() {
         setIsPause(true);
         setHealth(0);
-        Alert.alert('You have died', 'Play again?', [
-            {
-                text: 'Yes',
-                onPress: () => {
-                    setHealth(100);
-                    setMoney(10);
-                    setHappiness(10);
-                    setSmarts(10);
-                    setDays(0);
-                    setJobs([]);
-                    setCoursesTaken([]);
-                    setActivities([]);
-                    setIsPause(false);
+        Alert.alert(
+            GAME_TEXT_CONSTANTS.DIE_TITLE,
+            GAME_TEXT_CONSTANTS.DIE_DESC,
+            [
+                {
+                    text: GAME_TEXT_CONSTANTS.DIE_YES_TEXT,
+                    onPress: () => {
+                        setHealth(PLAYER_CONSTANTS.INITIAL_HEALTH);
+                        setMoney(PLAYER_CONSTANTS.INITIAL_MONEY);
+                        setHappiness(PLAYER_CONSTANTS.INITIAL_HAPPINESS);
+                        setSmarts(PLAYER_CONSTANTS.INITIAL_SMARTS);
+                        setDays(PLAYER_CONSTANTS.INITIAL_DAY);
+                        setJobs([]);
+                        setCoursesTaken([]);
+                        setActivities([]);
+                        setIsPause(false);
+                    },
                 },
-            },
-            {
-                text: 'No',
-                onPress: () => {
-                    BackHandler.exitApp();
+                {
+                    text: GAME_TEXT_CONSTANTS.DIE_NO_TEXT,
+                    onPress: () => {
+                        BackHandler.exitApp();
+                    },
                 },
-            },
-        ]);
+            ]
+        );
     }
 
     function applyRandomEvent() {
         const randIndex = Math.floor(Math.random() * events.length);
         const event = events[randIndex];
         Alert.alert(
-            `${event.name}`,
+            event.name,
             event.desc,
             event.options.map((option) => ({
                 text: option.desc,
                 onPress: () => {
                     // Update player stats based on selected option
                     const newHealth = Math.max(
-                        MIN_HEALTH,
-                        Math.min(MAX_HEALTH, health + option.effect.health)
+                        PLAYER_CONSTANTS.MIN_HEALTH,
+                        Math.min(PLAYER_CONSTANTS.MAX_HEALTH, health + option.effect.health)
                     );
                     const newMoney = Math.max(
-                        MIN_MONEY,
+                        PLAYER_CONSTANTS.MIN_MONEY,
                         money + option.effect.money
                     );
                     const newHappiness = Math.max(
-                        MIN_HAPPINESS,
+                        PLAYER_CONSTANTS.MIN_HAPPINESS,
                         Math.min(
-                            MAX_HAPPINESS,
+                            PLAYER_CONSTANTS.MAX_HAPPINESS,
                             happiness + option.effect.happiness
                         )
                     );
                     const newSmarts = Math.max(
-                        MIN_SMARTS,
-                        Math.min(MAX_SMARTS, smarts + option.effect.smarts)
+                        PLAYER_CONSTANTS.MIN_SMARTS,
+                        Math.min(PLAYER_CONSTANTS.MAX_SMARTS, smarts + option.effect.smarts)
                     );
 
                     // Update player stats based on selected option
@@ -292,13 +299,3 @@ export default function GameContextProvider({ children }: Props) {
         <GameContext.Provider value={context}>{children}</GameContext.Provider>
     );
 }
-
-const MAX_HEALTH = 100;
-const MAX_SMARTS = 100;
-const MAX_HAPPINESS = 100;
-const MIN_HEALTH = 0;
-const MIN_SMARTS = 0;
-const MIN_HAPPINESS = 0;
-const MIN_MONEY = 0;
-const DAY_IN_MONTH = 30;
-const INTERVAL = 2000;
