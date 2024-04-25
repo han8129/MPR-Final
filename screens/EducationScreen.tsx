@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    View,
-    StyleSheet,
-    ScrollView,
-    Alert,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Color } from '../constants/Color';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
@@ -14,6 +9,7 @@ import { Education } from '../models';
 import { getEducationData } from '../data';
 import { GameContext } from '../store/GameContext';
 import EducationModal from '../components/game/EducationalModal';
+import LoadingScreen from './LoadingScreen';
 
 const EducationScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -26,6 +22,7 @@ const EducationScreen: React.FC = () => {
 
     const [selectedEducation, setSelectedEducation] =
         useState<Education | null>();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchEducationData = async () => {
@@ -40,6 +37,7 @@ const EducationScreen: React.FC = () => {
                         !context.coursesTaken?.includes(edu.name as never)
                 );
                 setAvailableEducation(filteredEdus);
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching education data:', error);
             }
@@ -110,6 +108,9 @@ const EducationScreen: React.FC = () => {
         }
     };
 
+    if (isLoading) {
+        return <LoadingScreen />;
+    }
     return (
         <>
             <StatusBar hidden={true} />

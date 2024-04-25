@@ -66,19 +66,19 @@ const JobModal: React.FC<JobModalProps> = ({
                         <Text
                             style={styles.requirement}
                         >
-                            {'Education: ' }
+                            {'- Education: ' }
                             {job.requirement.education
                                 ? job.requirement.education
                                 : 'None'}
                         </Text>
                         <Text style={styles.requirement}>
-                            {'Age: ' + job.requirement.age}
+                            {'- Age: ' + job.requirement.age}
                         </Text>
                         <Text style={styles.requirement}>
-                            {'Health: ' + job.requirement.health}
+                            {'- Health: ' + job.requirement.health}
                         </Text>
                         <Text style={styles.requirement}>
-                            {'Smart: ' + job.requirement.smart}
+                            {'- Smart: ' + job.requirement.smarts}
                         </Text>
                     </View>
                     <View style={{ alignItems: 'center' }}>
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     },
     requirement: {
         fontSize: 14,
-        marginLeft: 14,
+        fontStyle: 'italic',
     },
 });
 

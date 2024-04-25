@@ -15,6 +15,7 @@ import ActivityModal from '../components/game/ActivityModal';
 import { Activity } from '../models';
 import { getActivitiesData } from '../data';
 import { GameContext } from '../store/GameContext';
+import LoadingScreen from './LoadingScreen';
 
 export interface Relationship {
     name: string;
@@ -38,6 +39,7 @@ const ActivityScreen: React.FC = () => {
     const [filteredActivities, setFilteredActivities] = useState<Activity[]>(
         []
     );
+    const [isLoading, setIsLoading] = useState(true);
 
     const relationships: Relationship[] = [
         {
@@ -57,6 +59,7 @@ const ActivityScreen: React.FC = () => {
     useEffect(() => {
         const fetchActivitiesData = async () => {
             try {
+                
                 // Get the data from Firebase
                 const activitiesData = await getActivitiesData();
 
@@ -66,6 +69,7 @@ const ActivityScreen: React.FC = () => {
                         !context.activities?.includes(activity.name as never)
                 );
                 setFilteredActivities(filteredActivities);
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching activities data:', error);
             }
@@ -126,6 +130,12 @@ const ActivityScreen: React.FC = () => {
         context.setMoney(context.money + 50);
         setSelectedRelationship(null);
     };
+
+    if (isLoading) {
+        return (
+            <LoadingScreen />
+        );
+    }
 
     return (
         <>

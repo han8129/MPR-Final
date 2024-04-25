@@ -45,7 +45,7 @@ export interface Job {
         age: number;
         health: number;
         education: string;
-        smart: number
+        smarts: number
     }
     type: string;
 }

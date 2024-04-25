@@ -14,6 +14,7 @@ import AgeStatus from '../components/game/AgeStatus';
 import PlayerStats from '../components/game/PlayerStats';
 import { GameContext } from '../store/GameContext';
 import ExitModal from '../components/game/ExitModal';
+import LoadingScreen from './LoadingScreen';
 
 const { height } = Dimensions.get('window');
 
@@ -28,6 +29,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const progress = Number((((context.days % 360) / 360) * 100).toFixed(2));
 
     const [isExitModalOpened, setIsExitModalOpened] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     let image;
     let title;
@@ -76,6 +78,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         title = 'Old Age';
     }
 
+    if (context.jobs.length > 0) {
+        for (const job of context.jobs) {
+            title += job.name + ' ';
+        }
+    }
+
     useEffect(() => {
         context.setTitle(title);
     }, [
@@ -85,6 +93,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         context.happiness,
         context.smarts,
     ]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+    }, []);
 
     const navigateDailyLogin = () => {
         navigation.navigate('DailyLogin');
@@ -103,6 +117,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         setIsExitModalOpened(true);
         context.setIsPause(true);
     };
+
+    if (isLoading) {
+        return <LoadingScreen />;
+    }
 
     return (
         <>
