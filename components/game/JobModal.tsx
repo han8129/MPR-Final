@@ -19,13 +19,17 @@ interface JobModalProps {
     quitJob: () => void;
 }
 
-const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob, quitJob }) => {
-
+const JobModal: React.FC<JobModalProps> = ({
+    job,
+    closeModal,
+    applyJob,
+    quitJob,
+}) => {
     const context = React.useContext(GameContext);
     const isDoing = context?.jobs?.find((j: Job) => j?.name === job?.name);
 
     if (!job) return null;
-    
+
     return (
         <Modal
             visible={true}
@@ -41,24 +45,42 @@ const JobModal: React.FC<JobModalProps> = ({ job, closeModal, applyJob, quitJob 
                             <Ionicons name='close' size={24} color='#333' />
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.modalDescription}>{job.desc}</Text>
-                    <Text style={styles.detail}>Type: {job.type}</Text>
-                    <Text style={styles.detail}>
-                        Rate: ${job.effect.money}/month
-                    </Text>
-                    <Text style={styles.detail}>
-                        Age Needed: {job.ageNeeded}
-                    </Text>
-                    <Text style={styles.detail}>
-                        Health Effect: {job.effect.health}
-                    </Text>
-                    <Text style={styles.detail}>
-                        Smarts Effect: {job.effect.smarts}
-                    </Text>
-                    <Text style={styles.detail}>
-                        Prerequisites:{' '}
-                        {job.prerequisite ? job.prerequisite : 'None'}
-                    </Text>
+                    <View
+                        style={{
+                            gap: 5,
+                            flexDirection: 'column',
+                        }}
+                    >
+                        <Text style={styles.modalDescription}>{job.desc}</Text>
+                        <Text style={styles.detail}>Type: {job.type}</Text>
+                        <Text style={styles.detail}>
+                            Rate: ${job.effect.money}/month
+                        </Text>
+                        <Text style={styles.detail}>
+                            Health Effect: {job.effect.health}
+                        </Text>
+                        <Text style={styles.detail}>
+                            Smarts Effect: {job.effect.smarts}
+                        </Text>
+                        <Text style={styles.detail}>Requirements:</Text>
+                        <Text
+                            style={styles.requirement}
+                        >
+                            {'Education: ' }
+                            {job.requirement.education
+                                ? job.requirement.education
+                                : 'None'}
+                        </Text>
+                        <Text style={styles.requirement}>
+                            {'Age: ' + job.requirement.age}
+                        </Text>
+                        <Text style={styles.requirement}>
+                            {'Health: ' + job.requirement.health}
+                        </Text>
+                        <Text style={styles.requirement}>
+                            {'Smart: ' + job.requirement.smart}
+                        </Text>
+                    </View>
                     <View style={{ alignItems: 'center' }}>
                         {isDoing ? (
                             <TouchableOpacity
@@ -112,7 +134,6 @@ const styles = StyleSheet.create({
     },
     detail: {
         fontSize: 14,
-        marginBottom: 5,
     },
     button: {
         backgroundColor: Color.red,
@@ -125,6 +146,10 @@ const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'center',
         fontWeight: 'bold',
+    },
+    requirement: {
+        fontSize: 14,
+        marginLeft: 14,
     },
 });
 

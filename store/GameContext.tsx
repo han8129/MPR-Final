@@ -12,7 +12,7 @@ export const GameContext = createContext({
     events: [],
     activities: [],
     days: 0,
-    jobs: [],
+    jobs: new Array<Job>(),
     coursesTaken: [],
     username: '',
     title: '',
@@ -141,20 +141,36 @@ export default function GameContextProvider({ children }: Props) {
         }
 
         // Events only occur after the age of 6
-        if (currentDays > 12 * DAY_IN_MONTH) {
+        if (currentDays > 7 * 12 * DAY_IN_MONTH) {
             // Events may occur at the start of the month
             if (currentDayInMonth > 28) {
                 // Each month a job will generate money
-                const total = jobs
-                    .map((job) => job.effect.money)
-                    .reduce((sum, curr) => sum + curr, 0);
 
-                currentMoney += total;
+                for (const job of jobs) {
+                    currentMoney += job.effect.money;
+                    currentHealth += job.effect.health;
+                    currentHappiness += job.effect.happiness;
+                    currentSmarts += job.effect.smarts;
+                }
+
+                const validJobs = [];
+                for (const job of jobs) {
+                    if (health < job.requirement.health || smarts < job.requirement.smart)
+                    {
+                        Alert.alert(
+                            `You have to quit ${job.name} due to health issues'`
+                        );
+
+                        continue;
+                    }
+
+                    validJobs.push(job);
+                }
+
+                setJobs(validJobs);
                 // generate a random integer from 0 to n -1
                 // 20% for an event to happen
-                if (
-                    [0].includes(Math.floor(Math.random() * 5))
-                ) {
+                if ([0].includes(Math.floor(Math.random() * 5))) {
                     setIsPause(true);
                     applyRandomEvent();
                 }

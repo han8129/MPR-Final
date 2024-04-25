@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    View,
-    StyleSheet,
-    ScrollView,
-    Alert,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Color } from '../constants/Color';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
@@ -47,71 +42,74 @@ const CareerScreen: React.FC = () => {
 
     const applyJob = () => {
         if (selectedJob) {
-            // Check in the context.jobs, this should only contains 1 partime job and 1 fulltime job,
-            if (context?.jobs?.length > 0) {
-                for (const job of context.jobs) {
-                    const j: Job = job;
-                    if (
-                        j.type === 'Part-time' &&
-                        selectedJob.type === 'Part-time'
-                    ) {
-                        Alert.alert(
-                            'You already have a part-time job',
-                            'You must quit your current part-time job before you can apply for a new one'
-                        );
-                        return;
-                    }
-                    if (
-                        j.type === 'Full-time' &&
-                        selectedJob.type === 'Full-time'
-                    ) {
-                        Alert.alert(
-                            'You already have a full-time job',
-                            'You must quit your current full-time job before you can apply for a new one'
-                        );
-                        return;
-                    }
-                }
-            }
+            if (validateSelectedJob(selectedJob)) {
+                context.setJobs([...(context.jobs || []), selectedJob]);
 
-            if (age < selectedJob.ageNeeded) {
                 Alert.alert(
-                    'You are not old enough to apply for this job',
-                    'You must be at least ' +
-                        selectedJob.ageNeeded +
-                        ' years old to apply for this job'
+                    'Job Taken',
+                    'You have successfully taken the job: ' +
+                        selectedJob.name +
+                        ' and earned $' +
+                        selectedJob.effect.money +
+                        ' per month.'
                 );
-                return;
+                setSelectedJob(null);
             }
-
-            if (
-                selectedJob.prerequisite &&
-                !context.coursesTaken?.includes(
-                    selectedJob.prerequisite as never
-                )
-            ) {
-                Alert.alert(
-                    'You do not have the prerequisite for this job',
-                    'You must take ' +
-                        selectedJob.prerequisite +
-                        ' before you can apply for this job'
-                );
-                return;
-            }
-
-            context.setJobs([...(context.jobs || []), selectedJob]);
-
-            Alert.alert(
-                'Job Taken',
-                'You have successfully taken the job: ' +
-                    selectedJob.name +
-                    ' and earned $' +
-                    selectedJob.effect.money +
-                    ' per month.'
-            );
-            setSelectedJob(null);
         }
     };
+
+    function validateSelectedJob(selectedJob: Job): boolean {
+        // Check in the context.jobs, this should only contains 1 partime job and 1 fulltime job,
+        if (context.jobs.length > 0) {
+            const type = selectedJob.type;
+
+            const isDuplicated = context.jobs.find((job) => job.type === type);
+
+            if (isDuplicated) {
+                Alert.alert(
+                    `You already have a ${type} job`,
+                    `You must quit your current ${type} job before you can apply for a new one'`
+                );
+
+                return false;
+            }
+        }
+
+        if (
+            selectedJob.requirement.education &&
+            !context.coursesTaken?.includes(
+                selectedJob.requirement.education as never
+            )
+        ) {
+            Alert.alert(
+                'You do not have the education for this job',
+                'You must take ' +
+                    selectedJob.requirement.education +
+                    ' before you can apply for this job'
+            );
+            return false;
+        }
+
+        if (selectedJob.requirement.health > context.health) {
+            Alert.alert(
+                'You are not healthy enough for this job',
+                `You health must be at least ${context.health} to apply`
+            );
+
+            return false;
+        }
+
+        if (selectedJob.requirement.health > context.health) {
+            Alert.alert(
+                'You are not healthy enough for this job',
+                `You health must be at least ${context.health} to apply`
+            );
+
+            return false;
+        }
+
+        return true;
+    }
 
     const quitJob = () => {
         if (selectedJob) {
