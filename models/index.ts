@@ -37,11 +37,16 @@ export interface Education {
 }
 
 export interface Job {
-    ageNeeded: number;
     desc: string;
     name: string;
     prerequisite: string;
     effect: Effect;
+    requirement: {
+        age: number;
+        health: number;
+        education: string;
+        smart: number
+    }
     type: string;
 }
 
