@@ -9,6 +9,7 @@ import { Job } from '../models';
 import { getJobData } from '../data';
 import { GameContext } from '../store/GameContext';
 import JobModal from '../components/game/JobModal';
+import LoadingScreen from './LoadingScreen';
 
 const CareerScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -17,6 +18,7 @@ const CareerScreen: React.FC = () => {
     const [selectedJob, setSelectedJob] = useState<Job | null>();
 
     const age = Math.floor(context.days / 360);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchjobData = async () => {
@@ -27,6 +29,7 @@ const CareerScreen: React.FC = () => {
                     (job) => job.requirement.age <= age
                 );
                 setFilteredJobs(filteredJobs);
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching job data:', error);
             }
@@ -44,6 +47,7 @@ const CareerScreen: React.FC = () => {
         if (selectedJob) {
             if (validateSelectedJob(selectedJob)) {
                 context.setJobs([...(context.jobs || []), selectedJob]);
+                context.setTitle(selectedJob.name);
 
                 Alert.alert(
                     'Job Taken',
@@ -121,6 +125,10 @@ const CareerScreen: React.FC = () => {
             setSelectedJob(null);
         }
     };
+
+    if (isLoading) {
+        return <LoadingScreen />;
+    }
 
     return (
         <>

@@ -155,7 +155,7 @@ export default function GameContextProvider({ children }: Props) {
 
                 const validJobs = [];
                 for (const job of jobs) {
-                    if (health < job.requirement.health || smarts < job.requirement.smart)
+                    if (health < job.requirement.health || smarts < job.requirement.smarts)
                     {
                         Alert.alert(
                             `You have to quit ${job.name} due to health issues'`
