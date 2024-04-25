@@ -11,7 +11,7 @@ import Header from '../components/game/Header';
 import SectionHeader from '../components/game/SectionHeader';
 import ListScrollView from '../components/game/ListScrollView';
 import { Job } from '../models';
-import { getJobData } from '../data';
+import { getData } from '../data';
 import { GameContext } from '../store/GameContext';
 import JobModal from '../components/game/JobModal';
 
@@ -27,7 +27,7 @@ const CareerScreen: React.FC = () => {
         const fetchjobData = async () => {
             try {
                 // Get the data from Firebase
-                const jobData = await getJobData();
+                const jobData = await getData<Job>('job');
                 const filteredJobs = jobData.filter(
                     (job) => job.ageNeeded <= age
                 );

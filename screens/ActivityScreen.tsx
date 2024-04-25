@@ -13,7 +13,7 @@ import ListScrollView from '../components/game/ListScrollView';
 import RelationshipModal from '../components/game/RelationshipModal';
 import ActivityModal from '../components/game/ActivityModal';
 import { Activity } from '../models';
-import { getActivitiesData } from '../data';
+import { getData } from '../data';
 import { GameContext } from '../store/GameContext';
 
 export interface Relationship {
@@ -58,7 +58,7 @@ const ActivityScreen: React.FC = () => {
         const fetchActivitiesData = async () => {
             try {
                 // Get the data from Firebase
-                const activitiesData = await getActivitiesData();
+                const activitiesData = await getData<Activity>('activity');
 
                 const filteredActivities = activitiesData.filter(
                     (activity: Activity) =>
