@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Color } from '../constants/Color';
+import { View, Text } from 'react-native';
 import { Alert } from 'react-native';
-
 import TopBackground from '../components/auth/TopBackground';
 import Input from '../components/auth/UsernameInput';
 import PasswordInput from '../components/auth/PasswordInput';
-import CustomButton from '../components/auth/CommonButton';
+import CustomButton from '../components/auth/CustomButton';
 import { StatusBar } from 'expo-status-bar';
-
 import { SignUp } from '../services/PlayerService';
-import { User } from '../models';
+import { User } from '../models/Types';
 import { BottomNavText } from '../components/auth/BottomNavText';
+import { AUTH_STYLES } from '../styles/AuthStyles';
+import { GLOBAL_STYLES } from '../styles/SharedStyles';
 
 interface Props {
     navigation: any;
@@ -79,10 +78,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <>
             <StatusBar hidden={true} />
-            <View style={styles.container}>
+            <View style={GLOBAL_STYLES.container}>
                 <TopBackground />
-                <View style={styles.inputContainer}>
-                    <Text style={styles.loginText}>Sign up</Text>
+                <View style={AUTH_STYLES.inputContainer}>
+                    <Text style={AUTH_STYLES.text}>Sign up</Text>
 
                     <Input
                         value={email}
@@ -121,25 +120,5 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
         </>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Color.white,
-    },
-    loginText: {
-        color: Color.black,
-        fontSize: 30,
-        fontWeight: 'bold',
-        margin: 20,
-    },
-    inputContainer: {
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        flex: 2,
-    },
-});
 
 export default LoginScreen;

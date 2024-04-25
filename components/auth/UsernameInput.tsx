@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, TextInput, Text } from 'react-native';
+import { INPUT_STYLES } from '../../styles/AuthStyles';
 
 const Input = ({
     value,
@@ -14,9 +15,12 @@ const Input = ({
 }) => {
     return (
         <View>
-            <View style={styles.inputView}>
+            <View style={INPUT_STYLES.inputView}>
                 <TextInput
-                    style={[styles.input, isError && styles.errorInput]}
+                    style={[
+                        INPUT_STYLES.input,
+                        isError && INPUT_STYLES.errorInput,
+                    ]}
                     value={value}
                     onChangeText={onChangeText}
                     placeholder={placeholder}
@@ -30,30 +34,5 @@ const Input = ({
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    inputView: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: 300,
-        height: 60,
-        borderWidth: 1,
-        borderColor: '#CBD5E1',
-        backgroundColor: 'white',
-        padding: 8,
-        marginVertical: 10,
-        borderRadius: 10,
-    },
-    input: {
-        flex: 1,
-        fontSize: 16,
-    },
-    errorInput: {
-        borderColor: 'red',
-    },
-    errorText: {
-        color: 'red',
-    },
-});
 
 export default Input;

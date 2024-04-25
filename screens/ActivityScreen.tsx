@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    View,
-    StyleSheet,
-    ScrollView,
-    Alert,
-} from 'react-native';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Color } from '../constants/Color';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
@@ -12,8 +7,8 @@ import SectionHeader from '../components/game/SectionHeader';
 import ListScrollView from '../components/game/ListScrollView';
 import RelationshipModal from '../components/game/RelationshipModal';
 import CommonModal from '../components/game/CommonModal';
-import { Activity } from '../models';
-import { getData } from '../data';
+import { Activity } from '../models/Types';
+import { getData } from '../data/Data';
 import { GameContext } from '../store/GameContext';
 import LoadingScreen from './LoadingScreen';
 
@@ -59,7 +54,6 @@ const ActivityScreen: React.FC = () => {
     useEffect(() => {
         const fetchActivitiesData = async () => {
             try {
-                
                 // Get the data from Firebase
                 const activitiesData = await getData<Activity>('activity');
 
@@ -89,7 +83,6 @@ const ActivityScreen: React.FC = () => {
 
     const handleJoin = () => {
         if (selectedActivity) {
-            
             if (age < selectedActivity.ageNeeded) {
                 Alert.alert(
                     'You are not old enough to apply for this activity',
@@ -121,7 +114,7 @@ const ActivityScreen: React.FC = () => {
                 ...(context.activities || []),
                 selectedActivity.name as never,
             ]);
-        
+
             setSelectedActivity(null);
         }
     };
@@ -132,9 +125,7 @@ const ActivityScreen: React.FC = () => {
     };
 
     if (isLoading) {
-        return (
-            <LoadingScreen />
-        );
+        return <LoadingScreen />;
     }
 
     return (

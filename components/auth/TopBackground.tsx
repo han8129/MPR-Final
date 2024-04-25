@@ -1,5 +1,6 @@
 import React from 'react';
 import { ImageBackground, StyleSheet } from 'react-native';
+import { TOP_IMAGE_STYLES } from '../../styles/AuthStyles';
 
 const image = require('../../assets/images/bg.jpg');
 
@@ -8,17 +9,9 @@ const TopBackground = () => {
         <ImageBackground
             source={image}
             resizeMode='cover'
-            style={styles.image}
+            style={TOP_IMAGE_STYLES.image}
         />
     );
 };
-
-const styles = StyleSheet.create({
-    image: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-    },
-});
 
 export default TopBackground;

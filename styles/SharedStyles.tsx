@@ -51,8 +51,13 @@ export const MODAL_SHARED_STYLE = StyleSheet.create({
     },
 });
 
-export const DIMENSION = StyleSheet.create({
-    max: {
+export const GLOBAL_STYLES = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: Color.white,
+        alignItems: 'center',
+    },
+    maxWidth: {
         width: '100%',
     },
 });

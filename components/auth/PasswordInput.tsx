@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
+import { View, TextInput,Text } from 'react-native';
+import { PASSWORD_INPUT_STYLES } from '../../styles/AuthStyles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const PasswordInput = ({
@@ -19,9 +20,12 @@ const PasswordInput = ({
 }) => {
     return (
         <View>
-            <View style={styles.inputView}>
+            <View style={PASSWORD_INPUT_STYLES.inputView}>
                 <TextInput
-                    style={[styles.input, isError && styles.errorInput]}
+                    style={[
+                        PASSWORD_INPUT_STYLES.input,
+                        isError && PASSWORD_INPUT_STYLES.errorInput,
+                    ]}
                     value={value}
                     onChangeText={onChangeText}
                     placeholder={placeholder}
@@ -34,7 +38,7 @@ const PasswordInput = ({
                 />
             </View>
             {isError && (
-                <Text style={styles.errorText}>
+                <Text style={PASSWORD_INPUT_STYLES.errorText}>
                     Please enter a valid {placeholder.toLowerCase()}.
                 </Text>
             )}
@@ -42,30 +46,5 @@ const PasswordInput = ({
     );
 };
 
-const styles = StyleSheet.create({
-    inputView: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: 300,
-        height: 60,
-        borderWidth: 1,
-        borderColor: '#CBD5E1',
-        backgroundColor: 'white',
-        padding: 10,
-        marginVertical: 10,
-        borderRadius: 10,
-    },
-    input: {
-        flex: 1,
-        fontSize: 16,
-    },
-    errorInput: {
-        borderColor: 'red',
-    },
-    errorText: {
-        color: 'red',
-        marginTop: 5,
-    },
-});
 
 export default PasswordInput;

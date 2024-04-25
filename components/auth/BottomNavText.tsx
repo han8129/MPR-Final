@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Color } from '../../constants/Color';
+import { BOTTOM_NAV_STYLES } from '../../styles/AuthStyles';
 
 interface BottomNavTextProps {
     title: string;
@@ -14,23 +15,12 @@ export const BottomNavText: React.FC<BottomNavTextProps> = ({
     onPress,
 }) => {
     return (
-        <View style={styles.container}>
+        <View style={BOTTOM_NAV_STYLES.container}>
             <Text>{title}</Text>
             <TouchableOpacity onPress={onPress}>
-                <Text style={styles.to}>{text}</Text>
+                <Text style={BOTTOM_NAV_STYLES.to}>{text}</Text>
             </TouchableOpacity>
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 20,
-        alignItems: 'center',
-    },
-    to: {
-        color: Color.black,
-        fontWeight: 'bold',
-        fontSize: 17,
-    },
-});

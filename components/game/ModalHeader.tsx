@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { MODAL_SHARED_STYLE } from '../../styles'; 
+import { MODAL_SHARED_STYLE } from '../../styles/SharedStyles';
 
 const ModalHeader = ({
     title,

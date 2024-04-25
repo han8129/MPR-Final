@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect } from 'react';
 import { Alert, BackHandler } from 'react-native';
-import { Event, Job } from '../models';
+import { Event, Job } from '../models/Types';
 import useInterval from '../hooks/useInterval';
-import { getData } from '../data';
-import { PLAYER_CONSTANTS, GAME_TEXT_CONSTANTS } from '../constants';
+import { getData } from '../data/Data';
+import { PLAYER_CONSTANTS, GAME_TEXT_CONSTANTS } from '../constants/GameContansts';
 
 export const GameContext = createContext({
     health: PLAYER_CONSTANTS.ZERO,
@@ -158,8 +158,10 @@ export default function GameContextProvider({ children }: Props) {
 
                 const validJobs = [];
                 for (const job of jobs) {
-                    if (health < job.requirement.health || smarts < job.requirement.smarts)
-                    {
+                    if (
+                        health < job.requirement.health ||
+                        smarts < job.requirement.smarts
+                    ) {
                         Alert.alert(
                             `You have to quit ${job.name} due to health issues'`
                         );
@@ -235,7 +237,10 @@ export default function GameContextProvider({ children }: Props) {
                     // Update player stats based on selected option
                     const newHealth = Math.max(
                         PLAYER_CONSTANTS.MIN_HEALTH,
-                        Math.min(PLAYER_CONSTANTS.MAX_HEALTH, health + option.effect.health)
+                        Math.min(
+                            PLAYER_CONSTANTS.MAX_HEALTH,
+                            health + option.effect.health
+                        )
                     );
                     const newMoney = Math.max(
                         PLAYER_CONSTANTS.MIN_MONEY,
@@ -250,7 +255,10 @@ export default function GameContextProvider({ children }: Props) {
                     );
                     const newSmarts = Math.max(
                         PLAYER_CONSTANTS.MIN_SMARTS,
-                        Math.min(PLAYER_CONSTANTS.MAX_SMARTS, smarts + option.effect.smarts)
+                        Math.min(
+                            PLAYER_CONSTANTS.MAX_SMARTS,
+                            smarts + option.effect.smarts
+                        )
                     );
 
                     // Update player stats based on selected option

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Modal } from 'react-native';
-import { Activity, Education, Job } from '../../models';
-import { MODAL_SHARED_STYLE } from '../../styles';
+import { Activity, Education, Job } from '../../models/Types';
+import { MODAL_SHARED_STYLE } from '../../styles/SharedStyles';
 import ModalHeader from './ModalHeader';
 import ModalDetails from './ModalDetails';
 import ModalButton from './ModalButton';

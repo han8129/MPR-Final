@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { MODAL_SHARED_STYLE } from '../../styles'; 
-import { Effect } from '../../models';
+import { MODAL_SHARED_STYLE } from '../../styles/SharedStyles';
+import { Effect } from '../../models/Types';
 
 const ModalDetails = ({
     description,

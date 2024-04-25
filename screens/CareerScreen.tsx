@@ -5,11 +5,11 @@ import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
 import SectionHeader from '../components/game/SectionHeader';
 import ListScrollView from '../components/game/ListScrollView';
-import { Job } from '../models';
-import { getData } from '../data';
+import { Job } from '../models/Types';
+import { getData } from '../data/Data';
 import { GameContext } from '../store/GameContext';
 import LoadingScreen from './LoadingScreen';
-import { DIMENSION } from '../styles';
+import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import CommonModal from '../components/game/CommonModal';
 
 const CareerScreen: React.FC = () => {
@@ -140,7 +140,7 @@ const CareerScreen: React.FC = () => {
                     userTitle={context.title}
                     balance={context.money}
                 />
-                <ScrollView style={DIMENSION.max}>
+                <ScrollView style={GLOBAL_STYLES.maxWidth}>
                     <SectionHeader heading='Available Jobs' />
                     <ListScrollView
                         itemList={filteredJobs}

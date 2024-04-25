@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Color } from '../../constants/Color';
-import { Job, Player } from '../../models';
+import { Job, Player } from '../../models/Types';
 import { savePlayerData } from '../../services/PlayerService';
 import { GameContext } from '../../store/GameContext';
 import ModalButton from './ModalButton';
