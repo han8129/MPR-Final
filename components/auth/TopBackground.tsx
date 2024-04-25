@@ -1,20 +1,24 @@
-import React from "react";
-import { ImageBackground } from "react-native";
+import React from 'react';
+import { ImageBackground, StyleSheet } from 'react-native';
 
-const image = require("../../assets/images/bg.jpg");
+const image = require('../../assets/images/bg.jpg');
 
 const TopBackground = () => {
-  return (
-    <ImageBackground
-      source={image}
-      resizeMode="cover"
-      style={{
-        flex: 1,
-        width: "100%",
-        height : "100%",
-      }}
-    />
-  );
+    return (
+        <ImageBackground
+            source={image}
+            resizeMode='cover'
+            style={styles.image}
+        />
+    );
 };
+
+const styles = StyleSheet.create({
+    image: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+    },
+});
 
 export default TopBackground;

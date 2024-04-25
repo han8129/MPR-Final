@@ -8,8 +8,9 @@ import ListScrollView from '../components/game/ListScrollView';
 import { Job } from '../models';
 import { getData } from '../data';
 import { GameContext } from '../store/GameContext';
-import JobModal from '../components/game/JobModal';
+import CommonModal from '../components/game/CommonModal';
 import LoadingScreen from './LoadingScreen';
+import { DIMENSION } from '../styles';
 
 const CareerScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -139,18 +140,26 @@ const CareerScreen: React.FC = () => {
                     userTitle={context.title}
                     balance={context.money}
                 />
-                <ScrollView style={{ width: '100%' }}>
+                <ScrollView style={DIMENSION.max}>
                     <SectionHeader heading='Available Jobs' />
                     <ListScrollView
                         itemList={filteredJobs}
                         onPressItem={handleJobPress}
                     />
                 </ScrollView>
-                <JobModal
-                    job={selectedJob}
+                <CommonModal
+                    modalObject={selectedJob}
                     closeModal={() => setSelectedJob(null)}
-                    applyJob={applyJob}
-                    quitJob={quitJob}
+                    handlePress={
+                        context.jobs.includes(selectedJob as never)
+                            ? quitJob
+                            : applyJob
+                    }
+                    buttonText={
+                        context.jobs.includes(selectedJob as never)
+                            ? 'Quit Job'
+                            : 'Apply Job'
+                    }
                 />
             </View>
         </>

@@ -16,7 +16,7 @@ export interface Player {
     activities: string[];
 }
 
-interface Effect {
+export interface Effect {
     health: number;
     happiness: number;
     money: number;

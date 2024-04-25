@@ -11,7 +11,7 @@ import Header from '../components/game/Header';
 import SectionHeader from '../components/game/SectionHeader';
 import ListScrollView from '../components/game/ListScrollView';
 import RelationshipModal from '../components/game/RelationshipModal';
-import ActivityModal from '../components/game/ActivityModal';
+import CommonModal from '../components/game/CommonModal';
 import { Activity } from '../models';
 import { getData } from '../data';
 import { GameContext } from '../store/GameContext';
@@ -163,10 +163,11 @@ const ActivityScreen: React.FC = () => {
                     closeModal={() => setSelectedRelationship(null)}
                     handleInteraction={handleRelInteraction}
                 />
-                <ActivityModal
-                    act={selectedActivity}
+                <CommonModal
+                    modalObject={selectedActivity}
                     closeModal={() => setSelectedActivity(null)}
-                    joinActivity={handleJoin}
+                    handlePress={handleJoin}
+                    buttonText='Join'
                 />
             </View>
         </>
