@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Header from '../components/game/Header';
 import { Color } from '../constants/Color';
 import { GameContext } from '../store/GameContext';
+import ModalButton from '../components/game/ModalButton';
 
 interface Props {
     navigation: any;
@@ -30,7 +31,11 @@ const DailyLoginScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Header username={context.username} userTitle={context.title} balance={context.money} />
+            <Header
+                username={context.username}
+                userTitle={context.title}
+                balance={context.money}
+            />
             <TouchableOpacity onPress={navigateBack}>
                 <Ionicons
                     name='arrow-back'
@@ -53,12 +58,10 @@ const DailyLoginScreen: React.FC<Props> = ({ navigation }) => {
                 </View>
             </View>
 
-            <TouchableOpacity
-                style={styles.buttonContainer}
+            <ModalButton
                 onPress={handleTakeDailyLogin}
-            >
-                <Text style={styles.buttonText}>Take Money</Text>
-            </TouchableOpacity>
+                buttonText='Take Daily Login'
+            />
         </View>
     );
 };

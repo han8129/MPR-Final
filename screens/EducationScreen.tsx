@@ -5,10 +5,10 @@ import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
 import SectionHeader from '../components/game/SectionHeader';
 import ListScrollView from '../components/game/ListScrollView';
-import { Education } from '../models';
-import { getEducationData } from '../data';
+import { Education } from '../models/Types';
+import { getData } from '../data/Data';
 import { GameContext } from '../store/GameContext';
-import EducationModal from '../components/game/EducationalModal';
+import CommonModal from '../components/game/CommonModal';
 import LoadingScreen from './LoadingScreen';
 
 const EducationScreen: React.FC = () => {
@@ -28,7 +28,7 @@ const EducationScreen: React.FC = () => {
         const fetchEducationData = async () => {
             try {
                 // Get the data from Firebase
-                const educationData = await getEducationData();
+                const educationData = await getData<Education>('education');
 
                 // Set the education data in the context
                 const filteredEdus = educationData.filter(
@@ -127,10 +127,11 @@ const EducationScreen: React.FC = () => {
                         onPressItem={handleEduPress}
                     />
                 </ScrollView>
-                <EducationModal
-                    education={selectedEducation}
+                <CommonModal
+                    modalObject={selectedEducation}
                     closeModal={() => setSelectedEducation(null)}
-                    takeCourse={handleTake}
+                    handlePress={handleTake}
+                    buttonText='Take Course'
                 />
             </View>
         </>

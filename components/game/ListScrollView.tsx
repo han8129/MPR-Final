@@ -8,18 +8,16 @@ import {
 } from 'react-native';
 import { Color } from '../../constants/Color';
 
-// Define a type for the items in the list that requires a 'name' property
+
 interface ListItemWithName {
     name: string;
     desc: string;
     type?: string;
-    // Add any other required properties here
 }
 
 interface ListScrollViewProps<T extends ListItemWithName> {
     itemList: T[];
-    onPressItem: (index: number) => void; // Callback function for item press
-    // Progress state for each item
+    onPressItem: (index: number) => void;
 }
 
 const ListScrollView = <T extends ListItemWithName>({
@@ -42,7 +40,7 @@ const ListScrollView = <T extends ListItemWithName>({
                     onPress={() => onPressItem(index)}
                 >
                     <View style={styles.item}>
-                        <View style={{width: "100%"}}>
+                        <View style={styles.itemDiv}>
                             <Text style={styles.title}>{item.name}</Text>
                             <Text style={styles.description}>{item.desc}</Text>
 
@@ -51,7 +49,6 @@ const ListScrollView = <T extends ListItemWithName>({
                                     {item.type}
                                 </Text>
                             )}
-
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -93,6 +90,9 @@ const styles = StyleSheet.create({
     emptyText: {
         fontSize: 16,
         color: Color.black,
+    },
+    itemDiv: {
+        width: '100%',
     },
 });
 

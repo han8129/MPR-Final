@@ -32,61 +32,56 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const [isLoading, setIsLoading] = React.useState(true);
 
     let image;
-    let title;
 
     if (age < 6) {
         image = require(`../assets/images/male0-5.png`);
         if (context.gender === 'female') {
             image = require(`../assets/images/female0-5.png`);
         }
-        title = 'Baby';
     } else if (age < 11) {
         image = require('../assets/images/male6-10.png');
         if (context.gender === 'female') {
             image = require('../assets/images/female6-10.png');
         }
-        title = 'Child';
     } else if (age < 15) {
         image = require('../assets/images/male11-14.png');
         if (context.gender === 'female') {
             image = require('../assets/images/female11-14.png');
         }
-        title = 'Teenager';
     } else if (age < 18) {
         image = require('../assets/images/male15-17.png');
         if (context.gender === 'female') {
             image = require('../assets/images/female15-17.png');
         }
-        title = 'Young Adult';
     } else if (age < 22) {
         image = require('../assets/images/male18-21.png');
         if (context.gender === 'female') {
             image = require('../assets/images/female18-21.png');
         }
-        title = 'Adult';
     } else if (age < 60) {
         image = require('../assets/images/male22-59.png');
         if (context.gender === 'female') {
             image = require('../assets/images/female22-59.png');
         }
-        title = 'Middle Age';
     } else {
         image = require('../assets/images/male60+.png');
         if (context.gender === 'female') {
             image = require('../assets/images/female60+.png');
         }
-        title = 'Old Age';
-    }
-
-    if (context.jobs.length > 0) {
-        for (const job of context.jobs) {
-            title += job.name + ' ';
-        }
     }
 
     useEffect(() => {
+        context.setIsPause(false);
+        let title = '';
+        if (context.jobs.length > 0) {
+            for (const job of context.jobs) {
+                title += job.name + ' ';
+            }
+        }
         context.setTitle(title);
-    }, [
+    }, []);
+
+    useEffect(() => {}, [
         context.money,
         context.health,
         context.days,
@@ -128,7 +123,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             <View style={styles.container}>
                 <Header
                     username={context.username}
-                    userTitle={title}
+                    userTitle={context.title}
                     balance={context.money}
                 />
                 <AgeStatus age={age} value={progress} color={Color.red} />

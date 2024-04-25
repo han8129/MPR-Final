@@ -1,10 +1,18 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    Image,
+    Modal,
+} from 'react-native';
 import { Color } from '../constants/Color';
 import { GameContext } from '../store/GameContext';
+import ModalButton from '../components/game/ModalButton';
 
 interface Props {
-	navigation: any;
+    navigation: any;
 }
 
 const ChooseGenderScreen: React.FC<Props> = ({ navigation }) => {
@@ -41,12 +49,7 @@ const ChooseGenderScreen: React.FC<Props> = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity
-                style={styles.confirmButton}
-                onPress={handleConfirmGender}
-            >
-                <Text style={styles.confirmButtonText}>Confirm</Text>
-            </TouchableOpacity>
+            <ModalButton onPress={handleConfirmGender} buttonText='Confirm' />
         </View>
     );
 };

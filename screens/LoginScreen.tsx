@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-} from 'react-native';
-import { Color } from '../constants/Color';
-
+import { View, Text } from 'react-native';
 import TopBackground from '../components/auth/TopBackground';
 import Input from '../components/auth/UsernameInput';
 import PasswordInput from '../components/auth/PasswordInput';
-import CustomButton from '../components/auth/CommonButton';
+import CustomButton from '../components/auth/CustomButton';
 import { StatusBar } from 'expo-status-bar';
 import { GameContext } from '../store/GameContext';
 import { Login } from '../services/PlayerService';
+import { BottomNavText } from '../components/auth/BottomNavText';
+import { AUTH_STYLES } from '../styles/AuthStyles';
+import { GLOBAL_STYLES } from '../styles/SharedStyles';
 
 interface Props {
     navigation: any; // Adjust type according to your navigation prop type
@@ -77,10 +73,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <>
             <StatusBar hidden={true} />
-            <View style={styles.container}>
+            <View style={GLOBAL_STYLES.container}>
                 <TopBackground />
-                <View style={styles.inputContainer}>
-                    <Text style={styles.loginText}>Log in</Text>
+                <View style={AUTH_STYLES.inputContainer}>
+                    <Text style={AUTH_STYLES.text}>Log in</Text>
 
                     <Input
                         value={email}
@@ -98,41 +94,15 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     />
 
                     <CustomButton onPress={handleLogin} title='Login' />
-                    <View style={{ marginTop: 50, alignItems: 'center' }}>
-                        <Text>Don't have any account ?</Text>
-                        <TouchableOpacity onPress={handleSignUp}>
-                            <Text style={styles.toSignUp}>Sign up here</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <BottomNavText
+                        text='Sign up here'
+                        onPress={handleSignUp}
+                        title={'Dont have any account ?'}
+                    />
                 </View>
             </View>
         </>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: Color.white,
-    },
-    loginText: {
-        color: Color.black,
-        fontSize: 30,
-        fontWeight: 'bold',
-        margin: 20,
-    },
-    inputContainer: {
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        flex: 2,
-    },
-    toSignUp: {
-        color: Color.black,
-        fontWeight: 'bold',
-        fontSize: 17,
-    },
-});
 
 export default LoginScreen;

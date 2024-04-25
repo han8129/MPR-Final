@@ -9,9 +9,11 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Color } from '../../constants/Color';
-import { Job, Player } from '../../models';
+import { Job, Player } from '../../models/Types';
 import { savePlayerData } from '../../services/PlayerService';
 import { GameContext } from '../../store/GameContext';
+import ModalButton from './ModalButton';
+import ModalHeader from './ModalHeader';
 
 interface ExitModalProps {
     isOpened: boolean;
@@ -57,14 +59,10 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <View style={styles.modalHeader}>
-                        <Text style={styles.modalTitle}>
-                            Are you sure want to exit ?
-                        </Text>
-                        <TouchableOpacity onPress={closeModal}>
-                            <Ionicons name='close' size={24} color='#333' />
-                        </TouchableOpacity>
-                    </View>
+                    <ModalHeader
+                        title='Are you sure you want to exit?'
+                        closeModal={closeModal}
+                    />
                     <Text style={styles.modalDescription}>
                         Stats To Be Saved
                     </Text>
@@ -99,19 +97,15 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
                             ? context.activities.join(', ')
                             : 'None'}
                     </Text>
-                    <View style={{ alignItems: 'center' }}>
-                        <TouchableOpacity
-                            style={styles.button}
+                    <View style={styles.buttonDiv}>
+                        <ModalButton
                             onPress={ExitAndSave}
-                        >
-                            <Text style={styles.buttonText}>Exit and Save</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.button}
+                            buttonText='Save and Exit'
+                        />
+                        <ModalButton
                             onPress={justExit}
-                        >
-                            <Text style={styles.buttonText}>Just Exit</Text>
-                        </TouchableOpacity>
+                            buttonText='Just Exit'
+                        />
                     </View>
                 </View>
             </View>
@@ -164,6 +158,9 @@ const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'center',
         fontWeight: 'bold',
+    },
+    buttonDiv: {
+        alignItems: 'center',
     },
 });
 

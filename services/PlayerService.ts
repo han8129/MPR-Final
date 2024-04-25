@@ -1,18 +1,11 @@
-import { Player, User } from '../models';
-import {
-    getDatabase,
-    ref,
-    set,
-    get,
-    update,
-} from 'firebase/database'; // Import necessary functions
+import { Player, User } from '../models/Types';
+import { getDatabase, ref, set, get, update } from 'firebase/database'; // Import necessary functions
 
-import app from '../config/firebase';
+import app from '../config/Firebase';
 
 const db = getDatabase(app);
 
 export const SignUp = async (user: User): Promise<User | Error> => {
-
     try {
         const userRef = ref(db, `user`); // Reference to the "users" collection
 
@@ -40,7 +33,7 @@ export const SignUp = async (user: User): Promise<User | Error> => {
         });
 
         if (usernameExists) {
-            throw new Error("Username has existed"); // Fix: Return null as User | Error
+            throw new Error('Username has existed'); // Fix: Return null as User | Error
         }
 
         // Create the new user with the next available index
@@ -56,7 +49,10 @@ export const SignUp = async (user: User): Promise<User | Error> => {
     }
 };
 
-export const Login = async (username: string, password: string): Promise<User | Error> => {
+export const Login = async (
+    username: string,
+    password: string
+): Promise<User | Error> => {
     try {
         const userRef = ref(db, `user`);
         const userSnapshot = await get(userRef);
@@ -75,14 +71,14 @@ export const Login = async (username: string, password: string): Promise<User | 
         });
 
         if (foundUser === null) {
-            throw new Error("User not found."); // Fix: Return null as User | Error
+            throw new Error('User not found.'); // Fix: Return null as User | Error
         }
 
         return foundUser;
     } catch (error) {
         throw error;
     }
-}
+};
 
 export const savePlayerData = async (
     username: string,
