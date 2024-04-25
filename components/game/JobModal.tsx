@@ -78,7 +78,7 @@ const JobModal: React.FC<JobModalProps> = ({
                             {'Health: ' + job.requirement.health}
                         </Text>
                         <Text style={styles.requirement}>
-                            {'Smart: ' + job.requirement.smart}
+                            {'Smarts: ' + job.requirement.smarts}
                         </Text>
                     </View>
                     <View style={{ alignItems: 'center' }}>
