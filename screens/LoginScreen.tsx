@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Color } from '../constants/Color';
 
 import TopBackground from '../components/auth/TopBackground';
@@ -14,6 +9,7 @@ import CustomButton from '../components/auth/CommonButton';
 import { StatusBar } from 'expo-status-bar';
 import { GameContext } from '../store/GameContext';
 import { Login } from '../services/PlayerService';
+import { BottomNavText } from '../components/auth/BottomNavText';
 
 interface Props {
     navigation: any; // Adjust type according to your navigation prop type
@@ -98,12 +94,11 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     />
 
                     <CustomButton onPress={handleLogin} title='Login' />
-                    <View style={{ marginTop: 50, alignItems: 'center' }}>
-                        <Text>Don't have any account ?</Text>
-                        <TouchableOpacity onPress={handleSignUp}>
-                            <Text style={styles.toSignUp}>Sign up here</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <BottomNavText
+                        text='Sign up here'
+                        onPress={handleSignUp}
+                        title={'Dont have any account ?'}
+                    />
                 </View>
             </View>
         </>

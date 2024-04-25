@@ -41,8 +41,8 @@ export interface Job {
     name: string;
     prerequisite: string;
     effect: Effect;
+    ageNeeded: number;
     requirement: {
-        age: number;
         health: number;
         education: string;
         smarts: number
@@ -75,4 +75,5 @@ export interface NPC {
     relationshipType: string;
     maritalStatus?: string;
     work?: string;
+    options: Option[];
 }

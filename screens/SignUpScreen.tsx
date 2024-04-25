@@ -11,6 +11,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import { SignUp } from '../services/PlayerService';
 import { User } from '../models';
+import { BottomNavText } from '../components/auth/BottomNavText';
 
 interface Props {
     navigation: any;
@@ -42,10 +43,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                 username: email,
                 password: password,
                 player: {
-                    gender: "",
+                    gender: '',
                     days: 0,
                     health: 100,
-					happiness: 10,
+                    happiness: 10,
                     money: 5,
                     smarts: 10,
                     coursesTaken: [],
@@ -63,7 +64,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     navigation.navigate('Login');
                 }
             } catch (error) {
-                Alert.alert('Error occurred during signing up new user', 'Please try again later');
+                Alert.alert(
+                    'Error occurred during signing up new user',
+                    'Please try again later'
+                );
             }
         }
     };
@@ -107,12 +111,11 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     />
 
                     <CustomButton onPress={handleSignUp} title='Sign up' />
-                    <View style={{ marginTop: 20, alignItems: 'center' }}>
-                        <Text>Already have an account ?</Text>
-                        <TouchableOpacity onPress={handleLogin}>
-                            <Text style={styles.toSignUp}>Login here</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <BottomNavText
+                        title='Already have an account?'
+                        text='Login'
+                        onPress={handleLogin}
+                    />
                 </View>
             </View>
         </>
@@ -136,11 +139,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         flex: 2,
-    },
-    toSignUp: {
-        color: Color.black,
-        fontWeight: 'bold',
-        fontSize: 17,
     },
 });
 

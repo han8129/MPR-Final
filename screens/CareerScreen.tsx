@@ -8,6 +8,9 @@ import ListScrollView from '../components/game/ListScrollView';
 import { Job } from '../models';
 import { getData } from '../data';
 import { GameContext } from '../store/GameContext';
+import LoadingScreen from './LoadingScreen';
+import { DIMENSION } from '../styles';
+import CommonModal from '../components/game/CommonModal';
 
 const CareerScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -24,7 +27,7 @@ const CareerScreen: React.FC = () => {
                 // Get the data from Firebase
                 const jobData = await getData<Job>('job');
                 const filteredJobs = jobData.filter(
-                    (job) => job.requirement.age <= age
+                    (job) => job.ageNeeded <= age
                 );
                 setFilteredJobs(filteredJobs);
                 setIsLoading(false);

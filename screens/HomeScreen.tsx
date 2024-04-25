@@ -70,14 +70,15 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         }
     }
 
-    if (context.jobs.length > 0) {
-        for (const job of context.jobs) {
-            title += job.name + ' ';
-        }
-    }
-
     useEffect(() => {
         context.setIsPause(false);
+        let title = '';
+        if (context.jobs.length > 0) {
+            for (const job of context.jobs) {
+                title += job.name + ' ';
+            }
+        }
+        context.setTitle(title);
     }, []);
 
     useEffect(() => {}, [

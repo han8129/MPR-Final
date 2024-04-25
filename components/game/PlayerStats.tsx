@@ -42,7 +42,7 @@ const Stat: React.FC<{ label: string; value: number }> = ({ label, value }) => {
     return (
         <View style={styles.stat}>
             <View style={styles.statRow}>
-                <Text style={styles.statLabel}>{label}</Text>
+                <Text style={styles.statLabel}>{label + ' '} </Text>
                 <Ionicons name={iconName} size={24} color={Color.red} />
             </View>
             <ProgressBar value={value} color={Color.black} />

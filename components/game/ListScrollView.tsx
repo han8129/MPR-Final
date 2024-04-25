@@ -8,18 +8,16 @@ import {
 } from 'react-native';
 import { Color } from '../../constants/Color';
 
-// Define a type for the items in the list that requires a 'name' property
+
 interface ListItemWithName {
     name: string;
     desc: string;
     type?: string;
-    // Add any other required properties here
 }
 
 interface ListScrollViewProps<T extends ListItemWithName> {
     itemList: T[];
-    onPressItem: (index: number) => void; // Callback function for item press
-    // Progress state for each item
+    onPressItem: (index: number) => void;
 }
 
 const ListScrollView = <T extends ListItemWithName>({
