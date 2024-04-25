@@ -68,7 +68,7 @@ const CareerScreen: React.FC = () => {
             if (isDuplicated) {
                 Alert.alert(
                     `You already have a ${type} job`,
-                    `You must quit your current ${type} job before you can apply for a new one'`
+                    `You must quit your current ${type} job before you can apply for a new one`
                 );
 
                 return false;
@@ -76,16 +76,14 @@ const CareerScreen: React.FC = () => {
         }
 
         if (
-            selectedJob.requirement.education &&
+            selectedJob.requirement.education != 'None' &&
             !context.coursesTaken?.includes(
                 selectedJob.requirement.education as never
             )
         ) {
             Alert.alert(
                 'You do not have the education for this job',
-                'You must take ' +
-                    selectedJob.requirement.education +
-                    ' before you can apply for this job'
+                `You must take ${selectedJob.requirement.education} before you can apply for this job`
             );
             return false;
         }
@@ -93,7 +91,16 @@ const CareerScreen: React.FC = () => {
         if (selectedJob.requirement.health > context.health) {
             Alert.alert(
                 'You are not healthy enough for this job',
-                `You health must be at least ${context.health} to apply`
+                `You health must be at least ${selectedJob.requirement.health} to apply`
+            );
+
+            return false;
+        }
+
+        if (selectedJob.requirement.smarts > context.smarts) {
+            Alert.alert(
+                'You are not smart enough for this job',
+                `You smart must be at least ${selectedJob.requirement.smarts} to apply`
             );
 
             return false;
