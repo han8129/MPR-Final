@@ -11,8 +11,13 @@ import { GameContext } from '../store/GameContext';
 import CommonModal from '../components/game/CommonModal';
 import LoadingScreen from './LoadingScreen';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
+import { NavigationProp } from '@react-navigation/native';
 
-const EducationScreen: React.FC = () => {
+interface Props {
+    navigation: NavigationProp<any>; // Define navigation prop type
+}
+
+const EducationScreen: React.FC<Props> = ({ navigation }) => {
     const context = React.useContext(GameContext);
 
     const [availableEducation, setAvailableEducation] = useState<Education[]>(
@@ -87,24 +92,9 @@ const EducationScreen: React.FC = () => {
                 );
                 return;
             }
-
-            context.setMoney(context.money + selectedEducation.effect.money);
-            context.setHealth(context.health + selectedEducation.effect.health);
-            context.setHappiness(
-                context.happiness + selectedEducation.effect.happiness
-            );
-            context.setSmarts(context.smarts + selectedEducation.effect.smarts);
-
-            context.setCoursesTaken([
-                ...(context.coursesTaken || []),
-                selectedEducation.name as never,
-            ]);
-
-            Alert.alert(
-                'Course Taken',
-                'You have successfully taken the course: ' +
-                    selectedEducation.name
-            );
+            navigation.navigate('QuizScreen', {
+                object: selectedEducation,
+            });
             setSelectedEducation(null);
         }
     };

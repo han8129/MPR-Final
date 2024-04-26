@@ -78,8 +78,6 @@ const CareerScreen: React.FC = () => {
                 return false;
             }
         }
-        console.log(selectedJob.requirement);
-        
         if (
             selectedJob.requirement.education != 'None' &&
             !context.coursesTaken?.includes(

@@ -14,6 +14,7 @@ import DailyLoginScreen from '../screens/DailyLoginScreen';
 
 import { Ionicons } from '@expo/vector-icons';
 import { Color } from '../constants/Color';
+import QuizScreen from '../screens/QuizScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,11 @@ const AppNavigation = () => {
                 name='DailyLogin'
                 options={{ headerShown: false }}
                 component={DailyLoginScreen}
+            />
+            <Stack.Screen
+                name='QuizScreen'
+                options={{ headerShown: false }}
+                component={QuizScreen}
             />
         </Stack.Navigator>
     );
@@ -76,6 +82,7 @@ const GameNavigation = () => {
                     headerShown: false,
                 }}
             />
+            
             <Tabs.Screen
                 name='Career'
                 component={CareerScreen}
