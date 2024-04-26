@@ -8,7 +8,7 @@ import ListScrollView from '../components/game/ListScrollView';
 import RelationshipModal from '../components/game/RelationshipModal';
 import CommonModal from '../components/game/CommonModal';
 import { Activity } from '../models/Types';
-import { getData } from '../data/Data';
+import { getData } from '../services/DataService';
 import { GameContext } from '../store/GameContext';
 import LoadingScreen from './LoadingScreen';
 

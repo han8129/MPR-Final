@@ -6,6 +6,7 @@ export interface User {
 
 export interface Player {
     gender: string;
+    title:  string;
     days: number;
     health: number;
     money: number;

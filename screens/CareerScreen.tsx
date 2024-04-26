@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Alert } from 'react-native';
-import { Color } from '../constants/Color';
+import { View, ScrollView, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
 import SectionHeader from '../components/game/SectionHeader';
 import ListScrollView from '../components/game/ListScrollView';
 import { Job } from '../models/Types';
-import { getData } from '../data/Data';
+import { getData } from '../services/DataService';
 import { GameContext } from '../store/GameContext';
 import LoadingScreen from './LoadingScreen';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
@@ -79,7 +78,8 @@ const CareerScreen: React.FC = () => {
                 return false;
             }
         }
-
+        console.log(selectedJob.requirement);
+        
         if (
             selectedJob.requirement.education != 'None' &&
             !context.coursesTaken?.includes(
@@ -134,7 +134,7 @@ const CareerScreen: React.FC = () => {
     return (
         <>
             <StatusBar hidden={true} />
-            <View style={styles.container}>
+            <View style={GLOBAL_STYLES.container}>
                 <Header
                     username={context.username}
                     userTitle={context.title}
@@ -165,13 +165,5 @@ const CareerScreen: React.FC = () => {
         </>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Color.white,
-        alignItems: 'center',
-    },
-});
 
 export default CareerScreen;

@@ -2,8 +2,11 @@ import { createContext, useState, useEffect } from 'react';
 import { Alert, BackHandler } from 'react-native';
 import { Event, Job } from '../models/Types';
 import useInterval from '../hooks/useInterval';
-import { getData } from '../data/Data';
-import { PLAYER_CONSTANTS, GAME_TEXT_CONSTANTS } from '../constants/GameContansts';
+import { getData } from '../services/DataService';
+import {
+    PLAYER_CONSTANTS,
+    GAME_TEXT_CONSTANTS,
+} from '../constants/GameContansts';
 
 export const GameContext = createContext({
     health: PLAYER_CONSTANTS.ZERO,
@@ -16,7 +19,7 @@ export const GameContext = createContext({
     jobs: [] as Job[],
     coursesTaken: [] as string[],
     username: '',
-    title: PLAYER_CONSTANTS.INITIAL_TITLE,
+    title: 'No Title Yet',
     gender: '',
     setGender: (e: string) => {},
     setTitle: (e: string) => {},

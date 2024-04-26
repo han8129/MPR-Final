@@ -6,10 +6,11 @@ import Header from '../components/game/Header';
 import SectionHeader from '../components/game/SectionHeader';
 import ListScrollView from '../components/game/ListScrollView';
 import { Education } from '../models/Types';
-import { getData } from '../data/Data';
+import { getData } from '../services/DataService';
 import { GameContext } from '../store/GameContext';
 import CommonModal from '../components/game/CommonModal';
 import LoadingScreen from './LoadingScreen';
+import { GLOBAL_STYLES } from '../styles/SharedStyles';
 
 const EducationScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -44,7 +45,7 @@ const EducationScreen: React.FC = () => {
         };
         // Call the fetchEducationData function
         fetchEducationData();
-    }, [context.days, context.coursesTaken]);
+    }, [context.days, context.coursesTaken, context.money]);
 
     const handleEduPress = (index: number) => {
         setSelectedEducation(availableEducation[index]);
@@ -62,11 +63,11 @@ const EducationScreen: React.FC = () => {
                 return;
             }
 
-            if (context.money < +selectedEducation.effect.money) {
+            if (context.money < Math.abs(selectedEducation.effect.money)) {
                 Alert.alert(
                     'You do not have enough money to take this course',
                     'You need at least $' +
-                        selectedEducation.effect.money +
+                        Math.abs(selectedEducation.effect.money) +
                         ' to take this course'
                 );
                 return;
@@ -114,13 +115,13 @@ const EducationScreen: React.FC = () => {
     return (
         <>
             <StatusBar hidden={true} />
-            <View style={styles.container}>
+            <View style={GLOBAL_STYLES.container}>
                 <Header
                     username={context.username}
                     userTitle={context.title}
                     balance={context.money}
                 />
-                <ScrollView style={{ width: '100%' }}>
+                <ScrollView style={GLOBAL_STYLES.maxWidth}>
                     <SectionHeader heading='Available Education' />
                     <ListScrollView
                         itemList={availableEducation}
@@ -137,13 +138,5 @@ const EducationScreen: React.FC = () => {
         </>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Color.white,
-        alignItems: 'center',
-    },
-});
 
 export default EducationScreen;

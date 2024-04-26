@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TextInput, Text } from 'react-native';
-import { INPUT_STYLES } from '../../styles/AuthStyles';
+import { SHARED_INPUT_STYLES } from '../../styles/AuthStyles';
 
 const Input = ({
     value,
@@ -15,11 +15,11 @@ const Input = ({
 }) => {
     return (
         <View>
-            <View style={INPUT_STYLES.inputView}>
+            <View style={SHARED_INPUT_STYLES.inputView}>
                 <TextInput
                     style={[
-                        INPUT_STYLES.input,
-                        isError && INPUT_STYLES.errorInput,
+                        SHARED_INPUT_STYLES.input,
+                        isError && SHARED_INPUT_STYLES.errorInput,
                     ]}
                     value={value}
                     onChangeText={onChangeText}

@@ -5,7 +5,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ChooseGenderScreen from '../screens/ChooseGenderSreen';
+import ChooseGenderScreen from '../screens/ChooseGenderScreen';
 import HomeScreen from '../screens/HomeScreen';
 import EducationScreen from '../screens/EducationScreen';
 import CareerScreen from '../screens/CareerScreen';
