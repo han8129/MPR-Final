@@ -37,6 +37,17 @@ export interface Education {
     effect: Effect;
 }
 
+export interface Quiz {
+    courseName: string;
+    questions: Question[];
+}
+
+export interface Question {
+    question: string;
+    options: string[];
+    answer: string;
+}
+
 export interface Job {
     desc: string;
     name: string;

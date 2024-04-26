@@ -20,7 +20,7 @@ export const PLAYER_CONSTANTS = {
     INITIAL_TITLE: 'No Title Yet',
     INITIAL_DAY: 0,
     // incremental values
-    HEALTH_RATE: 0.05,
+    HEALTH_RATE: 0.5,
     NEW_AGE_VALUE: 5,
     // money values
     MONEY_AT_18: 10000,
