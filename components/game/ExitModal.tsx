@@ -1,19 +1,11 @@
 import React from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    Modal,
-    TouchableOpacity,
-    BackHandler,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Color } from '../../constants/Color';
+import { Text, BackHandler } from 'react-native';
 import { Job, Player } from '../../models/Types';
 import { savePlayerData } from '../../services/PlayerService';
 import { GameContext } from '../../store/GameContext';
 import ModalButton from './ModalButton';
-import ModalHeader from './ModalHeader';
+import { MODAL_SHARED_STYLE } from '../../styles/ComponentStyles';
+import ModalContentWrapper from './ModelContentWrapper';
 
 interface ExitModalProps {
     isOpened: boolean;
@@ -51,117 +43,48 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
     };
 
     return (
-        <Modal
-            visible={isOpened}
-            animationType='slide'
-            transparent={true}
-            statusBarTranslucent={true}
+        <ModalContentWrapper
+            title='Are you sure you want to exit?'
+            closeModal={closeModal}
+            isOpened={isOpened}
         >
-            <View style={styles.modalContainer}>
-                <View style={styles.modalContent}>
-                    <ModalHeader
-                        title='Are you sure you want to exit?'
-                        closeModal={closeModal}
-                    />
-                    <Text style={styles.modalDescription}>
-                        Stats To Be Saved
-                    </Text>
-                    <Text style={styles.detail}>Current Age: {age}</Text>
-                    <Text style={styles.detail}>
-                        Current Money: ${context.money}
-                    </Text>
-                    <Text style={styles.detail}>
-                        Current Health: {context.health}%
-                    </Text>
-                    <Text style={styles.detail}>
-                        Current Happiness: {context.happiness}%
-                    </Text>
-                    <Text style={styles.detail}>
-                        Current Smarts: {context.smarts}%
-                    </Text>
-                    <Text style={styles.detail}>
-                        Jobs Done:{' '}
-                        {context.jobs.length > 0
-                            ? context.jobs.map((job: Job) => job.name)
-                            : 'None'}
-                    </Text>
-                    <Text style={styles.detail}>
-                        Courses Completed:{' '}
-                        {context.coursesTaken
-                            ? context.coursesTaken.join(', ')
-                            : 'None'}
-                    </Text>
-                    <Text style={styles.detail}>
-                        Activities Joined:{' '}
-                        {context.activities
-                            ? context.activities.join(', ')
-                            : 'None'}
-                    </Text>
-                    <View style={styles.buttonDiv}>
-                        <ModalButton
-                            onPress={ExitAndSave}
-                            buttonText='Save and Exit'
-                        />
-                        <ModalButton
-                            onPress={justExit}
-                            buttonText='Just Exit'
-                        />
-                    </View>
-                </View>
-            </View>
-        </Modal>
+            <Text style={MODAL_SHARED_STYLE.modalDescription}>
+                Stats To Be Saved
+            </Text>
+            <Text style={MODAL_SHARED_STYLE.detail}>Current Age: {age}</Text>
+            <Text style={MODAL_SHARED_STYLE.detail}>
+                Current Money: ${context.money}
+            </Text>
+            <Text style={MODAL_SHARED_STYLE.detail}>
+                Current Health: {context.health}%
+            </Text>
+            <Text style={MODAL_SHARED_STYLE.detail}>
+                Current Happiness: {context.happiness}%
+            </Text>
+            <Text style={MODAL_SHARED_STYLE.detail}>
+                Current Smarts: {context.smarts}%
+            </Text>
+            <Text style={MODAL_SHARED_STYLE.detail}>
+                Jobs Done:{' '}
+                {context.jobs.length > 0
+                    ? context.jobs.map((job: Job) => job.name)
+                    : 'None'}
+            </Text>
+            <Text style={MODAL_SHARED_STYLE.detail}>
+                Courses Completed:{' '}
+                {context.coursesTaken
+                    ? context.coursesTaken.join(', ')
+                    : 'None'}
+            </Text>
+            <Text style={MODAL_SHARED_STYLE.detail}>
+                Activities Joined:{' '}
+                {context.activities ? context.activities.join(', ') : 'None'}
+            </Text>
+
+            <ModalButton onPress={ExitAndSave} buttonText='Save and Exit' />
+            <ModalButton onPress={justExit} buttonText='Just Exit' />
+        </ModalContentWrapper>
     );
 };
-
-const styles = StyleSheet.create({
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    modalContent: {
-        backgroundColor: '#fff',
-        padding: 20,
-        borderRadius: 10,
-        elevation: 5,
-        width: '80%',
-    },
-    modalHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
-    modalTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    modalDescription: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        textAlign: 'center',
-    },
-    detail: {
-        fontSize: 14,
-        marginBottom: 5,
-    },
-    button: {
-        backgroundColor: Color.red,
-        padding: 10,
-        borderRadius: 5,
-        marginTop: 10,
-        width: '50%',
-    },
-    buttonText: {
-        color: '#fff',
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-    buttonDiv: {
-        alignItems: 'center',
-    },
-});
 
 export default ExitModal;

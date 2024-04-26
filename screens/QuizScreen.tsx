@@ -101,7 +101,7 @@ const QuizScreen: React.FC<Props> = ({ navigation, route }) => {
         // alert user if they try to leave the quiz screen
         Alert.alert(
             'Warning',
-            'Are you sure you want to leave the quiz? You will lost the resource that needed to take part in this quiz',
+            'Are you sure you want to leave the quiz? All progress will be lost.',
             [
                 {
                     text: 'Yes',

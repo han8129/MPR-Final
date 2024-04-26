@@ -3716,6 +3716,1952 @@
                     "answer": "O(n log n)"
                 }
             ]
+        },
+
+        {
+            "courseName": "Artificial Intelligence",
+            "questions": [
+                {
+                    "question": "What is the purpose of the activation function in a neural network?",
+                    "options": [
+                        "To determine the output of a neuron",
+                        "To adjust the weights of connections",
+                        "To optimize the loss function",
+                        "To preprocess input data"
+                    ],
+                    "answer": "To determine the output of a neuron"
+                },
+                {
+                    "question": "Which type of neural network architecture is commonly used for image recognition tasks?",
+                    "options": [
+                        "Convolutional Neural Networks (CNNs)",
+                        "Recurrent Neural Networks (RNNs)",
+                        "Feedforward Neural Networks (FNNs)",
+                        "Autoencoder Neural Networks"
+                    ],
+                    "answer": "Convolutional Neural Networks (CNNs)"
+                },
+                {
+                    "question": "What is the term for the process of adjusting the weights of connections in a neural network to minimize prediction errors?",
+                    "options": [
+                        "Backpropagation",
+                        "Forward propagation",
+                        "Gradient descent",
+                        "Stochastic optimization"
+                    ],
+                    "answer": "Backpropagation"
+                },
+                {
+                    "question": "What is a common technique used to prevent overfitting in machine learning models?",
+                    "options": [
+                        "Dropout regularization",
+                        "Batch normalization",
+                        "Data augmentation",
+                        "Feature scaling"
+                    ],
+                    "answer": "Dropout regularization"
+                },
+                {
+                    "question": "Which type of learning algorithm attempts to mimic the way humans learn, by making predictions and adjusting based on feedback?",
+                    "options": [
+                        "Supervised learning",
+                        "Unsupervised learning",
+                        "Reinforcement learning",
+                        "Semi-supervised learning"
+                    ],
+                    "answer": "Reinforcement learning"
+                },
+                {
+                    "question": "What is the primary goal of unsupervised learning?",
+                    "options": [
+                        "To classify input data into predefined categories",
+                        "To predict output values based on input features",
+                        "To discover hidden patterns or structures in data",
+                        "To provide feedback on model performance"
+                    ],
+                    "answer": "To discover hidden patterns or structures in data"
+                },
+                {
+                    "question": "Which technique is commonly used to preprocess text data before feeding it into a natural language processing model?",
+                    "options": [
+                        "Tokenization",
+                        "Normalization",
+                        "Dimensionality reduction",
+                        "Feature extraction"
+                    ],
+                    "answer": "Tokenization"
+                },
+                {
+                    "question": "What is the purpose of an optimizer in machine learning?",
+                    "options": [
+                        "To define the loss function",
+                        "To initialize model parameters",
+                        "To adjust model parameters to minimize the loss function",
+                        "To preprocess input data"
+                    ],
+                    "answer": "To adjust model parameters to minimize the loss function"
+                },
+                {
+                    "question": "Which technique is commonly used to handle missing data in a dataset?",
+                    "options": [
+                        "Mean imputation",
+                        "Median imputation",
+                        "Mode imputation",
+                        "Random imputation"
+                    ],
+                    "answer": "Mean imputation"
+                },
+                {
+                    "question": "What is the primary objective of reinforcement learning?",
+                    "options": [
+                        "To classify input data into predefined categories",
+                        "To predict output values based on input features",
+                        "To discover hidden patterns or structures in data",
+                        "To optimize decision-making over time"
+                    ],
+                    "answer": "To optimize decision-making over time"
+                }
+            ]
+        },
+        {
+            "courseName": "Cybersecurity Fundamentals",
+            "questions": [
+                {
+                    "question": "What is a common method of protecting data from unauthorized access?",
+                    "options": [
+                        "Encryption",
+                        "Firewall",
+                        "Authentication",
+                        "Decryption"
+                    ],
+                    "answer": "Encryption"
+                },
+                {
+                    "question": "Which type of attack involves sending unsolicited messages in bulk?",
+                    "options": ["Phishing", "Ransomware", "Malware", "Spyware"],
+                    "answer": "Phishing"
+                },
+                {
+                    "question": "What does SSL stand for in the context of internet security?",
+                    "options": [
+                        "Secure Socket Layer",
+                        "Software Security Library",
+                        "Secure Signaling Language",
+                        "System Security Log"
+                    ],
+                    "answer": "Secure Socket Layer"
+                },
+                {
+                    "question": "What is the primary purpose of a firewall?",
+                    "options": [
+                        "Monitor network traffic",
+                        "Block unauthorized access",
+                        "Detect malware",
+                        "Encrypt data"
+                    ],
+                    "answer": "Block unauthorized access"
+                },
+                {
+                    "question": "What is the term for the process of confirming the identity of a user?",
+                    "options": [
+                        "Authentication",
+                        "Authorization",
+                        "Encryption",
+                        "Decryption"
+                    ],
+                    "answer": "Authentication"
+                },
+                {
+                    "question": "Which type of malware encrypts files and demands payment for decryption?",
+                    "options": [
+                        "Ransomware",
+                        "Spyware",
+                        "Adware",
+                        "Trojan Horse"
+                    ],
+                    "answer": "Ransomware"
+                },
+                {
+                    "question": "What does VPN stand for in the context of secure network connections?",
+                    "options": [
+                        "Virtual Private Network",
+                        "Virus Protection Network",
+                        "Very Private Navigation",
+                        "Virtual Proxy Network"
+                    ],
+                    "answer": "Virtual Private Network"
+                },
+                {
+                    "question": "Which term refers to a software vulnerability that remains unpatched by the vendor?",
+                    "options": [
+                        "Zero-day exploit",
+                        "Backdoor",
+                        "Rootkit",
+                        "Buffer overflow"
+                    ],
+                    "answer": "Zero-day exploit"
+                },
+                {
+                    "question": "What is the primary goal of a DDoS attack?",
+                    "options": [
+                        "Overwhelm a server with traffic",
+                        "Steal sensitive information",
+                        "Install malware",
+                        "Deface a website"
+                    ],
+                    "answer": "Overwhelm a server with traffic"
+                },
+                {
+                    "question": "What is the purpose of penetration testing?",
+                    "options": [
+                        "Identify vulnerabilities",
+                        "Secure user credentials",
+                        "Encrypt network traffic",
+                        "Monitor network activity"
+                    ],
+                    "answer": "Identify vulnerabilities"
+                }
+            ]
+        },
+        {
+            "courseName": "Cloud Computing",
+            "questions": [
+                {
+                    "question": "What is the main benefit of using cloud computing services?",
+                    "options": [
+                        "Scalability",
+                        "Cost-efficiency",
+                        "Security",
+                        "Performance"
+                    ],
+                    "answer": "Cost-efficiency"
+                },
+                {
+                    "question": "Which cloud service model provides access to virtualized hardware resources over the internet?",
+                    "options": [
+                        "Infrastructure as a Service (IaaS)",
+                        "Platform as a Service (PaaS)",
+                        "Software as a Service (SaaS)",
+                        "Function as a Service (FaaS)"
+                    ],
+                    "answer": "Infrastructure as a Service (IaaS)"
+                },
+                {
+                    "question": "What is the term for a cloud computing deployment model where resources are shared among multiple users?",
+                    "options": [
+                        "Public cloud",
+                        "Private cloud",
+                        "Hybrid cloud",
+                        "Community cloud"
+                    ],
+                    "answer": "Public cloud"
+                },
+                {
+                    "question": "What is the purpose of auto-scaling in cloud computing?",
+                    "options": [
+                        "Automatically adjust resources based on demand",
+                        "Encrypt data in transit",
+                        "Manage user access controls",
+                        "Monitor network traffic"
+                    ],
+                    "answer": "Automatically adjust resources based on demand"
+                },
+                {
+                    "question": "Which cloud service model allows users to access applications hosted on remote servers?",
+                    "options": [
+                        "Software as a Service (SaaS)",
+                        "Platform as a Service (PaaS)",
+                        "Infrastructure as a Service (IaaS)",
+                        "Function as a Service (FaaS)"
+                    ],
+                    "answer": "Software as a Service (SaaS)"
+                },
+                {
+                    "question": "What does CDN stand for in the context of cloud computing?",
+                    "options": [
+                        "Content Delivery Network",
+                        "Cloud Data Network",
+                        "Centralized Data Node",
+                        "Cloud Distribution Network"
+                    ],
+                    "answer": "Content Delivery Network"
+                },
+                {
+                    "question": "Which cloud computing characteristic allows users to access resources on-demand via a network?",
+                    "options": [
+                        "Resource pooling",
+                        "Elasticity",
+                        "Broad network access",
+                        "Measured service"
+                    ],
+                    "answer": "Broad network access"
+                },
+                {
+                    "question": "What does S3 stand for in the context of Amazon Web Services (AWS)?",
+                    "options": [
+                        "Simple Storage Service",
+                        "Secure Storage System",
+                        "Storage Security Service",
+                        "System Storage Solution"
+                    ],
+                    "answer": "Simple Storage Service"
+                },
+                {
+                    "question": "Which cloud computing deployment model offers both public and private cloud resources?",
+                    "options": [
+                        "Hybrid cloud",
+                        "Public cloud",
+                        "Private cloud",
+                        "Community cloud"
+                    ],
+                    "answer": "Hybrid cloud"
+                },
+                {
+                    "question": "What is the term for the practice of using multiple cloud service providers?",
+                    "options": [
+                        "Multi-cloud",
+                        "Cloud federation",
+                        "Cloud brokerage",
+                        "Cloud collaboration"
+                    ],
+                    "answer": "Multi-cloud"
+                }
+            ]
+        },
+        {
+            "courseName": "Advanced Web Development",
+            "questions": [
+                {
+                    "question": "Which of the following is NOT a front-end web development framework?",
+                    "options": ["React", "Angular", "Express", "Vue.js"],
+                    "answer": "Express"
+                },
+                {
+                    "question": "What is the purpose of a CSS preprocessor in web development?",
+                    "options": [
+                        "To convert HTML to CSS",
+                        "To enhance the functionality of JavaScript",
+                        "To simplify writing and managing CSS code",
+                        "To optimize website performance"
+                    ],
+                    "answer": "To simplify writing and managing CSS code"
+                },
+                {
+                    "question": "Which programming language is primarily used for server-side web development?",
+                    "options": ["JavaScript", "Python", "Java", "PHP"],
+                    "answer": "Node.js"
+                },
+                {
+                    "question": "What is the purpose of responsive web design?",
+                    "options": [
+                        "To improve website security",
+                        "To enhance user experience on different devices",
+                        "To increase website loading speed",
+                        "To optimize database queries"
+                    ],
+                    "answer": "To enhance user experience on different devices"
+                },
+                {
+                    "question": "Which of the following is a commonly used database management system for web applications?",
+                    "options": ["MongoDB", "Git", "Sass", "Docker"],
+                    "answer": "MongoDB"
+                },
+                {
+                    "question": "What is the purpose of AJAX in web development?",
+                    "options": [
+                        "To create animations and visual effects",
+                        "To enhance website security",
+                        "To optimize database queries",
+                        "To enable asynchronous data retrieval without reloading the entire page"
+                    ],
+                    "answer": "To enable asynchronous data retrieval without reloading the entire page"
+                },
+                {
+                    "question": "Which HTTP status code indicates that a requested resource was not found on the server?",
+                    "options": ["200", "404", "500", "302"],
+                    "answer": "404"
+                },
+                {
+                    "question": "What is the purpose of version control systems like Git in web development?",
+                    "options": [
+                        "To manage server infrastructure",
+                        "To track changes in code and collaborate with other developers",
+                        "To optimize website performance",
+                        "To improve website security"
+                    ],
+                    "answer": "To track changes in code and collaborate with other developers"
+                },
+                {
+                    "question": "Which of the following is NOT a commonly used web development tool?",
+                    "options": ["Webpack", "npm", "Photoshop", "Postman"],
+                    "answer": "Photoshop"
+                },
+                {
+                    "question": "What is the purpose of a web server in web development?",
+                    "options": [
+                        "To manage client-side scripting languages",
+                        "To process form submissions",
+                        "To serve web pages and content to clients",
+                        "To secure database connections"
+                    ],
+                    "answer": "To serve web pages and content to clients"
+                }
+            ]
+        },
+        {
+            "courseName": "Computer Graphics",
+            "questions": [
+                {
+                    "question": "What is the primary goal of computer graphics?",
+                    "options": [
+                        "To create realistic images and animations",
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage client-server communication"
+                    ],
+                    "answer": "To create realistic images and animations"
+                },
+                {
+                    "question": "Which rendering technique is commonly used for simulating the interaction of light with surfaces?",
+                    "options": [
+                        "Ray tracing",
+                        "Database indexing",
+                        "Recursive function",
+                        "Content delivery network"
+                    ],
+                    "answer": "Ray tracing"
+                },
+                {
+                    "question": "What is the purpose of a graphics processing unit (GPU) in computer graphics?",
+                    "options": [
+                        "To process graphics-related tasks efficiently",
+                        "To manage server infrastructure",
+                        "To facilitate client-server communication",
+                        "To store and retrieve data from databases"
+                    ],
+                    "answer": "To process graphics-related tasks efficiently"
+                },
+                {
+                    "question": "Which of the following is NOT a commonly used graphics file format?",
+                    "options": ["PNG", "JSON", "JPEG", "SVG"],
+                    "answer": "JSON"
+                },
+                {
+                    "question": "What is texture mapping in computer graphics?",
+                    "options": [
+                        "The process of creating 3D models",
+                        "The process of applying images to 3D objects",
+                        "The process of compressing images",
+                        "The process of converting images to vectors"
+                    ],
+                    "answer": "The process of applying images to 3D objects"
+                },
+                {
+                    "question": "What is the purpose of anti-aliasing in computer graphics?",
+                    "options": [
+                        "To enhance website security",
+                        "To optimize database queries",
+                        "To reduce visual artifacts in images",
+                        "To create 3D models"
+                    ],
+                    "answer": "To reduce visual artifacts in images"
+                },
+                {
+                    "question": "Which mathematical concept is fundamental to computer graphics?",
+                    "options": [
+                        "Trigonometry",
+                        "Statistics",
+                        "Algebra",
+                        "Calculus"
+                    ],
+                    "answer": "Trigonometry"
+                },
+                {
+                    "question": "What is the role of shaders in modern graphics programming?",
+                    "options": [
+                        "To manage server infrastructure",
+                        "To optimize database queries",
+                        "To define how objects are rendered",
+                        "To store and retrieve data from databases"
+                    ],
+                    "answer": "To define how objects are rendered"
+                },
+                {
+                    "question": "What is the purpose of perspective projection in 3D graphics?",
+                    "options": [
+                        "To enhance website security",
+                        "To optimize database queries",
+                        "To create 3D models",
+                        "To simulate the effect of viewing objects from a distance"
+                    ],
+                    "answer": "To simulate the effect of viewing objects from a distance"
+                },
+                {
+                    "question": "Which of the following is NOT a commonly used graphics API?",
+                    "options": ["OpenGL", "DirectX", "jQuery", "Vulkan"],
+                    "answer": "jQuery"
+                }
+            ]
+        },
+        {
+            "courseName": "Human-Computer Interaction",
+            "questions": [
+                {
+                    "question": "What is the primary goal of human-computer interaction (HCI)?",
+                    "options": [
+                        "To create user-friendly software and hardware systems",
+                        "To manage server infrastructure",
+                        "To optimize database queries",
+                        "To enhance website security"
+                    ],
+                    "answer": "To create user-friendly software and hardware systems"
+                },
+                {
+                    "question": "Which of the following is NOT a usability principle in HCI?",
+                    "options": [
+                        "Visibility of system status",
+                        "User control and freedom",
+                        "Uniformity of system interfaces",
+                        "Complexity of system functions"
+                    ],
+                    "answer": "Complexity of system functions"
+                },
+                {
+                    "question": "What is the purpose of user personas in HCI design?",
+                    "options": [
+                        "To simulate user interactions with the system",
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To create fictional representations of target users"
+                    ],
+                    "answer": "To create fictional representations of target users"
+                },
+                {
+                    "question": "What is cognitive walkthrough in the context of HCI evaluation?",
+                    "options": [
+                        "A method for evaluating the usability of a system by simulating user tasks",
+                        "A security measure to prevent unauthorized access to data",
+                        "A technique for optimizing database queries",
+                        "A visual representation of system architecture"
+                    ],
+                    "answer": "A method for evaluating the usability of a system by simulating user tasks"
+                },
+                {
+                    "question": "Which HCI design principle emphasizes the importance of consistent and predictable system behavior?",
+                    "options": [
+                        "Visibility of system status",
+                        "User control and freedom",
+                        "Consistency and standards",
+                        "Error prevention"
+                    ],
+                    "answer": "Consistency and standards"
+                },
+                {
+                    "question": "What is the purpose of usability testing in HCI?",
+                    "options": [
+                        "To manage server infrastructure",
+                        "To optimize database queries",
+                        "To evaluate the effectiveness and efficiency of a system",
+                        "To enhance website security"
+                    ],
+                    "answer": "To evaluate the effectiveness and efficiency of a system"
+                },
+                {
+                    "question": "Which of the following is NOT a common usability evaluation method in HCI?",
+                    "options": [
+                        "Heuristic evaluation",
+                        "Cognitive walkthrough",
+                        "Eye tracking",
+                        "A/B testing"
+                    ],
+                    "answer": "Optical character recognition"
+                },
+                {
+                    "question": "What is the purpose of wireframing in HCI design?",
+                    "options": [
+                        "To simulate user interactions with the system",
+                        "To create high-fidelity prototypes",
+                        "To optimize database queries",
+                        "To define the basic layout and functionality of a user interface"
+                    ],
+                    "answer": "To define the basic layout and functionality of a user interface"
+                },
+                {
+                    "question": "What is the role of affordances in HCI design?",
+                    "options": [
+                        "To simulate user interactions with the system",
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To suggest how objects should be used or interacted with"
+                    ],
+                    "answer": "To suggest how objects should be used or interacted with"
+                },
+                {
+                    "question": "Which HCI design principle emphasizes the importance of providing users with control and freedom?",
+                    "options": [
+                        "Visibility of system status",
+                        "User control and freedom",
+                        "Consistency and standards",
+                        "Error prevention"
+                    ],
+                    "answer": "User control and freedom"
+                }
+            ]
+        },
+        {
+            "courseName": "Data Mining",
+            "questions": [
+                {
+                    "question": "What is data mining?",
+                    "options": [
+                        "The process of extracting valuable insights from large datasets",
+                        "The process of encrypting sensitive information",
+                        "The process of optimizing database queries",
+                        "The process of developing user interfaces"
+                    ],
+                    "answer": "The process of extracting valuable insights from large datasets"
+                },
+                {
+                    "question": "Which of the following is a common data mining technique for discovering patterns in data?",
+                    "options": [
+                        "Regression analysis",
+                        "Content delivery network",
+                        "Database indexing",
+                        "Recursive function"
+                    ],
+                    "answer": "Regression analysis"
+                },
+                {
+                    "question": "What is the purpose of association rule mining?",
+                    "options": [
+                        "To enhance website security",
+                        "To optimize database queries",
+                        "To discover relationships between variables in large datasets",
+                        "To create 3D models"
+                    ],
+                    "answer": "To discover relationships between variables in large datasets"
+                },
+                {
+                    "question": "Which of the following is NOT a common data mining task?",
+                    "options": [
+                        "Clustering",
+                        "Regression",
+                        "Classification",
+                        "Recursion"
+                    ],
+                    "answer": "Recursion"
+                },
+                {
+                    "question": "What is the role of feature selection in data mining?",
+                    "options": [
+                        "To enhance website security",
+                        "To optimize database queries",
+                        "To identify the most relevant features for predictive modeling",
+                        "To create 3D models"
+                    ],
+                    "answer": "To identify the most relevant features for predictive modeling"
+                },
+                {
+                    "question": "What is the purpose of data preprocessing in data mining?",
+                    "options": [
+                        "To manage server infrastructure",
+                        "To optimize database queries",
+                        "To clean and prepare data for analysis",
+                        "To enhance website security"
+                    ],
+                    "answer": "To clean and prepare data for analysis"
+                },
+                {
+                    "question": "Which data mining technique is used for identifying groups of similar objects in a dataset?",
+                    "options": [
+                        "Clustering",
+                        "Regression",
+                        "Association rule mining",
+                        "Content delivery network"
+                    ],
+                    "answer": "Clustering"
+                },
+                {
+                    "question": "What is the purpose of cross-validation in data mining?",
+                    "options": [
+                        "To manage server infrastructure",
+                        "To optimize database queries",
+                        "To evaluate the performance of predictive models",
+                        "To enhance website security"
+                    ],
+                    "answer": "To evaluate the performance of predictive models"
+                },
+                {
+                    "question": "Which of the following is a common data mining algorithm for classification?",
+                    "options": [
+                        "K-means",
+                        "Apriori",
+                        "Decision trees",
+                        "PageRank"
+                    ],
+                    "answer": "Decision trees"
+                },
+                {
+                    "question": "What is the purpose of outlier detection in data mining?",
+                    "options": [
+                        "To enhance website security",
+                        "To optimize database queries",
+                        "To identify unusual patterns or observations in data",
+                        "To manage server infrastructure"
+                    ],
+                    "answer": "To identify unusual patterns or observations in data"
+                }
+            ]
+        },
+        {
+            "courseName": "Distributed Systems",
+            "questions": [
+                {
+                    "question": "What is a distributed system?",
+                    "options": [
+                        "A system in which software components are distributed across multiple computers",
+                        "A system with a single centralized server",
+                        "A system with no network connectivity",
+                        "A system with limited functionality"
+                    ],
+                    "answer": "A system in which software components are distributed across multiple computers"
+                },
+                {
+                    "question": "What is the primary goal of distributed systems?",
+                    "options": [
+                        "To achieve fault tolerance and scalability",
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure"
+                    ],
+                    "answer": "To achieve fault tolerance and scalability"
+                },
+                {
+                    "question": "Which communication model is commonly used in distributed systems?",
+                    "options": [
+                        "Message passing",
+                        "Client-server",
+                        "Peer-to-peer",
+                        "Centralized"
+                    ],
+                    "answer": "Message passing"
+                },
+                {
+                    "question": "What is a distributed hash table (DHT) used for in distributed systems?",
+                    "options": [
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To optimize database queries",
+                        "To store and retrieve data in a decentralized manner"
+                    ],
+                    "answer": "To store and retrieve data in a decentralized manner"
+                },
+                {
+                    "question": "What is the purpose of consensus algorithms in distributed systems?",
+                    "options": [
+                        "To optimize database queries",
+                        "To manage server infrastructure",
+                        "To ensure agreement among nodes in a distributed system",
+                        "To enhance website security"
+                    ],
+                    "answer": "To ensure agreement among nodes in a distributed system"
+                },
+                {
+                    "question": "What is the role of distributed transactions in distributed systems?",
+                    "options": [
+                        "To manage server infrastructure",
+                        "To optimize database queries",
+                        "To ensure data consistency across multiple nodes",
+                        "To enhance website security"
+                    ],
+                    "answer": "To ensure data consistency across multiple nodes"
+                },
+                {
+                    "question": "Which of the following is NOT a challenge in distributed systems?",
+                    "options": [
+                        "Fault tolerance",
+                        "Scalability",
+                        "Centralization",
+                        "Consistency"
+                    ],
+                    "answer": "Centralization"
+                },
+                {
+                    "question": "What is the purpose of load balancing in distributed systems?",
+                    "options": [
+                        "To enhance website security",
+                        "To optimize database queries",
+                        "To distribute incoming network traffic across multiple servers",
+                        "To manage server infrastructure"
+                    ],
+                    "answer": "To distribute incoming network traffic across multiple servers"
+                },
+                {
+                    "question": "Which distributed system architecture provides fault tolerance and scalability by replicating data across multiple servers?",
+                    "options": [
+                        "Master-slave",
+                        "Peer-to-peer",
+                        "Client-server",
+                        "Replication"
+                    ],
+                    "answer": "Replication"
+                },
+                {
+                    "question": "What is the purpose of distributed caching in distributed systems?",
+                    "options": [
+                        "To manage server infrastructure",
+                        "To optimize database queries",
+                        "To store frequently accessed data closer to the client",
+                        "To enhance website security"
+                    ],
+                    "answer": "To store frequently accessed data closer to the client"
+                }
+            ]
+        },
+        {
+            "courseName": "Software Testing",
+            "questions": [
+                {
+                    "question": "What is software testing?",
+                    "options": [
+                        "The process of ensuring that software meets specified requirements and quality standards",
+                        "The process of optimizing database queries",
+                        "The process of enhancing website security",
+                        "The process of managing server infrastructure"
+                    ],
+                    "answer": "The process of ensuring that software meets specified requirements and quality standards"
+                },
+                {
+                    "question": "What is the purpose of software testing?",
+                    "options": [
+                        "To detect defects and errors in software",
+                        "To manage server infrastructure",
+                        "To optimize database queries",
+                        "To enhance website security"
+                    ],
+                    "answer": "To detect defects and errors in software"
+                },
+                {
+                    "question": "Which testing technique focuses on validating individual units or components of software?",
+                    "options": [
+                        "Unit testing",
+                        "Integration testing",
+                        "System testing",
+                        "Acceptance testing"
+                    ],
+                    "answer": "Unit testing"
+                },
+                {
+                    "question": "What is regression testing?",
+                    "options": [
+                        "Testing performed to ensure that changes in one part of the software do not adversely affect other parts",
+                        "Testing performed to optimize database queries",
+                        "Testing performed to enhance website security",
+                        "Testing performed to manage server infrastructure"
+                    ],
+                    "answer": "Testing performed to ensure that changes in one part of the software do not adversely affect other parts"
+                },
+                {
+                    "question": "What is the purpose of test-driven development (TDD)?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To write tests before writing code"
+                    ],
+                    "answer": "To write tests before writing code"
+                },
+                {
+                    "question": "What is the role of a test plan in software testing?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To document the approach and scope of testing activities"
+                    ],
+                    "answer": "To document the approach and scope of testing activities"
+                },
+                {
+                    "question": "Which testing technique evaluates the behavior of a system under realistic operating conditions?",
+                    "options": [
+                        "Stress testing",
+                        "Integration testing",
+                        "System testing",
+                        "Acceptance testing"
+                    ],
+                    "answer": "Stress testing"
+                },
+                {
+                    "question": "What is the purpose of exploratory testing?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To discover defects through ad-hoc testing"
+                    ],
+                    "answer": "To discover defects through ad-hoc testing"
+                },
+                {
+                    "question": "Which testing technique involves testing a system with extreme or uncommon inputs?",
+                    "options": [
+                        "Boundary testing",
+                        "Integration testing",
+                        "System testing",
+                        "Acceptance testing"
+                    ],
+                    "answer": "Boundary testing"
+                },
+                {
+                    "question": "What is the purpose of test automation?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To execute repetitive test cases more efficiently"
+                    ],
+                    "answer": "To execute repetitive test cases more efficiently"
+                }
+            ]
+        },
+        {
+            "courseName": "Big Data Analytics",
+            "questions": [
+                {
+                    "question": "What is big data analytics?",
+                    "options": [
+                        "The process of analyzing large and complex datasets to extract valuable insights",
+                        "The process of optimizing database queries",
+                        "The process of enhancing website security",
+                        "The process of managing server infrastructure"
+                    ],
+                    "answer": "The process of analyzing large and complex datasets to extract valuable insights"
+                },
+                {
+                    "question": "What are the three V's of big data?",
+                    "options": [
+                        "Volume, Variety, Velocity",
+                        "Value, Validation, Verification",
+                        "Views, Validation, Verification",
+                        "Volume, Value, Velocity"
+                    ],
+                    "answer": "Volume, Variety, Velocity"
+                },
+                {
+                    "question": "What is the purpose of data preprocessing in big data analytics?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To clean and prepare data for analysis"
+                    ],
+                    "answer": "To clean and prepare data for analysis"
+                },
+                {
+                    "question": "Which of the following is NOT a common big data analytics tool or platform?",
+                    "options": ["Hadoop", "Spark", "MongoDB", "MySQL"],
+                    "answer": "MySQL"
+                },
+                {
+                    "question": "What is the role of data visualization in big data analytics?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To present data in a visual format for easier interpretation"
+                    ],
+                    "answer": "To present data in a visual format for easier interpretation"
+                },
+                {
+                    "question": "Which data mining technique is commonly used in big data analytics for finding patterns in data?",
+                    "options": [
+                        "Regression analysis",
+                        "Clustering",
+                        "Association rule mining",
+                        "Decision trees"
+                    ],
+                    "answer": "Clustering"
+                },
+                {
+                    "question": "What is the purpose of sentiment analysis in big data analytics?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To analyze and interpret emotions expressed in textual data"
+                    ],
+                    "answer": "To analyze and interpret emotions expressed in textual data"
+                },
+                {
+                    "question": "Which of the following is a common application of big data analytics?",
+                    "options": [
+                        "E-commerce personalization",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "E-commerce personalization"
+                },
+                {
+                    "question": "What is the purpose of predictive analytics in big data?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To forecast future trends and behavior based on historical data"
+                    ],
+                    "answer": "To forecast future trends and behavior based on historical data"
+                },
+                {
+                    "question": "What is the role of machine learning in big data analytics?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To develop algorithms that enable computers to learn from data"
+                    ],
+                    "answer": "To develop algorithms that enable computers to learn from data"
+                }
+            ]
+        },
+        {
+            "courseName": "Computer Vision",
+            "questions": [
+                {
+                    "question": "What is computer vision?",
+                    "options": [
+                        "The field of enabling computers to interpret and understand visual information from the real world",
+                        "The process of optimizing database queries",
+                        "The process of enhancing website security",
+                        "The process of managing server infrastructure"
+                    ],
+                    "answer": "The field of enabling computers to interpret and understand visual information from the real world"
+                },
+                {
+                    "question": "What are some applications of computer vision?",
+                    "options": [
+                        "Image recognition, object detection, and facial recognition",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Image recognition, object detection, and facial recognition"
+                },
+                {
+                    "question": "Which computer vision algorithm is commonly used for detecting edges in images?",
+                    "options": [
+                        "Canny edge detector",
+                        "Hough transform",
+                        "SIFT",
+                        "ORB"
+                    ],
+                    "answer": "Canny edge detector"
+                },
+                {
+                    "question": "What is the purpose of feature extraction in computer vision?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To identify meaningful information in images"
+                    ],
+                    "answer": "To identify meaningful information in images"
+                },
+                {
+                    "question": "Which deep learning model architecture is commonly used in computer vision?",
+                    "options": [
+                        "Convolutional Neural Networks (CNNs)",
+                        "Recurrent Neural Networks (RNNs)",
+                        "Generative Adversarial Networks (GANs)",
+                        "Deep Belief Networks (DBNs)"
+                    ],
+                    "answer": "Convolutional Neural Networks (CNNs)"
+                },
+                {
+                    "question": "What is the purpose of image segmentation in computer vision?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To partition images into meaningful segments"
+                    ],
+                    "answer": "To partition images into meaningful segments"
+                },
+                {
+                    "question": "What is optical character recognition (OCR) used for in computer vision?",
+                    "options": [
+                        "To recognize and extract text from images",
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure"
+                    ],
+                    "answer": "To recognize and extract text from images"
+                },
+                {
+                    "question": "Which technique is commonly used for image classification in computer vision?",
+                    "options": [
+                        "Support Vector Machines (SVMs)",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Support Vector Machines (SVMs)"
+                },
+                {
+                    "question": "What is the purpose of image registration in computer vision?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To align images from different sources"
+                    ],
+                    "answer": "To align images from different sources"
+                },
+                {
+                    "question": "Which computer vision technique is used for estimating the pose of objects in images or videos?",
+                    "options": [
+                        "Pose estimation",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Pose estimation"
+                }
+            ]
+        },
+        {
+            "courseName": "Natural Language Processing",
+            "questions": [
+                {
+                    "question": "What is natural language processing (NLP)?",
+                    "options": [
+                        "The field of enabling computers to understand and generate human language",
+                        "The process of optimizing database queries",
+                        "The process of enhancing website security",
+                        "The process of managing server infrastructure"
+                    ],
+                    "answer": "The field of enabling computers to understand and generate human language"
+                },
+                {
+                    "question": "What are some applications of natural language processing?",
+                    "options": [
+                        "Machine translation, sentiment analysis, and chatbots",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Machine translation, sentiment analysis, and chatbots"
+                },
+                {
+                    "question": "Which technique is commonly used for tokenization in NLP?",
+                    "options": [
+                        "Breaking text into words or sentences",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Breaking text into words or sentences"
+                },
+                {
+                    "question": "What is the purpose of part-of-speech (POS) tagging in NLP?",
+                    "options": [
+                        "To label words with their grammatical categories",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "To label words with their grammatical categories"
+                },
+                {
+                    "question": "Which algorithm is commonly used for named entity recognition (NER) in NLP?",
+                    "options": [
+                        "Conditional Random Fields (CRFs)",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Conditional Random Fields (CRFs)"
+                },
+                {
+                    "question": "What is the purpose of stemming and lemmatization in NLP?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To reduce words to their base or root forms"
+                    ],
+                    "answer": "To reduce words to their base or root forms"
+                },
+                {
+                    "question": "Which model architecture is commonly used for text classification in NLP?",
+                    "options": [
+                        "Recurrent Neural Networks (RNNs)",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Recurrent Neural Networks (RNNs)"
+                },
+                {
+                    "question": "What is the purpose of sentiment analysis in NLP?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To analyze and interpret emotions expressed in textual data"
+                    ],
+                    "answer": "To analyze and interpret emotions expressed in textual data"
+                },
+                {
+                    "question": "Which algorithm is commonly used for machine translation in NLP?",
+                    "options": [
+                        "Sequence-to-Sequence models",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Sequence-to-Sequence models"
+                },
+                {
+                    "question": "What is the purpose of named entity recognition (NER) in NLP?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To identify and classify named entities in textual data"
+                    ],
+                    "answer": "To identify and classify named entities in textual data"
+                }
+            ]
+        },
+        {
+            "courseName": "Emerging Technologies in IT",
+            "questions": [
+                {
+                    "question": "What are emerging technologies in IT?",
+                    "options": [
+                        "New and developing technologies with the potential to transform industries",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "New and developing technologies with the potential to transform industries"
+                },
+                {
+                    "question": "What are some examples of emerging technologies?",
+                    "options": [
+                        "Blockchain, Internet of Things (IoT), and Artificial Intelligence (AI)",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Blockchain, Internet of Things (IoT), and Artificial Intelligence (AI)"
+                },
+                {
+                    "question": "Which emerging technology is focused on decentralized and secure data storage?",
+                    "options": [
+                        "Blockchain",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Blockchain"
+                },
+                {
+                    "question": "What is the potential impact of Artificial Intelligence (AI) on various industries?",
+                    "options": [
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure",
+                        "Transformation and automation of processes"
+                    ],
+                    "answer": "Transformation and automation of processes"
+                },
+                {
+                    "question": "What role does the Internet of Things (IoT) play in connecting devices and collecting data?",
+                    "options": [
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure",
+                        "Enabling communication between devices and data collection"
+                    ],
+                    "answer": "Enabling communication between devices and data collection"
+                },
+                {
+                    "question": "How does blockchain technology ensure the security and immutability of data?",
+                    "options": [
+                        "By optimizing database queries",
+                        "By enhancing website security",
+                        "By managing server infrastructure",
+                        "By creating a decentralized and tamper-proof ledger"
+                    ],
+                    "answer": "By creating a decentralized and tamper-proof ledger"
+                },
+                {
+                    "question": "What is the potential impact of virtual reality (VR) and augmented reality (AR) on user experiences?",
+                    "options": [
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure",
+                        "Enhancing immersion and interaction in virtual environments"
+                    ],
+                    "answer": "Enhancing immersion and interaction in virtual environments"
+                },
+                {
+                    "question": "How does cloud computing enable scalable and flexible IT infrastructure?",
+                    "options": [
+                        "By optimizing database queries",
+                        "By enhancing website security",
+                        "By managing server infrastructure",
+                        "By providing on-demand access to computing resources"
+                    ],
+                    "answer": "By providing on-demand access to computing resources"
+                },
+                {
+                    "question": "What is the potential impact of quantum computing on computational power and problem-solving?",
+                    "options": [
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure",
+                        "Exponential increase in computational power and solving complex problems"
+                    ],
+                    "answer": "Exponential increase in computational power and solving complex problems"
+                },
+                {
+                    "question": "How does Artificial Intelligence (AI) enable automation and decision-making based on data analysis?",
+                    "options": [
+                        "By optimizing database queries",
+                        "By enhancing website security",
+                        "By managing server infrastructure",
+                        "By learning from data and making predictions or decisions"
+                    ],
+                    "answer": "By learning from data and making predictions or decisions"
+                }
+            ]
+        },
+        {
+            "courseName": "Advanced Cybersecurity",
+            "questions": [
+                {
+                    "question": "What is cybersecurity?",
+                    "options": [
+                        "The practice of protecting systems, networks, and data from digital attacks",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "The practice of protecting systems, networks, and data from digital attacks"
+                },
+                {
+                    "question": "What are some common cyber threats?",
+                    "options": [
+                        "Malware, phishing, and ransomware attacks",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Malware, phishing, and ransomware attacks"
+                },
+                {
+                    "question": "Which cybersecurity measure is focused on verifying the identity of users or devices?",
+                    "options": [
+                        "Authentication",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Authentication"
+                },
+                {
+                    "question": "What role does encryption play in cybersecurity?",
+                    "options": [
+                        "Protecting data by converting it into a secret code",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Protecting data by converting it into a secret code"
+                },
+                {
+                    "question": "Which cybersecurity measure focuses on preventing unauthorized access to networks or systems?",
+                    "options": [
+                        "Firewalls",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Firewalls"
+                },
+                {
+                    "question": "What is the purpose of penetration testing in cybersecurity?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To simulate cyber attacks to identify vulnerabilities"
+                    ],
+                    "answer": "To simulate cyber attacks to identify vulnerabilities"
+                },
+                {
+                    "question": "Which cybersecurity measure focuses on detecting and responding to security incidents?",
+                    "options": [
+                        "Intrusion detection systems (IDS)",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Intrusion detection systems (IDS)"
+                },
+                {
+                    "question": "What is the purpose of security awareness training in cybersecurity?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To educate users about cybersecurity best practices"
+                    ],
+                    "answer": "To educate users about cybersecurity best practices"
+                },
+                {
+                    "question": "Which cybersecurity measure focuses on securing communication over the internet?",
+                    "options": [
+                        "Virtual Private Networks (VPNs)",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Virtual Private Networks (VPNs)"
+                },
+                {
+                    "question": "What is the purpose of incident response planning in cybersecurity?",
+                    "options": [
+                        "To optimize database queries",
+                        "To enhance website security",
+                        "To manage server infrastructure",
+                        "To prepare for and respond to security incidents"
+                    ],
+                    "answer": "To prepare for and respond to security incidents"
+                }
+            ]
+        },
+        {
+            "courseName": "Quantum Computing",
+            "questions": [
+                {
+                    "question": "What is the fundamental unit of quantum computing?",
+                    "options": ["Qubit", "Bit", "Byte", "Quantum Byte"],
+                    "answer": "Qubit"
+                },
+                {
+                    "question": "What is superposition in quantum computing?",
+                    "options": [
+                        "The ability of qubits to be in multiple states simultaneously",
+                        "A powerful quantum algorithm",
+                        "A programming language used in quantum computing",
+                        "A type of quantum error correction"
+                    ],
+                    "answer": "The ability of qubits to be in multiple states simultaneously"
+                },
+                {
+                    "question": "What is entanglement in quantum computing?",
+                    "options": [
+                        "A phenomenon where qubits become correlated with each other",
+                        "A type of quantum error correction",
+                        "A quantum computing architecture",
+                        "A programming language used in quantum computing"
+                    ],
+                    "answer": "A phenomenon where qubits become correlated with each other"
+                },
+                {
+                    "question": "What is quantum parallelism?",
+                    "options": [
+                        "The ability of quantum computers to perform many calculations simultaneously",
+                        "A quantum computing architecture",
+                        "A quantum error correction technique",
+                        "A powerful quantum algorithm"
+                    ],
+                    "answer": "The ability of quantum computers to perform many calculations simultaneously"
+                },
+                {
+                    "question": "What is decoherence in quantum computing?",
+                    "options": [
+                        "The loss of quantum coherence in a quantum system",
+                        "A quantum error correction technique",
+                        "A type of quantum gate",
+                        "A programming language used in quantum computing"
+                    ],
+                    "answer": "The loss of quantum coherence in a quantum system"
+                },
+                {
+                    "question": "What is quantum supremacy?",
+                    "options": [
+                        "The theoretical point at which quantum computers surpass classical computers",
+                        "A powerful quantum algorithm",
+                        "A type of quantum gate",
+                        "A quantum error correction technique"
+                    ],
+                    "answer": "The theoretical point at which quantum computers surpass classical computers"
+                },
+                {
+                    "question": "What is a quantum gate?",
+                    "options": [
+                        "A basic building block of quantum circuits",
+                        "A powerful quantum algorithm",
+                        "A type of quantum error correction",
+                        "A programming language used in quantum computing"
+                    ],
+                    "answer": "A basic building block of quantum circuits"
+                },
+                {
+                    "question": "What is the significance of Shor's algorithm?",
+                    "options": [
+                        "A quantum algorithm for integer factorization",
+                        "A type of quantum gate",
+                        "A quantum error correction technique",
+                        "A powerful quantum algorithm"
+                    ],
+                    "answer": "A quantum algorithm for integer factorization"
+                },
+                {
+                    "question": "What are some potential applications of quantum computing?",
+                    "options": [
+                        "Factoring large numbers, cryptography, optimization problems",
+                        "Managing server infrastructure",
+                        "Optimizing database queries",
+                        "Enhancing website security"
+                    ],
+                    "answer": "Factoring large numbers, cryptography, optimization problems"
+                },
+                {
+                    "question": "What are some challenges facing quantum computing?",
+                    "options": [
+                        "Decoherence, error correction, scalability",
+                        "Managing server infrastructure",
+                        "Optimizing database queries",
+                        "Enhancing website security"
+                    ],
+                    "answer": "Decoherence, error correction, scalability"
+                }
+            ]
+        },
+        {
+            "courseName": "Marketing Principles",
+            "questions": [
+                {
+                    "question": "What is marketing?",
+                    "options": [
+                        "The process of promoting and selling products or services",
+                        "A branch of computer science",
+                        "A type of financial analysis",
+                        "A project management technique"
+                    ],
+                    "answer": "The process of promoting and selling products or services"
+                },
+                {
+                    "question": "What is market research?",
+                    "options": [
+                        "The systematic gathering, recording, and analysis of data about customers, competitors, and market trends",
+                        "A type of financial analysis",
+                        "A programming language used in marketing",
+                        "A project management technique"
+                    ],
+                    "answer": "The systematic gathering, recording, and analysis of data about customers, competitors, and market trends"
+                },
+                {
+                    "question": "What is consumer behavior?",
+                    "options": [
+                        "The study of how individuals, groups, and organizations select, buy, use, and dispose of goods, services, ideas, or experiences",
+                        "A type of financial analysis",
+                        "A programming language used in marketing",
+                        "A project management technique"
+                    ],
+                    "answer": "The study of how individuals, groups, and organizations select, buy, use, and dispose of goods, services, ideas, or experiences"
+                },
+                {
+                    "question": "What is a marketing strategy?",
+                    "options": [
+                        "A plan of action designed to promote and sell a product or service",
+                        "A type of financial analysis",
+                        "A programming language used in marketing",
+                        "A project management technique"
+                    ],
+                    "answer": "A plan of action designed to promote and sell a product or service"
+                },
+                {
+                    "question": "What is the marketing mix (4Ps)?",
+                    "options": [
+                        "Product, Price, Place, Promotion",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Product, Price, Place, Promotion"
+                },
+                {
+                    "question": "What is brand management?",
+                    "options": [
+                        "The process of building and maintaining a brand",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "The process of building and maintaining a brand"
+                },
+                {
+                    "question": "What is digital marketing?",
+                    "options": [
+                        "Marketing that utilizes online channels and digital technologies",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Marketing that utilizes online channels and digital technologies"
+                },
+                {
+                    "question": "What is the role of social media in marketing?",
+                    "options": [
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure",
+                        "Building brand awareness, engaging with customers, and driving sales"
+                    ],
+                    "answer": "Building brand awareness, engaging with customers, and driving sales"
+                },
+                {
+                    "question": "What is the purpose of market segmentation?",
+                    "options": [
+                        "To divide the market into smaller, more manageable segments",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "To divide the market into smaller, more manageable segments"
+                },
+                {
+                    "question": "What are some emerging trends in marketing?",
+                    "options": [
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure",
+                        "Personalization, influencer marketing, and AI-driven analytics"
+                    ],
+                    "answer": "Personalization, influencer marketing, and AI-driven analytics"
+                }
+            ]
+        },
+        {
+            "courseName": "Financial Analysis Fundamentals",
+            "questions": [
+                {
+                    "question": "What is financial analysis?",
+                    "options": [
+                        "The process of assessing the financial health and performance of a company",
+                        "A marketing technique",
+                        "A project management technique",
+                        "A type of computer science"
+                    ],
+                    "answer": "The process of assessing the financial health and performance of a company"
+                },
+                {
+                    "question": "What are financial statements?",
+                    "options": [
+                        "Reports that summarize a company's financial performance and position",
+                        "A marketing technique",
+                        "A project management technique",
+                        "A type of computer science"
+                    ],
+                    "answer": "Reports that summarize a company's financial performance and position"
+                },
+                {
+                    "question": "What is ratio analysis?",
+                    "options": [
+                        "The use of financial ratios to assess various aspects of a company's performance",
+                        "A marketing technique",
+                        "A project management technique",
+                        "A type of computer science"
+                    ],
+                    "answer": "The use of financial ratios to assess various aspects of a company's performance"
+                },
+                {
+                    "question": "What is financial forecasting?",
+                    "options": [
+                        "Predicting future financial performance based on historical data and trends",
+                        "A marketing technique",
+                        "A project management technique",
+                        "A type of computer science"
+                    ],
+                    "answer": "Predicting future financial performance based on historical data and trends"
+                },
+                {
+                    "question": "What is valuation?",
+                    "options": [
+                        "Determining the economic value of a company or asset",
+                        "A marketing technique",
+                        "A project management technique",
+                        "A type of computer science"
+                    ],
+                    "answer": "Determining the economic value of a company or asset"
+                },
+                {
+                    "question": "What are some common financial ratios?",
+                    "options": [
+                        "Profitability, liquidity, solvency, efficiency",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Profitability, liquidity, solvency, efficiency"
+                },
+                {
+                    "question": "What is the purpose of financial analysis?",
+                    "options": [
+                        "To assess a company's financial health and performance",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "To assess a company's financial health and performance"
+                },
+                {
+                    "question": "What is cash flow analysis?",
+                    "options": [
+                        "Evaluating a company's cash inflows and outflows",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Evaluating a company's cash inflows and outflows"
+                },
+                {
+                    "question": "What is financial modeling?",
+                    "options": [
+                        "Creating mathematical representations of financial situations",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Creating mathematical representations of financial situations"
+                },
+                {
+                    "question": "What are some key components of a financial statement?",
+                    "options": [
+                        "Income statement, balance sheet, cash flow statement",
+                        "Optimizing database queries",
+                        "Enhancing website security",
+                        "Managing server infrastructure"
+                    ],
+                    "answer": "Income statement, balance sheet, cash flow statement"
+                }
+            ]
+        },
+        {
+            "courseName": "Project Management Basics",
+            "questions": [
+                {
+                    "question": "What is project management?",
+                    "options": [
+                        "The practice of initiating, planning, executing, controlling, and closing the work of a team to achieve specific goals and meet specific success criteria",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "The practice of initiating, planning, executing, controlling, and closing the work of a team to achieve specific goals and meet specific success criteria"
+                },
+                {
+                    "question": "What is a project?",
+                    "options": [
+                        "A temporary endeavor undertaken to create a unique product, service, or result",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "A temporary endeavor undertaken to create a unique product, service, or result"
+                },
+                {
+                    "question": "What is project planning?",
+                    "options": [
+                        "Defining the project scope, objectives, and deliverables, as well as creating a detailed project plan",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "Defining the project scope, objectives, and deliverables, as well as creating a detailed project plan"
+                },
+                {
+                    "question": "What is a project manager?",
+                    "options": [
+                        "The person responsible for leading a project from initiation through to completion",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "The person responsible for leading a project from initiation through to completion"
+                },
+                {
+                    "question": "What is project execution?",
+                    "options": [
+                        "Carrying out the project plan to achieve the project objectives",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "Carrying out the project plan to achieve the project objectives"
+                },
+                {
+                    "question": "What is project monitoring and control?",
+                    "options": [
+                        "Tracking project performance and making adjustments as needed to ensure the project stays on track",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "Tracking project performance and making adjustments as needed to ensure the project stays on track"
+                },
+                {
+                    "question": "What is project closure?",
+                    "options": [
+                        "Formally completing the project and obtaining stakeholder acceptance",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "Formally completing the project and obtaining stakeholder acceptance"
+                },
+                {
+                    "question": "What is a project scope?",
+                    "options": [
+                        "The work that needs to be accomplished to deliver a product, service, or result with the specified features and functions",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "The work that needs to be accomplished to deliver a product, service, or result with the specified features and functions"
+                },
+                {
+                    "question": "What is risk management in project management?",
+                    "options": [
+                        "Identifying, assessing, and mitigating risks that could impact the project",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "Identifying, assessing, and mitigating risks that could impact the project"
+                },
+                {
+                    "question": "What is a project milestone?",
+                    "options": [
+                        "A significant event or achievement in a project",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "A significant event or achievement in a project"
+                }
+            ]
+        },
+        {
+            "courseName": "Mobile App Development",
+            "questions": [
+                {
+                    "question": "What is a mobile application?",
+                    "options": [
+                        "A software application designed to run on mobile devices such as smartphones and tablets",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "A software application designed to run on mobile devices such as smartphones and tablets"
+                },
+                {
+                    "question": "What are the main mobile platforms?",
+                    "options": [
+                        "iOS and Android",
+                        "Windows and macOS",
+                        "Linux and Unix",
+                        "Chrome OS and Ubuntu"
+                    ],
+                    "answer": "iOS and Android"
+                },
+                {
+                    "question": "What is an SDK?",
+                    "options": [
+                        "Software Development Kit - a set of tools and libraries used to develop software applications for a specific platform",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "Software Development Kit - a set of tools and libraries used to develop software applications for a specific platform"
+                },
+                {
+                    "question": "What is a UI framework?",
+                    "options": [
+                        "A set of pre-built user interface components and tools used to create the graphical layout of a mobile app",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "A set of pre-built user interface components and tools used to create the graphical layout of a mobile app"
+                },
+                {
+                    "question": "What is cross-platform development?",
+                    "options": [
+                        "Developing mobile apps that can run on multiple operating systems with a single codebase",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "Developing mobile apps that can run on multiple operating systems with a single codebase"
+                },
+                {
+                    "question": "What programming languages are commonly used for mobile app development?",
+                    "options": [
+                        "Java, Kotlin, Swift, Objective-C, Dart",
+                        "Python, JavaScript, C++, Ruby, PHP",
+                        "HTML, CSS, SQL, TypeScript, Go",
+                        "C#, Visual Basic, Ruby, PHP, Perl"
+                    ],
+                    "answer": "Java, Kotlin, Swift, Objective-C, Dart"
+                },
+                {
+                    "question": "What is a mobile backend?",
+                    "options": [
+                        "The server-side infrastructure that supports the functionality of a mobile app",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "The server-side infrastructure that supports the functionality of a mobile app"
+                },
+                {
+                    "question": "What is mobile app testing?",
+                    "options": [
+                        "The process of evaluating the functionality, usability, and performance of a mobile app",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "The process of evaluating the functionality, usability, and performance of a mobile app"
+                },
+                {
+                    "question": "What is the role of UX/UI design in mobile app development?",
+                    "options": [
+                        "Creating intuitive and visually appealing user interfaces to enhance the user experience",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "Creating intuitive and visually appealing user interfaces to enhance the user experience"
+                },
+                {
+                    "question": "What is mobile app deployment?",
+                    "options": [
+                        "The process of making a mobile app available for download and use by end-users",
+                        "A financial analysis technique",
+                        "A marketing strategy",
+                        "A type of computer science"
+                    ],
+                    "answer": "The process of making a mobile app available for download and use by end-users"
+                }
+            ]
         }
     ],
 
@@ -4670,7 +6616,7 @@
                 "health": 100,
                 "money": 110,
                 "smarts": 15,
-                "title": ""
+                "title": "No Title Yet"
             },
             "username": "dat"
         },

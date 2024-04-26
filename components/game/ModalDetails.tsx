@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { MODAL_SHARED_STYLE } from '../../styles/SharedStyles';
+import { MODAL_SHARED_STYLE } from '../../styles/ComponentStyles';
 import { Effect } from '../../models/Types';
 
 const ModalDetails = ({
@@ -14,7 +14,7 @@ const ModalDetails = ({
     effect: Effect;
     prerequisite: string;
 }) => (
-    <View>
+    <>
         <Text style={MODAL_SHARED_STYLE.modalDescription}>{description}</Text>
         <Text style={MODAL_SHARED_STYLE.detail}>Age Needed: {ageNeeded}</Text>
         <Text style={MODAL_SHARED_STYLE.detail}>
@@ -32,7 +32,7 @@ const ModalDetails = ({
         <Text style={MODAL_SHARED_STYLE.detail}>
             Prerequisites: {prerequisite || 'None'}
         </Text>
-    </View>
+    </>
 );
 
 export default ModalDetails;

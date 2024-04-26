@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
+import {PLAYER_HEADER_STYLES} from '../../styles/ComponentStyles';
 
 interface HeaderProps {
     username: string;
@@ -9,48 +10,21 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ username, userTitle, balance }) => {
     return (
-        <View style={styles.container}>
-            <View style={styles.leftCont}>
-                <Text style={styles.username}>{username}</Text>
-                <Text style={styles.userTitle}>Title: {userTitle}</Text>
+        <View style={PLAYER_HEADER_STYLES.container}>
+            <View style={PLAYER_HEADER_STYLES.leftCont}>
+                <Text style={PLAYER_HEADER_STYLES.username}>{username}</Text>
+                <Text style={PLAYER_HEADER_STYLES.userTitle}>
+                    Title: {userTitle}
+                </Text>
             </View>
 
-            <View style={styles.rightCont}>
-                <Text style={styles.balance}>${balance}</Text>
+            <View style={PLAYER_HEADER_STYLES.rightCont}>
+                <Text style={PLAYER_HEADER_STYLES.balance}>${balance}</Text>
                 <Text>Balance</Text>
             </View>
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        height: 70,
-        width: '100%',
-        backgroundColor: '#E2E8F0',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        flexDirection: 'row',
-    },
-    leftCont: {
-        flexDirection: 'column',
-    },
-    rightCont: {
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-    },
-    username: {
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
-    userTitle: {
-        fontSize: 14,
-    },
-    balance: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-});
 
 export default Header;
