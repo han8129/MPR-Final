@@ -89,3 +89,20 @@ export interface NPC {
     work?: string;
     options: Option[];
 }
+
+export interface Interaction {
+    name: string;
+    favor: number;
+    effect: {
+        health: number;
+        happiness: number;
+        smarts: number;
+        money: number;
+    };
+    response: [
+        {
+            desc: string;
+            deed: number; // -1 for bad 0 for neutral 1 for good
+        },
+    ];
+}

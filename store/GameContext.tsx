@@ -21,6 +21,8 @@ export const GameContext = createContext({
     username: '',
     title: 'No Title Yet',
     gender: '',
+    badDeeds: Array<string>(),
+    goodDeeds: Array<string>(),
     setGender: (e: string) => {},
     setTitle: (e: string) => {},
     isTakeDailyLogin: false,
@@ -37,6 +39,8 @@ export const GameContext = createContext({
     setEvents: (e: Event[]) => {},
     isPause: true, // login vao game thi false
     setIsPause: (e: boolean) => {},
+    setGoodDeeds: (deeds: string[]) => {},
+    setBadDeeds: (deeds: string[]) => {},
 });
 
 interface Props {
@@ -58,6 +62,8 @@ export default function GameContextProvider({ children }: Props) {
     const [isTakeDailyLogin, setIsTakeDailyLogin] = useState(false);
     const [title, setTitle] = useState(''); // Initialize title as an empty string
     const [gender, setGender] = useState('');
+    const [goodDeeds, setGoodDeeds] = useState(Array<string>())
+    const [badDeeds, setBadDeeds] = useState(Array<string>())
 
     const [isPause, setIsPause] = useState(true);
 
@@ -304,6 +310,8 @@ export default function GameContextProvider({ children }: Props) {
         setEvents: setEvents,
         isPause: isPause,
         setIsPause: setIsPause,
+        setGoodDeeds: setGoodDeeds,
+        setBadDeeds: setBadDeeds
     };
 
     return (
