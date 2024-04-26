@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
+import { SECTION_HEADER_STYLES } from '../../styles/ComponentStyles';
 
 interface HeaderProps {
     heading: string;
@@ -7,24 +8,10 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ heading }) => {
     return (
-        <View style={styles.headerCont}>
-            <Text style={styles.heading}>{heading}</Text>
+        <View style={SECTION_HEADER_STYLES.headerCont}>
+            <Text style={SECTION_HEADER_STYLES.heading}>{heading}</Text>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    headerCont: {
-        backgroundColor: '#334155',
-        width: '100%',
-    },
-    heading: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        padding: 8,
-        textAlign: 'center',
-        color: '#fff',
-    },
-});
 
 export default Header;

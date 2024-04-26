@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import ProgressBar from './ProgressBar';
+import { AGE_STATUS_STYLES } from '../../styles/ComponentStyles';
 
 interface AgeStatusProps {
     age: number;
@@ -10,25 +11,11 @@ interface AgeStatusProps {
 
 const AgeStatus: React.FC<AgeStatusProps> = ({ age, value, color }) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.ageText}>Age {age}</Text>
+        <View style={AGE_STATUS_STYLES.container}>
+            <Text style={AGE_STATUS_STYLES.ageText}>Age {age}</Text>
             <ProgressBar value={value} color={color} />
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        marginTop: 16,
-        justifyContent: 'center',
-        width: '80%',
-    },
-    ageText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-});
 
 export default AgeStatus;

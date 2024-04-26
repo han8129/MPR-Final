@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Alert } from 'react-native';
-import { Color } from '../constants/Color';
+import { View, ScrollView, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
 import SectionHeader from '../components/game/SectionHeader';
@@ -11,6 +10,7 @@ import { Activity } from '../models/Types';
 import { getData } from '../services/DataService';
 import { GameContext } from '../store/GameContext';
 import LoadingScreen from './LoadingScreen';
+import { GLOBAL_STYLES } from '../styles/SharedStyles';
 
 export interface Relationship {
     name: string;
@@ -131,7 +131,7 @@ const ActivityScreen: React.FC = () => {
     return (
         <>
             <StatusBar hidden={true} />
-            <View style={styles.container}>
+            <View style={GLOBAL_STYLES.container}>
                 <Header
                     username={context.username}
                     userTitle={context.title}
@@ -164,13 +164,5 @@ const ActivityScreen: React.FC = () => {
         </>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Color.white,
-        alignItems: 'center',
-    },
-});
 
 export default ActivityScreen;

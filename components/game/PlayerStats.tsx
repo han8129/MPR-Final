@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ProgressBar from './ProgressBar';
 import { Color } from '../../constants/Color';
+import {PLAYER_STATS_STYLES} from '../../styles/ComponentStyles';
 
 interface PlayerStatsProps {
     health: number;
@@ -13,8 +14,8 @@ interface PlayerStatsProps {
 const PlayerStats: React.FC<PlayerStatsProps> = React.memo(
     ({ health, smarts, happiness }) => {
         return (
-            <View style={styles.container}>
-                <View style={styles.statCont}>
+            <View style={PLAYER_STATS_STYLES.container}>
+                <View style={PLAYER_STATS_STYLES.statCont}>
                     <Stat label='Health' value={health} />
                     <Stat label='Happiness' value={happiness} />
                     <Stat label='Smarts' value={smarts} />
@@ -40,44 +41,16 @@ const Stat: React.FC<{ label: string; value: number }> = ({ label, value }) => {
     }, [label]);
 
     return (
-        <View style={styles.stat}>
-            <View style={styles.statRow}>
-                <Text style={styles.statLabel}>{label + ' '} </Text>
+        <View style={PLAYER_STATS_STYLES.stat}>
+            <View style={PLAYER_STATS_STYLES.statRow}>
+                <Text style={PLAYER_STATS_STYLES.statLabel}>
+                    {label + ' '}{' '}
+                </Text>
                 <Ionicons name={iconName} size={24} color={Color.red} />
             </View>
             <ProgressBar value={value} color={Color.black} />
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'column',
-        width: '100%',
-        height: '30%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#E2E8F0',
-    },
-    statCont: {
-        width: '80%',
-        justifyContent: 'center',
-        height: '100%',
-        marginVertical: 10,
-    },
-    stat: {
-        justifyContent: 'space-around',
-        alignItems: 'flex-start',
-        height: 55,
-    },
-    statRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    statLabel: {
-        fontWeight: 'bold',
-        color: Color.red,
-    },
-});
 
 export default PlayerStats;
