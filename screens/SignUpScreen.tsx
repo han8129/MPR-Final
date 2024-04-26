@@ -51,6 +51,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     coursesTaken: [],
                     jobs: [],
                     activities: [],
+                    title: 'No Title Yet'
                 },
             };
 

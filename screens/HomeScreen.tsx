@@ -2,10 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import {
     View,
     Text,
-    StyleSheet,
     TouchableOpacity,
     Image,
-    Dimensions,
 } from 'react-native';
 import { Color } from '../constants/Color';
 import { StatusBar } from 'expo-status-bar';
@@ -15,8 +13,8 @@ import PlayerStats from '../components/game/PlayerStats';
 import { GameContext } from '../store/GameContext';
 import ExitModal from '../components/game/ExitModal';
 import LoadingScreen from './LoadingScreen';
-
-const { height } = Dimensions.get('window');
+import { SCREEN_STYLES } from '../styles/HomeScreenStyles';
+import { GLOBAL_STYLES } from '../styles/SharedStyles';
 
 interface Props {
     navigation: any;
@@ -72,14 +70,15 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
     useEffect(() => {
         context.setIsPause(false);
-        let title = '';
+        let title = context.title;
         if (context.jobs.length > 0) {
+            title = ''
             for (const job of context.jobs) {
-                title += job.name + ' ';
+                title = job.name;
             }
         }
         context.setTitle(title);
-    }, []);
+    }, [context.jobs]);
 
     useEffect(() => {}, [
         context.money,
@@ -120,7 +119,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <>
             <StatusBar hidden={true} />
-            <View style={styles.container}>
+            <View style={GLOBAL_STYLES.container}>
                 <Header
                     username={context.username}
                     userTitle={context.title}
@@ -129,28 +128,33 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 <AgeStatus age={age} value={progress} color={Color.red} />
                 <Image
                     source={image}
-                    style={styles.image}
+                    style={SCREEN_STYLES.image}
                     resizeMode='contain'
                 />
                 <TouchableOpacity
-                    style={styles.dailyLoginbutton}
+                    style={[
+                        SCREEN_STYLES.dailyLoginbutton,
+                        SCREEN_STYLES.button,
+                    ]}
                     onPress={navigateDailyLogin}
                 >
-                    <Text style={styles.dailyText}>Daily Gift</Text>
+                    <Text style={SCREEN_STYLES.dailyText}>Daily Gift</Text>
                 </TouchableOpacity>
                 {age < 6 && (
                     <TouchableOpacity
-                        style={styles.skipAge6Button}
+                        style={[SCREEN_STYLES.skipAge6Button]}
                         onPress={skipToAge6}
                     >
-                        <Text style={styles.skipAge6Text}>Skip to Age 6</Text>
+                        <Text style={SCREEN_STYLES.skipAge6Text}>
+                            Skip to Age 6
+                        </Text>
                     </TouchableOpacity>
                 )}
                 <TouchableOpacity
-                    style={styles.exitButton}
+                    style={[SCREEN_STYLES.exitButton, SCREEN_STYLES.button]}
                     onPress={toggleExitModal}
                 >
-                    <Text style={styles.dailyText}>Exit Game</Text>
+                    <Text style={SCREEN_STYLES.dailyText}>Exit Game</Text>
                 </TouchableOpacity>
                 <PlayerStats
                     health={context.health}
@@ -166,55 +170,5 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Color.white,
-        alignItems: 'center',
-    },
-    image: {
-        flex: 1,
-    },
-    dailyLoginbutton: {
-        height: 40,
-        width: 80,
-        backgroundColor: Color.red,
-        top: 0.57 * height,
-        right: 30,
-        position: 'absolute',
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    exitButton: {
-        height: 40,
-        width: 80,
-        backgroundColor: Color.black,
-        top: 0.2 * height,
-        left: 30,
-        position: 'absolute',
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    dailyText: {
-        color: Color.white,
-        fontWeight: 'bold',
-        fontSize: 12,
-    },
-    skipAge6Button: {
-        position: 'absolute',
-        top: 0.57 * height,
-        left: 30,
-        backgroundColor: Color.red, // Adjust color as needed
-        padding: 10,
-        borderRadius: 10,
-    },
-    skipAge6Text: {
-        color: Color.white,
-        fontWeight: 'bold',
-        fontSize: 14,
-    },
-});
 
 export default HomeScreen;

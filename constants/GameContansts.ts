@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native";
+
 export const PLAYER_CONSTANTS = {
     MAX_HEALTH: 100,
     MAX_HAPPINESS: 100,
@@ -18,7 +20,7 @@ export const PLAYER_CONSTANTS = {
     INITIAL_TITLE: 'No Title Yet',
     INITIAL_DAY: 0,
     // incremental values
-    HEALTH_RATE: 0.005,
+    HEALTH_RATE: 0.05,
     NEW_AGE_VALUE: 5,
     // money values
     MONEY_AT_18: 10000,
@@ -32,3 +34,8 @@ export const GAME_TEXT_CONSTANTS = {
     DIE_YES_TEXT: 'Yes',
     DIE_NO_TEXT: 'No',
 };
+
+export const DIMENSIONS = {
+    WIDTH: Dimensions.get('window').width,
+    HEIGHT: Dimensions.get('window').height,
+}

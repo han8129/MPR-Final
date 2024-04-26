@@ -41,6 +41,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                 } else {
                     // Set player data to context
                     context.setUsername(res.username);
+                    context.setTitle(res.player.title);
                     context.setHealth(res.player.health);
                     context.setMoney(res.player.money);
                     context.setHappiness(res.player.happiness);
