@@ -62,8 +62,8 @@ export default function GameContextProvider({ children }: Props) {
     const [isTakeDailyLogin, setIsTakeDailyLogin] = useState(false);
     const [title, setTitle] = useState(''); // Initialize title as an empty string
     const [gender, setGender] = useState('');
-    const [goodDeeds, setGoodDeeds] = useState(Array<string>())
-    const [badDeeds, setBadDeeds] = useState(Array<string>())
+    const [goodDeeds, setGoodDeeds] = useState(new Array<string>())
+    const [badDeeds, setBadDeeds] = useState(new Array<string>())
 
     const [isPause, setIsPause] = useState(true);
 
@@ -311,7 +311,9 @@ export default function GameContextProvider({ children }: Props) {
         isPause: isPause,
         setIsPause: setIsPause,
         setGoodDeeds: setGoodDeeds,
-        setBadDeeds: setBadDeeds
+        setBadDeeds: setBadDeeds,
+        goodDeeds: goodDeeds,
+        badDeeds: badDeeds,
     };
 
     return (

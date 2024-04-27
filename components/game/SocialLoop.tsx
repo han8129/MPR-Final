@@ -1,21 +1,35 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GameContext } from '../../store/GameContext';
-import { NPC } from '../../models/index';
+import { NPC, NPCInteraction } from '../../models/Types';
 import { Alert } from 'react-native';
-import { getRandomElement } from '../../utils/random';
+import { getRandomElement, getRandomInt } from '../../utils/random';
+import { getData } from '../../services/DataService';
+import {PLAYER_CONSTANTS} from '../../constants/GameContansts'
 
 export default function SocialLoop() {
     const context = useContext(GameContext);
+    const [npcs, setNpcs] = useState(new Array<NPC>());
+    const [interactions, setInteractions] = useState(
+        new Array<NPCInteraction>()
+    );
+
+    useEffect(() => {fetch()}, []);
 
     useEffect(() => {
-        // 20% of being approached by someone
-        if ([0].includes(Math.floor(Math.random() * 5))) {
-            const npc = getRandomElement(NPCs);
+        // Social Interactions May only happen after 6 yo
+        if (context.days < PLAYER_CONSTANTS.DAY_IN_YEAR * 6) return;
+        // 10% of being approached by someone everyday
+        if ([0].includes(getRandomInt({ min: 0, max: 9 }))) {
+            context.setIsPause(true);
+            const npc: NPC = getRandomElement(npcs);
             const npcFavor = getFavor(npc);
-            const possibleInteractions = INTERACTIONS.filter(
+
+            if (interactions.length < 1) return;
+
+            const possibleInteractions = interactions.filter(
                 (i) => i.favor < npcFavor
             );
-            const interaction: Interaction =
+            const interaction: NPCInteraction =
                 getRandomElement(possibleInteractions);
 
             let health = context.health;
@@ -44,54 +58,47 @@ export default function SocialLoop() {
             Alert.alert(
                 `${npc.name} ${interaction.name}`,
                 '',
-                interaction.options.map((option) => ({
+                interaction.response.map((option) => ({
                     text: option.desc,
                     onPress: () => {
                         if (option.deed == -1)
-                            context.setBadDeeds([...context.badDeeds, npc.name]);
-                        if (option.deed == 1) context.setGoodDeeds([...context.goodDeeds, npc.name]);
+                            context.setBadDeeds([
+                                ...context.badDeeds,
+                                npc.name,
+                            ]);
+                        if (option.deed == 1)
+                            context.setGoodDeeds([
+                                ...context.goodDeeds,
+                                npc.name,
+                            ]);
 
                         context.setIsPause(false);
                     },
                 }))
             );
         }
-    }, [context.days]);
+    }, [context.days, npcs, interactions]);
 
     function getFavor(npc: NPC): number {
         // count number of bad deeds done by player to this NPC
+        if (npc == undefined) return 0;
         const badDeeds = context.badDeeds.filter((name) => name == npc.name);
         const goodDeeds = context.goodDeeds.filter((name) => name == npc.name);
 
         // bad deeds will weight more than good, each bad deed will have weight of 1.25 while good deed have weight of 0.75
         return (
-            goodDeeds.length * GOOD_DEED_WEIGHT -
-            badDeeds.length * BAD_DEED_WEIGHT
+            goodDeeds.length * PLAYER_CONSTANTS.GOOD_DEED_WEIGHT -
+            badDeeds.length * PLAYER_CONSTANTS.BAD_DEED_WEIGHT
         );
     }
+        async function fetch(){
+            try {
+                setNpcs(await getData<NPC>('npc'));
+                setInteractions(await getData<NPCInteraction>('npc interaction'));
+            } catch(error) {
+                Alert.alert('We have trouble connecting to the server', 'Please try later')
+            }
+        };
 
     return <></>;
 }
-
-interface Interaction {
-    name: string;
-    favor: number;
-    effect: {
-        health: number;
-        happiness: number;
-        smarts: number;
-        money: number;
-    };
-    options: [
-        {
-            desc: string;
-            deed: number; // -1 for bad 0 for neutral 1 for good
-        },
-    ];
-}
-const NPCs: NPC[] = [];
-const DAY_IN_MONTH = 30;
-const INTERACTIONS = new Array<Interaction>();
-
-const GOOD_DEED_WEIGHT = 0.75;
-const BAD_DEED_WEIGHT = 1.0;

@@ -26,6 +26,9 @@ export const PLAYER_CONSTANTS = {
     MONEY_AT_18: 10000,
 
     ZERO: 0,
+
+    GOOD_DEED_WEIGHT : 0.75,
+    BAD_DEED_WEIGHT : 1.0,
 };
 
 export const GAME_TEXT_CONSTANTS = {

@@ -28,6 +28,8 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
             coursesTaken: context.coursesTaken || [],
             jobs: context.jobs || [],
             activities: context.activities || [],
+            goodDeeds: context.goodDeeds || [],
+            badDeeds: context.badDeeds || []
         } as unknown as Player);
 
         if (res) {

@@ -6,7 +6,7 @@ export interface User {
 
 export interface Player {
     gender: string;
-    title:  string;
+    title: string;
     days: number;
     health: number;
     money: number;
@@ -15,6 +15,8 @@ export interface Player {
     coursesTaken: string[];
     jobs: Job[];
     activities: string[];
+    goodDeeds: string[];
+    badDeeds: string[]
 }
 
 export interface Effect {
@@ -57,8 +59,8 @@ export interface Job {
     requirement: {
         health: number;
         education: string;
-        smarts: number
-    }
+        smarts: number;
+    };
     type: string;
 }
 
@@ -90,19 +92,14 @@ export interface NPC {
     options: Option[];
 }
 
-export interface Interaction {
+export interface NPCInteraction {
     name: string;
     favor: number;
-    effect: {
-        health: number;
-        happiness: number;
-        smarts: number;
-        money: number;
-    };
-    response: [
-        {
-            desc: string;
-            deed: number; // -1 for bad 0 for neutral 1 for good
-        },
-    ];
+    effect: Effect;
+    response: UserResponse[];
+}
+
+export interface UserResponse {
+    desc: string;
+    deed: number; // -1 for bad 0 for neutral 1 for good
 }

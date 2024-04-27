@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Color } from '../constants/Color';
+import Sizes from '../constants/Sizes';
 
 export const GLOBAL_STYLES = StyleSheet.create({
     container: {
@@ -10,4 +11,12 @@ export const GLOBAL_STYLES = StyleSheet.create({
     maxWidth: {
         width: '100%',
     },
+    flexRow: {
+        flexDirection: 'row',
+        gap: Sizes.md
+    },
+    flexColumn: {
+        flexDirection: 'column'
+        ,gap: Sizes.md
+    }
 });
