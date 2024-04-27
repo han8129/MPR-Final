@@ -43,7 +43,6 @@ export default function SocialScreen() {
 
     function closeModel() {
         setNpc(null)
-        setShowModel(false);
     }
 
     function setDeedHandler({ name, deed }: { name: string; deed: number }) {

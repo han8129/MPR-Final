@@ -81,7 +81,6 @@ export default function SocialLoop() {
 
     function getFavor(npc: NPC): number {
         // count number of bad deeds done by player to this NPC
-        if (npc == undefined) return 0;
         const badDeeds = context.badDeeds.filter((name) => name == npc.name);
         const goodDeeds = context.goodDeeds.filter((name) => name == npc.name);
 
