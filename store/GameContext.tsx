@@ -1,13 +1,8 @@
-import { createContext, useState, useEffect } from 'react';
-import { Alert, BackHandler } from 'react-native';
+import { createContext, useState } from 'react';
 import { Event, Job } from '../models/Types';
-import useInterval from '../hooks/useInterval';
-import { getData } from '../services/DataService';
 import {
     PLAYER_CONSTANTS,
-    GAME_TEXT_CONSTANTS,
 } from '../constants/GameContansts';
-import { getRandomInt } from '../utils/random';
 
 export const GameContext = createContext({
     health: PLAYER_CONSTANTS.ZERO,
@@ -20,7 +15,7 @@ export const GameContext = createContext({
     jobs: [] as Job[],
     coursesTaken: [] as string[],
     username: '',
-    title: 'No Title Yet',
+    title: PLAYER_CONSTANTS.INITIAL_TITLE,
     gender: '',
     badDeeds: Array<string>(),
     goodDeeds: Array<string>(),
@@ -64,6 +59,7 @@ export default function GameContextProvider({ children }: Props) {
     const [gender, setGender] = useState('');
     const [goodDeeds, setGoodDeeds] = useState(new Array<string>())
     const [badDeeds, setBadDeeds] = useState(new Array<string>())
+    const [events, setEvents] = useState<Event[]>([]);
 
     const [isPause, setIsPause] = useState(true);
 
@@ -80,6 +76,8 @@ export default function GameContextProvider({ children }: Props) {
         isTakeDailyLogin: isTakeDailyLogin,
         title: title,
         gender: gender,
+        events: events,
+        setEvents: setEvents,
         setGender: setGender,
         setTitle: setTitle,
         setIsDailyLogin: setIsTakeDailyLogin,

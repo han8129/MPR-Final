@@ -11,13 +11,8 @@ import { getData } from '../services/DataService';
 import { GameContext } from '../store/GameContext';
 import LoadingScreen from './LoadingScreen';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
-
-export interface Relationship {
-    name: string;
-    desc: string;
-    maritalStatus: string;
-    work: string;
-}
+import { PARENT_INFOS } from '../data/dummy-data';
+import { Relationship } from '../models/Types';
 
 const ActivityScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -35,21 +30,6 @@ const ActivityScreen: React.FC = () => {
         []
     );
     const [isLoading, setIsLoading] = useState(true);
-
-    const relationships: Relationship[] = [
-        {
-            name: 'Robert Downey Jr.',
-            desc: 'Father',
-            maritalStatus: 'Married to Scarlett Johansson',
-            work: 'Actor for Marvel Studios',
-        },
-        {
-            name: 'Scarlett Johansson',
-            desc: 'Mother',
-            maritalStatus: 'Married to Robert Downey Jr.',
-            work: 'Actress for Marvel Studios',
-        },
-    ];
 
     useEffect(() => {
         const fetchActivitiesData = async () => {
@@ -74,7 +54,7 @@ const ActivityScreen: React.FC = () => {
     }, [selectedActivity]);
 
     const handleRelPress = (index: number) => {
-        setSelectedRelationship(relationships[index]);
+        setSelectedRelationship(PARENT_INFOS[index]);
     };
 
     const handleActivityPress = (index: number) => {
@@ -140,7 +120,7 @@ const ActivityScreen: React.FC = () => {
                 <ScrollView style={{ width: '100%' }}>
                     <SectionHeader heading='Your Parents' />
                     <ListScrollView
-                        itemList={relationships}
+                        itemList={PARENT_INFOS}
                         onPressItem={handleRelPress}
                     />
                     <SectionHeader heading='Available Activities' />

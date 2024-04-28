@@ -82,18 +82,18 @@ export default function GameLoop() {
             smarts = PLAYER_CONSTANTS.MAX_SMARTS;
         }
 
-        if (health <= 0) {
+        if (health <= PLAYER_CONSTANTS.ZERO) {
             isPause = true;
             resetGame();
             return;
         }
 
-        if (happiness < 0) {
-            happiness = 0;
+        if (happiness < PLAYER_CONSTANTS.ZERO) {
+            happiness = PLAYER_CONSTANTS.ZERO;
         }
 
-        if (smarts < 0) {
-            smarts = 0;
+        if (smarts < PLAYER_CONSTANTS.ZERO) {
+            smarts = PLAYER_CONSTANTS.ZERO;
         }
 
         // Events only occur after the age of 6
@@ -122,14 +122,13 @@ export default function GameLoop() {
 
                         continue;
                     }
-
                     validJobs.push(job);
                 }
 
                 context.setJobs(validJobs);
                 // generate a random integer from 0 to n -1
                 // 20% for an event to happen
-                if ([0].includes(getRandomInt({ min: 0, max: 4 }))) {
+                if ([0].includes(getRandomInt({ min: 0, max: PLAYER_CONSTANTS.MAX_EVENT_PERCENTAGE }))) {
                     isPause = true;
                     applyRandomEvent({health, happiness, smarts, money});
                 }
@@ -139,7 +138,7 @@ export default function GameLoop() {
             if (!isPause) {
                 // Extracting this into a standalone function does not work
                 // 10% of being approached by someone everyday
-                if ([0].includes(getRandomInt({ min: 0, max: 9 }))) {
+                if ([0].includes(getRandomInt({ min: 0, max: PLAYER_CONSTANTS.MAX_INTERACTION_PERCENTAGE }))) {
                     isPause = true;
                     const npc: NPC = getRandomElement(npcs);
                     const npcFavor = getFavor(npc);
@@ -153,18 +152,18 @@ export default function GameLoop() {
 
                     health += interaction.effect.health;
 
-                    if (health < 0) health = 0;
-                    if (health > 100) health = 100;
+                    if (health < PLAYER_CONSTANTS.ZERO) health = PLAYER_CONSTANTS.ZERO;
+                    if (health > PLAYER_CONSTANTS.MAX_HEALTH) health = PLAYER_CONSTANTS.MAX_HEALTH;
 
                     happiness += interaction.effect.happiness;
 
-                    if (happiness < 0) happiness = 0;
-                    if (happiness > 100) happiness = 100;
+                    if (happiness < PLAYER_CONSTANTS.ZERO) happiness = PLAYER_CONSTANTS.ZERO;
+                    if (happiness > PLAYER_CONSTANTS.MAX_HAPPINESS) happiness = PLAYER_CONSTANTS.MAX_HAPPINESS;
 
                     smarts += interaction.effect.smarts;
 
-                    if (smarts < 0) smarts = 0;
-                    if (smarts > 100) smarts = 100;
+                    if (smarts < PLAYER_CONSTANTS.ZERO) smarts = PLAYER_CONSTANTS.ZERO;
+                    if (smarts > PLAYER_CONSTANTS.MAX_SMARTS) smarts = PLAYER_CONSTANTS.MAX_SMARTS;
 
                     context.setHealth(health);
                     context.setHappiness(happiness);

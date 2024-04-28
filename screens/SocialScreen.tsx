@@ -1,8 +1,6 @@
 import {
-    ScrollView,
     StatusBar,
     View,
-    Modal,
     FlatList,
     Pressable,
     StyleSheet,
@@ -11,15 +9,10 @@ import {
 import Header from '../components/game/Header';
 import { useContext, useEffect, useState } from 'react';
 import { GameContext } from '../store/GameContext';
-import { MODAL_SHARED_STYLE } from '../styles/ComponentStyles';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import SectionHeader from '../components/game/SectionHeader';
-import ListScrollView from '../components/game/ListScrollView';
-import CommonModal from '../components/game/CommonModal';
 import { NPC } from '../models/Types';
 import { Color } from '../constants/Color';
-import ModalDetails from '../components/game/ModalDetails';
-import ModalButton from '../components/game/ModalButton';
 import { getData } from '../services/DataService';
 import Sizes from '../constants/Sizes';
 import ModalContentWrapper from '../components/game/ModelContentWrapper';
@@ -42,7 +35,7 @@ export default function SocialScreen() {
     }, [npc]);
 
     function closeModel() {
-        setNpc(null)
+        setNpc(null);
     }
 
     function setDeedHandler({ name, deed }: { name: string; deed: number }) {
@@ -72,7 +65,7 @@ export default function SocialScreen() {
                 <Text>Description: {npc.desc}</Text>
                 <Text>Marital Status: {npc.maritalStatus}</Text>
                 <Text>Work: {npc.work}</Text>
-                <SocialInteractions name={npc.name} setDeed={setDeedHandler}/>
+                <SocialInteractions name={npc.name} setDeed={setDeedHandler} />
             </ModalContentWrapper>
         );
 

@@ -92,6 +92,13 @@ export interface NPC {
     options: Option[];
 }
 
+export interface Relationship {
+    name: string;
+    desc: string;
+    maritalStatus: string;
+    work: string;
+}
+
 export interface NPCInteraction {
     name: string;
     favor: number;

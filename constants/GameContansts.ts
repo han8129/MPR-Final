@@ -30,6 +30,10 @@ export const PLAYER_CONSTANTS = {
 
     GOOD_DEED_WEIGHT : 0.75,
     BAD_DEED_WEIGHT : 1.0,
+
+    // percentage values
+    MAX_EVENT_PERCENTAGE: 4, // number / 0,1,2,3,4 = 20% chance
+    MAX_INTERACTION_PERCENTAGE: 50, // number / 0,1,...,50 
 };
 
 export const GAME_TEXT_CONSTANTS = {

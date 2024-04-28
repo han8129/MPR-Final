@@ -1,30 +1,8 @@
 import { useRef } from 'react';
 import ModalButton from './ModalButton';
 import { getRandomElement, getRandomInt } from '../../utils/random';
-import { UserResponse } from '../../models/Types';
+import { USER_RESPONSES } from '../../data/dummy-data';
 
-const interactions: UserResponse[] = [
-    {
-        desc: 'Give Flower',
-        deed: 1,
-    },
-    {
-        desc: 'Fist Bump',
-        deed: 0,
-    },
-    {
-        desc: 'Sucker Punch in Face',
-        deed: -1,
-    },
-    {
-        desc: 'Mocking For No Reason',
-        deed: -1,
-    },
-    {
-        desc: 'Give Complements',
-        deed: 1,
-    },
-];
 
 export default function SocialInteractions({
     setDeed,
@@ -33,14 +11,14 @@ export default function SocialInteractions({
     setDeed: ({ name, deed }: { name: string; deed: number }) => void;
     name: string;
 }) {
-    const INTERACTIONS = useRef(interactions);
+    const INTERACTIONS = useRef(USER_RESPONSES);
     const goods = INTERACTIONS.current.filter((i) => i.deed == 1);
     const bads = INTERACTIONS.current.filter((i) => i.deed == -1);
     const options = useRef(
         shuffleList([
             getRandomElement(goods),
             getRandomElement(bads),
-            getRandomElement(interactions),
+            getRandomElement(USER_RESPONSES),
         ])
     );
 
