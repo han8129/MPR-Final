@@ -58,7 +58,6 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                         navigation.navigate('ChooseGender');
                     } else {
                         navigation.navigate('Game');
-                        context.setIsPause(false);
                     }
                 }
             } catch (error) {
