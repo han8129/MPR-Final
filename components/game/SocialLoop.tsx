@@ -16,8 +16,12 @@ export default function SocialLoop() {
     useEffect(() => {fetch()}, []);
 
     useEffect(() => {
+        // if Another Event is happening do nothing
+        if (context.isPause) return;
+
         // Social Interactions May only happen after 6 yo
         if (context.days < PLAYER_CONSTANTS.DAY_IN_YEAR * 6) return;
+
         // 10% of being approached by someone everyday
         if ([0].includes(getRandomInt({ min: 0, max: 9 }))) {
             context.setIsPause(true);

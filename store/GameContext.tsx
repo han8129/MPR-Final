@@ -7,6 +7,7 @@ import {
     PLAYER_CONSTANTS,
     GAME_TEXT_CONSTANTS,
 } from '../constants/GameContansts';
+import { getRandomInt } from '../utils/random';
 
 export const GameContext = createContext({
     health: PLAYER_CONSTANTS.ZERO,
@@ -83,10 +84,6 @@ export default function GameContextProvider({ children }: Props) {
 
     useInterval(callback, PLAYER_CONSTANTS.DAY_INTERVAL, isPause, [
         days,
-        health,
-        happiness,
-        money,
-        smarts,
     ]);
 
     function callback() {
@@ -153,11 +150,10 @@ export default function GameContextProvider({ children }: Props) {
         }
 
         // Events only occur after the age of 6
-        if (currentDays > 7 * 12 * PLAYER_CONSTANTS.DAY_IN_MONTH) {
+        if (currentDays > 6 * PLAYER_CONSTANTS.DAY_IN_YEAR) {
             // Events may occur at the start of the month
-            if (currentDayInMonth > 28) {
+            if (currentDayInMonth > PLAYER_CONSTANTS.DAY_IN_MONTH - 2) {
                 // Each month a job will generate money
-
                 for (const job of jobs) {
                     currentMoney += job.effect.money;
                     currentHealth += job.effect.health;
@@ -184,11 +180,7 @@ export default function GameContextProvider({ children }: Props) {
                 setJobs(validJobs);
                 // generate a random integer from 0 to n -1
                 // 20% for an event to happen
-                if (
-                    [0].includes(Math.floor(Math.random() * 5)) &&
-                    days > 6 * PLAYER_CONSTANTS.DAY_IN_YEAR
-                ) {
-                    setIsPause(true);
+                if ([0].includes(getRandomInt({min: 0, max: 4}))) {
                     applyRandomEvent();
                 }
             }
@@ -235,6 +227,7 @@ export default function GameContextProvider({ children }: Props) {
     }
 
     function applyRandomEvent() {
+        setIsPause(true);
         const randIndex = Math.floor(Math.random() * events.length);
         const event = events[randIndex];
         Alert.alert(
