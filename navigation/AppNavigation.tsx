@@ -15,42 +15,24 @@ import DailyLoginScreen from '../screens/DailyLoginScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { Color } from '../constants/Color';
 import QuizScreen from '../screens/QuizScreen';
+import SocialScreen from '../screens/SocialScreen';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
     return (
-        <Stack.Navigator initialRouteName='Login'>
-            <Stack.Screen
-                name='Login'
-                options={{ headerShown: false }}
-                component={LoginScreen}
-            />
-            <Stack.Screen
-                name='SignUp'
-                options={{ headerShown: false }}
-                component={SignUpScreen}
-            />
-            <Stack.Screen
-                name='Game'
-                options={{ headerShown: false }}
-                component={GameNavigation}
-            />
-            <Stack.Screen
-                name='ChooseGender'
-                options={{ headerShown: false }}
-                component={ChooseGenderScreen}
-            />
-            <Stack.Screen
-                name='DailyLogin'
-                options={{ headerShown: false }}
-                component={DailyLoginScreen}
-            />
-            <Stack.Screen
-                name='QuizScreen'
-                options={{ headerShown: false }}
-                component={QuizScreen}
-            />
+        <Stack.Navigator
+            initialRouteName='Login'
+            screenOptions={{
+                headerShown: false,
+            }}
+        >
+            <Stack.Screen name='Login' component={LoginScreen} />
+            <Stack.Screen name='SignUp' component={SignUpScreen} />
+            <Stack.Screen name='Game' component={GameNavigation} />
+            <Stack.Screen name='ChooseGender' component={ChooseGenderScreen} />
+            <Stack.Screen name='DailyLogin' component={DailyLoginScreen} />
+            <Stack.Screen name='QuizScreen' component={QuizScreen} />
         </Stack.Navigator>
     );
 };
@@ -82,7 +64,7 @@ const GameNavigation = () => {
                     headerShown: false,
                 }}
             />
-            
+
             <Tabs.Screen
                 name='Career'
                 component={CareerScreen}
@@ -96,11 +78,26 @@ const GameNavigation = () => {
             />
             <Tabs.Screen
                 name='Social'
-                component={ActivityScreen}
+                component={SocialScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons
                             name='share-social'
+                            color={color}
+                            size={size}
+                        />
+                    ),
+                    tabBarActiveTintColor: Color.red,
+                    headerShown: false,
+                }}
+            />
+            <Tabs.Screen
+                name='Activity'
+                component={ActivityScreen}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons
+                            name='golf'
                             color={color}
                             size={size}
                         />

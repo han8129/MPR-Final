@@ -1,7 +1,7 @@
 import { Player, User } from '../models/Types';
 import { getDatabase, ref, set, get, update } from 'firebase/database'; // Import necessary functions
 
-import app from '../config/Firebase';
+import app from '../config/firebase';
 
 const db = getDatabase(app);
 
@@ -60,11 +60,15 @@ export const Login = async (
         let foundUser: User | null = null;
 
         userSnapshot.forEach((childSnapshot) => {
-            const user = childSnapshot.val();
+            const user: User = childSnapshot.val();
             if (user.username === username && user.password === password) {
                 if (user.player.jobs == undefined) {
                     user.player.jobs = [];
                 }
+
+                if (user.player.badDeeds == undefined) user.player.badDeeds = [];
+                if (user.player.goodDeeds == undefined) user.player.goodDeeds = [];
+
                 foundUser = user;
                 return true; // Stop looping
             }

@@ -59,6 +59,7 @@ export const MODAL_SHARED_STYLE = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
         fontWeight: 'bold',
+        textAlign: 'center',
     },
     buttonDiv: {
         alignItems: 'center',

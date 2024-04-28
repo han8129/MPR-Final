@@ -1,5 +1,5 @@
 import { getDatabase, ref, get } from 'firebase/database';
-import app from '../config/Firebase';
+import app from '../config/firebase';
 
 const db = getDatabase(app);
 

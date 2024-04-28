@@ -69,7 +69,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     useEffect(() => {
-        context.setIsPause(false);
         let title = context.title;
         if (context.jobs.length > 0) {
             title = ''
@@ -89,8 +88,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     ]);
 
     useEffect(() => {
+
         setTimeout(() => {
             setIsLoading(false);
+            context.setIsPause(false);
         }, 2000);
     }, []);
 
@@ -108,8 +109,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     };
 
     const toggleExitModal = () => {
-        setIsExitModalOpened(true);
         context.setIsPause(true);
+        setIsExitModalOpened(true);
     };
 
     if (isLoading) {
