@@ -11,6 +11,7 @@ import { User } from '../models/Types';
 import { BottomNavText } from '../components/auth/BottomNavText';
 import { AUTH_STYLES } from '../styles/AuthStyles';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
+import { PLAYER_CONSTANTS } from '../constants/GameContansts';
 
 interface Props {
     navigation: any;
@@ -42,16 +43,18 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                 username: email,
                 password: password,
                 player: {
-                    gender: '',
-                    days: 0,
-                    health: 100,
-                    happiness: 10,
-                    money: 5,
-                    smarts: 10,
+                    gender: PLAYER_CONSTANTS.INITIAL_GENDER,
+                    days: PLAYER_CONSTANTS.INITIAL_DAY,
+                    health: PLAYER_CONSTANTS.INITIAL_HEALTH,
+                    happiness: PLAYER_CONSTANTS.INITIAL_HAPPINESS,
+                    money: PLAYER_CONSTANTS.INITIAL_MONEY,
+                    smarts: PLAYER_CONSTANTS.INITIAL_SMARTS,
                     coursesTaken: [],
                     jobs: [],
                     activities: [],
-                    title: 'No Title Yet'
+                    goodDeeds: [],
+                    badDeeds: [],
+                    title: PLAYER_CONSTANTS.INITIAL_TITLE,
                 },
             };
 
