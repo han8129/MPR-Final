@@ -22,7 +22,7 @@ export default function GameLoop() {
         fetch();
     }, []);
 
-    useInterval(callback, 20, context.isPause, [
+    useInterval(callback, PLAYER_CONSTANTS.DAY_INTERVAL, context.isPause, [
         context.days,
         context.health,
         context.smarts,
@@ -165,8 +165,6 @@ export default function GameLoop() {
 
                     if (smarts < 0) smarts = 0;
                     if (smarts > 100) smarts = 100;
-
-                    console.log(health);
 
                     context.setHealth(health);
                     context.setHappiness(happiness);
