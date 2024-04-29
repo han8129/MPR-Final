@@ -39,7 +39,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ value, color }) => {
             <View style={[styles.progressBar]}>
                 <View style={styles.progress} />
             </View>
-            <Text style={styles.progressText}>{`${value}%`}</Text>
+            <Text style={styles.progressText}>{`${value.toFixed(2)}%`}</Text>
         </>
     );
 };

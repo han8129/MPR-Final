@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, BackHandler } from 'react-native';
-import { Job, Player } from '../../models/Types';
+import { Player } from '../../models/Types';
 import { savePlayerData } from '../../services/PlayerService';
 import { GameContext } from '../../store/GameContext';
 import ModalButton from './ModalButton';
@@ -30,7 +30,7 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
             jobs: context.jobs || [],
             activities: context.activities || [],
             goodDeeds: context.goodDeeds || [],
-            badDeeds: context.badDeeds || []
+            badDeeds: context.badDeeds || [],
         } as unknown as Player);
 
         if (res) {
@@ -68,10 +68,7 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
                 Current Smarts: {context.smarts}%
             </Text>
             <Text style={MODAL_SHARED_STYLE.detail}>
-                Jobs Done:{' '}
-                {context.jobs.length > 0
-                    ? context.jobs.map((job: Job) => job.name)
-                    : 'None'}
+                Jobs Done: {context.jobs.length > 0 ? context.jobs : 'None'}
             </Text>
             <Text style={MODAL_SHARED_STYLE.detail}>
                 Courses Completed:{' '}
