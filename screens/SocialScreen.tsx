@@ -5,6 +5,7 @@ import {
     Pressable,
     Text,
     Alert,
+    ScrollView,
 } from 'react-native';
 import Header from '../components/game/Header';
 import { useContext, useEffect, useRef, useState } from 'react';
@@ -16,7 +17,11 @@ import { getData } from '../services/DataService';
 import ModalContentWrapper from '../components/game/ModelContentWrapper';
 import SocialInteractions from '../components/game/SocialIntercations';
 import { SCREEN } from '../styles/SocialScreenStyles';
-import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
+import {
+    GAME_TEXT_CONSTANTS,
+    PLAYER_CONSTANTS,
+} from '../constants/GameConstants';
+import { SCROLL_VIEW_STYLES } from '../styles/ComponentStyles';
 
 export default function SocialScreen() {
     const context = useContext(GameContext);
@@ -54,19 +59,17 @@ export default function SocialScreen() {
                 </Text>
             </View>
         ) : (
-            <View style={styles.list}>
-                <FlatList
-                    data={availableNpcs}
-                    renderItem={({ item, index }) => (
+                <ScrollView>
+                    {availableNpcs.map((item, index) => (
                         <Item
+                            key={item.name}
                             npc={item}
                             onPress={() => {
                                 setNpc(availableNpcs[index]);
                             }}
                         />
-                    )}
-                />
-            </View>
+                    ))}
+                </ScrollView>
         );
 
     useEffect(() => {}, [context.days]);
@@ -100,28 +103,14 @@ export default function SocialScreen() {
     return (
         <>
             <StatusBar hidden={true} />
-            <View>
-                <Header
-                    username={context.username}
-                    userTitle={context.title}
-                    balance={context.money}
-                />
-                <SectionHeader heading={GAME_TEXT_CONSTANTS.HEADING_SOCIAL_SECTION} />
-                <View style={SCREEN.list}>
-                    <FlatList
-                        data={npcList}
-                        renderItem={({ item }) => (
-                            <Item
-                                npc={item}
-                                onPress={() => {
-                                    setNpc(item);
-                                }}
-                            />
-                        )}
-                    />
-                </View>
-                {modal}
-            </View>
+            <Header
+                username={context.username}
+                userTitle={context.title}
+                balance={context.money}
+            />
+            <SectionHeader
+                heading={GAME_TEXT_CONSTANTS.HEADING_SOCIAL_SECTION}
+            />
             {content}
             {modal}
         </>

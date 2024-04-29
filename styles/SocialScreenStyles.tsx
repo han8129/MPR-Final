@@ -9,7 +9,7 @@ export const SCREEN = StyleSheet.create({
         borderBottomWidth: 1,
     },
     type: {
-        fontSize: Sizes.lg,
+        fontSize: Sizes.md,
         fontWeight: 'bold',
         color: Color.red,
     },

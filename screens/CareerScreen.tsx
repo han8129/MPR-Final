@@ -9,6 +9,7 @@ import { GameContext } from '../store/GameContext';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import ModalContentWrapper from '../components/game/ModelContentWrapper';
 import ModalButton from '../components/game/ModalButton';
+import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 const CareerScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -52,10 +53,11 @@ const CareerScreen: React.FC = () => {
         if (context.jobs.length > 0) {
             const type = selectedJob.type;
 
-            const isDuplicated = context.jobs
-                .map((name) => context.careers.find((job) => job.name == name))
-                .map((job) => (job == undefined ? '' : job.type))
-                .includes(type);
+            const jobs = context.careers.filter((career) =>
+                context.jobs.includes(career.name)
+            );
+
+            const isDuplicated = jobs.map((job) => job.type).includes(type);
 
             if (isDuplicated) {
                 Alert.alert(
@@ -127,7 +129,9 @@ const CareerScreen: React.FC = () => {
                     balance={context.money}
                 />
                 <ScrollView style={GLOBAL_STYLES.maxWidth}>
-                    <SectionHeader heading={GAME_TEXT_CONSTANTS.HEADING_JOB_SECTION} />
+                    <SectionHeader
+                        heading={GAME_TEXT_CONSTANTS.HEADING_JOB_SECTION}
+                    />
                     <ListScrollView
                         itemList={availableJobs}
                         onPressItem={handleJobPress}

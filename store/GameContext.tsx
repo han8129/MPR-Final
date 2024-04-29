@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { Event, Job } from '../models/Types';
+import { Event, Job, NPC } from '../models/Types';
 import { PLAYER_CONSTANTS } from '../constants/GameConstants';
 
 export const GameContext = createContext({
@@ -60,8 +60,6 @@ export default function GameContextProvider({ children }: Props) {
     const [isTakeDailyLogin, setIsTakeDailyLogin] = useState(false);
     const [title, setTitle] = useState(''); // Initialize title as an empty string
     const [gender, setGender] = useState('');
-    const [goodDeeds, setGoodDeeds] = useState(new Array<string>());
-    const [badDeeds, setBadDeeds] = useState(new Array<string>());
     const [goodDeeds, setGoodDeeds] = useState(new Array<string>());
     const [badDeeds, setBadDeeds] = useState(new Array<string>());
     const [events, setEvents] = useState<Event[]>([]);

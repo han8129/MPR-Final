@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Color } from '../constants/Color';
 import { DIMENSIONS } from '../constants/GameConstants';
+import Sizes from '../constants/Sizes';
 
 export const SCREEN_STYLES = StyleSheet.create({
     image: {

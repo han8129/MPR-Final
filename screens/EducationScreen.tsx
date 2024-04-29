@@ -20,13 +20,11 @@ interface Props {
 const EducationScreen: React.FC<Props> = ({ navigation }) => {
     const context = React.useContext(GameContext);
     const EDUCATIONS = useRef(new Array<Education>());
-
-    const age = Math.floor(context.days / 360);
-
     const [selectedEducation, setSelectedEducation] =
         useState<Education | null>();
     const [isLoading, setIsLoading] = useState(true);
 
+    const age = Math.floor(context.days / 360);
     const availableEduction = EDUCATIONS.current.filter(
         (edu) =>
             edu.ageNeeded <= age &&
@@ -35,12 +33,14 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
 
     useEffect(() => {
         const fetchEducationData = async () => {
+            setIsLoading(true);
             try {
                 // Get the data from Firebase
                 EDUCATIONS.current = await getData<Education>('education');
-                setIsLoading(false);
             } catch (error) {
-                console.error(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, error);
+                Alert.alert(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA);
+            } finally {
+                setIsLoading(false);
             }
         };
         // Call the fetchEducationData function
