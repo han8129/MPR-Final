@@ -13,7 +13,7 @@ export interface Player {
     happiness: number;
     smarts: number;
     coursesTaken: string[];
-    jobs: Job[];
+    jobs: string[];
     activities: string[];
     goodDeeds: string[];
     badDeeds: string[]

@@ -1,53 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Alert } from 'react-native';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { View, ScrollView, Alert, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
 import SectionHeader from '../components/game/SectionHeader';
 import ListScrollView from '../components/game/ListScrollView';
 import { Job } from '../models/Types';
-import { getData } from '../services/DataService';
 import { GameContext } from '../store/GameContext';
-import LoadingScreen from './LoadingScreen';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
-import CommonModal from '../components/game/CommonModal';
-import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
+import ModalContentWrapper from '../components/game/ModelContentWrapper';
+import ModalButton from '../components/game/ModalButton';
 
 const CareerScreen: React.FC = () => {
     const context = React.useContext(GameContext);
-    const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+    const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+    const [showModal, setShowModal] = useState(false);
+    useEffect(() => {}, [context.days]);
+    useEffect(
+        () => setShowModal(showModal == null ? false : true),
+        [showModal]
+    );
 
-    const [selectedJob, setSelectedJob] = useState<Job | null>();
-
-    const age = Math.floor(context.days / 360);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchjobData = async () => {
-            try {
-                // Get the data from Firebase
-                const jobData = await getData<Job>('job');
-                const filteredJobs = jobData.filter(
-                    (job) => job.ageNeeded <= age
-                );
-                setFilteredJobs(filteredJobs);
-                setIsLoading(false);
-            } catch (error) {
-                console.error(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, error);
-            }
-        };
-
-        // Call the fetchjobData function
-        fetchjobData();
-    }, [context.days]);
+    const availableJobs = context.careers.filter(
+        (job) => job.ageNeeded <= Math.floor(context.days / 360)
+    );
 
     const handleJobPress = (index: number) => {
-        setSelectedJob(filteredJobs[index]);
+        setSelectedJob(availableJobs[index]);
     };
 
     const applyJob = () => {
         if (selectedJob) {
             if (validateSelectedJob(selectedJob)) {
-                context.setJobs([...(context.jobs || []), selectedJob]);
+                context.setJobs([...context.jobs, selectedJob.name]);
                 context.setTitle(selectedJob.name);
 
                 Alert.alert(
@@ -68,7 +52,10 @@ const CareerScreen: React.FC = () => {
         if (context.jobs.length > 0) {
             const type = selectedJob.type;
 
-            const isDuplicated = context.jobs.find((job) => job.type === type);
+            const isDuplicated = context.jobs
+                .map((name) => context.careers.find((job) => job.name == name))
+                .map((job) => (job == undefined ? '' : job.type))
+                .includes(type);
 
             if (isDuplicated) {
                 Alert.alert(
@@ -115,7 +102,7 @@ const CareerScreen: React.FC = () => {
     const quitJob = () => {
         if (selectedJob) {
             context.setJobs(
-                context.jobs.filter((job: Job) => job.name !== selectedJob.name)
+                context.jobs.filter((name) => name !== selectedJob.name)
             );
             Alert.alert(
                 GAME_TEXT_CONSTANTS.JOB_TITLE_QUIT,
@@ -125,9 +112,10 @@ const CareerScreen: React.FC = () => {
         }
     };
 
-    if (isLoading) {
-        return <LoadingScreen />;
-    }
+    let button = <ModalButton onPress={applyJob} buttonText='Apply' />;
+    if (selectedJob != null)
+        if (context.jobs.includes(selectedJob.name))
+            button = <ModalButton onPress={quitJob} buttonText='Quit' />;
 
     return (
         <>
@@ -141,27 +129,48 @@ const CareerScreen: React.FC = () => {
                 <ScrollView style={GLOBAL_STYLES.maxWidth}>
                     <SectionHeader heading={GAME_TEXT_CONSTANTS.HEADING_JOB_SECTION} />
                     <ListScrollView
-                        itemList={filteredJobs}
+                        itemList={availableJobs}
                         onPressItem={handleJobPress}
                     />
                 </ScrollView>
-                <CommonModal
-                    modalObject={selectedJob}
-                    closeModal={() => setSelectedJob(null)}
-                    handlePress={
-                        context.jobs.includes(selectedJob as never)
-                            ? quitJob
-                            : applyJob
-                    }
-                    buttonText={
-                        context.jobs.includes(selectedJob as never)
-                            ? GAME_TEXT_CONSTANTS.JOB_QUIT_BUTTON_TEXT
-                            : GAME_TEXT_CONSTANTS.JOB_APPLY_BUTTON_TEXT
-                    }
-                />
             </View>
+            <Modal
+                showModal={showModal}
+                job={selectedJob}
+                closeModal={() => setSelectedJob(null)}
+                button={button}
+            />
         </>
     );
 };
 
 export default CareerScreen;
+
+interface ModalProps {
+    showModal: boolean;
+    job: Job | null;
+    closeModal: () => void;
+    button: ReactNode;
+}
+function Modal({ showModal, job, closeModal, button }: ModalProps) {
+    if (job == null) return <></>;
+
+    return (
+        <ModalContentWrapper
+            isOpened={showModal}
+            title={job.name}
+            closeModal={closeModal}
+        >
+            <Text>Healt Effect: {job.effect.health}</Text>
+            <Text>Happiness Effect: {job.effect.happiness}</Text>
+            <Text>Smarts Effect: {job.effect.smarts}</Text>
+            <Text>Monthly Rate: {job.effect.money}</Text>
+            <Text>Requirements:</Text>
+            <Text> Age: {job.ageNeeded}</Text>
+            <Text> Health: {job.requirement.health}</Text>
+            <Text> Smarts: {job.requirement.smarts}</Text>
+            <Text> Education: {job.requirement.education}</Text>
+            {button}
+        </ModalContentWrapper>
+    );
+}
