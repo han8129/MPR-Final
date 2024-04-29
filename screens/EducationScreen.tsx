@@ -38,7 +38,7 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
                 // Get the data from Firebase
                 EDUCATIONS.current = await getData<Education>('education');
             } catch (error) {
-                Alert.alert(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA);
+                Alert.alert(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA_MESSAGE);
             } finally {
                 setIsLoading(false);
             }
