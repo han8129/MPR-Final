@@ -10,7 +10,7 @@ export const SCREEN_STYLES = StyleSheet.create({
         height: 40,
         width: 80,
         position: 'absolute',
-        borderRadius: 10,
+        borderRadius: Sizes.md,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -27,19 +27,20 @@ export const SCREEN_STYLES = StyleSheet.create({
     dailyText: {
         color: Color.white,
         fontWeight: 'bold',
-        fontSize: 12,
+        fontSize: Sizes.md,
     },
     skipAge6Button: {
         position: 'absolute',
         top: 0.57 * DIMENSIONS.HEIGHT,
         left: 30,
         backgroundColor: Color.red,
-        padding: 10,
-        borderRadius: 10,
+        padding: Sizes.md,
+        borderRadius: Sizes.md,
     },
     skipAge6Text: {
         color: Color.white,
         fontWeight: 'bold',
-        fontSize: 14,
+        fontSize: Sizes.lg,
     },
 });
+

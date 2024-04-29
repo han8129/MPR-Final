@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Color } from '../constants/Color';
+import Sizes from '../constants/Sizes';
 
 export const SCREEN = StyleSheet.create({
     questionCont: {
@@ -8,27 +9,27 @@ export const SCREEN = StyleSheet.create({
         flex: 1,
     },
     heading: {
-        fontSize: 26,
+        fontSize: Sizes.xxl,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: Sizes.xl,
     },
     question: {
-        fontSize: 18,
-        marginBottom: 20,
+        fontSize: Sizes.lg,
+        marginBottom: Sizes.xl,
         textAlign: 'center',
     },
     option: {
-        padding: 10,
-        margin: 5,
-        borderRadius: 5,
+        padding: Sizes.md,
+        margin: Sizes.sm,
+        borderRadius: Sizes.sm,
         backgroundColor: Color.lightGrey,
     },
     optionText: {
-        fontSize: 16,
+        fontSize: Sizes.lg,
     },
     progressCont: {
-        marginBottom: 20,
+        marginBottom: Sizes.xl,
         width: '80%',
-        height: 20,
+        height: Sizes.xl,
     },
 });

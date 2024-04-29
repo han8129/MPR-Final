@@ -1,17 +1,18 @@
 import { StyleSheet } from 'react-native';
 import { Color } from '../constants/Color';
+import Sizes from '../constants/Sizes';
 
 export const AGE_STATUS_STYLES = StyleSheet.create({
     container: {
         alignItems: 'center',
-        marginTop: 16,
+        marginTop: Sizes.lg,
         justifyContent: 'center',
         width: '80%',
     },
     ageText: {
-        fontSize: 20,
+        fontSize: Sizes.xl,
         fontWeight: 'bold',
-        marginBottom: 10,
+        marginBottom: Sizes.md,
     },
 });
 
@@ -24,40 +25,40 @@ export const MODAL_SHARED_STYLE = StyleSheet.create({
     },
     modalContent: {
         backgroundColor: '#fff',
-        padding: 20,
-        borderRadius: 10,
-        elevation: 5,
+        padding: Sizes.xl,
+        borderRadius: Sizes.md,
+        elevation: Sizes.sm,
         width: '80%',
     },
     modalHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: 10,
+        marginBottom: Sizes.md,
     },
     modalTitle: {
-        fontSize: 20,
+        fontSize: Sizes.xl,
         fontWeight: 'bold',
     },
     modalDescription: {
-        fontSize: 16,
-        marginBottom: 10,
+        fontSize: Sizes.lg,
+        marginBottom: Sizes.md,
     },
     detail: {
-        fontSize: 14,
-        marginBottom: 5,
+        fontSize: Sizes.lg,
+        marginBottom: Sizes.sm,
     },
     button: {
         backgroundColor: Color.red,
-        padding: 10,
-        borderRadius: 5,
+        padding: Sizes.md,
+        borderRadius: Sizes.sm,
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: Sizes.md,
         width: '50%',
     },
     buttonText: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: Sizes.lg,
         fontWeight: 'bold',
         textAlign: 'center',
     },
@@ -73,7 +74,7 @@ export const PLAYER_HEADER_STYLES = StyleSheet.create({
         backgroundColor: '#E2E8F0',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 20,
+        paddingHorizontal: Sizes.xl,
         flexDirection: 'row',
     },
     leftCont: {
@@ -84,14 +85,14 @@ export const PLAYER_HEADER_STYLES = StyleSheet.create({
         alignItems: 'flex-end',
     },
     username: {
-        fontSize: 18,
+        fontSize: Sizes.xl,
         fontWeight: 'bold',
     },
     userTitle: {
-        fontSize: 14,
+        fontSize: Sizes.xl,
     },
     balance: {
-        fontSize: 16,
+        fontSize: Sizes.lg,
         fontWeight: 'bold',
     },
 });
@@ -100,12 +101,12 @@ export const SCROLL_VIEW_STYLES = StyleSheet.create({
     item: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 16,
+        padding: Sizes.lg,
         borderBottomColor: '#ccc',
         borderBottomWidth: 1,
     },
     progressText: {
-        fontSize: 12,
+        fontSize: Sizes.md,
         fontWeight: 'bold',
         color: Color.red,
         position: 'absolute',
@@ -113,21 +114,21 @@ export const SCROLL_VIEW_STYLES = StyleSheet.create({
         right: 0,
     },
     title: {
-        fontSize: 16,
+        fontSize: Sizes.lg,
         fontWeight: 'bold',
     },
     description: {
-        fontSize: 14,
-        marginTop: 8,
+        fontSize: Sizes.lg,
+        marginTop: Sizes.md,
     },
     emptyContainer: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
-        padding: 20,
+        padding: Sizes.xl,
     },
     emptyText: {
-        fontSize: 16,
+        fontSize: Sizes.lg,
         color: Color.black,
     },
     itemDiv: {
@@ -148,7 +149,7 @@ export const PLAYER_STATS_STYLES = StyleSheet.create({
         width: '80%',
         justifyContent: 'center',
         height: '100%',
-        marginVertical: 10,
+        marginVertical: Sizes.md,
     },
     stat: {
         justifyContent: 'space-around',
@@ -171,9 +172,9 @@ export const SECTION_HEADER_STYLES = StyleSheet.create({
         width: '100%',
     },
     heading: {
-        fontSize: 20,
+        fontSize: Sizes.xl,
         fontWeight: 'bold',
-        padding: 8,
+        padding: Sizes.md,
         textAlign: 'center',
         color: '#fff',
     },
