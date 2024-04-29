@@ -41,7 +41,7 @@ const ActivityScreen: React.FC = () => {
                 ACTIVITIES.current = await getData<Activity>('activity');
                 setIsLoading(false);
             } catch (error) {
-                console.error(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, error);
+                Alert.alert(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA_MESSAGE);
             }
         };
 

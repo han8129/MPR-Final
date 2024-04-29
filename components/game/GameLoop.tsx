@@ -216,7 +216,7 @@ export default function GameLoop() {
             setInteractions(await getData<NPCInteraction>('npc interaction'));
             setEvents(await getData<Event>('event'));
         } catch (error) {
-            Alert.alert('Error connecting to the server', 'Please try later');
+            Alert.alert(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA_MESSAGE);
         }
     }
 

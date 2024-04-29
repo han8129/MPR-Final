@@ -51,6 +51,7 @@ export const GAME_TEXT_CONSTANTS = {
     WARNING_EXIT_APP: 'Are you sure you want to exit the app?',
 
     ERROR_FETCHING_DATA: 'Error fetching data',
+    ERROR_FETCHING_DATA_MESSAGE: 'Please try later!',
     ERROR_ACTIVITY_AGE: 'You are not old enough to join for this activity',
     ERROR_ACTIVITY_MONEY: 'You do not have enough money to join this activity',
 
