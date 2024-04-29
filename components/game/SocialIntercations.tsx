@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import ModalButton from './ModalButton';
-import { getRandomElement, getRandomInt } from '../../utils/random';
+import { getRandomElement, shuffleList } from '../../utils/random';
 import { USER_RESPONSES } from '../../data/dummy-data';
 
 
@@ -38,19 +38,4 @@ export default function SocialInteractions({
             ))}
         </>
     );
-}
-
-// Already Declared at utils/random, however importing it results in "function
-// is undefined"
-function shuffleList(list: any[]): any[] {
-    const copy = [...list];
-
-    for (let i = copy.length - 1; i > 0; i--) {
-        const j = getRandomInt({ min: 0, max: i });
-        const temp = copy[i];
-        copy[i] = copy[j];
-        copy[j] = temp;
-    }
-
-    return copy;
 }
