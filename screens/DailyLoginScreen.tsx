@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Header from '../components/game/Header';
 import { GameContext } from '../store/GameContext';
 import ModalButton from '../components/game/ModalButton';
 import { SCREEN_STYLES } from '../styles/DailyLoginStyles';
+import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 interface Props {
     navigation: any;
@@ -21,7 +22,7 @@ const DailyLoginScreen: React.FC<Props> = ({ navigation }) => {
 
     const handleTakeDailyLogin = () => {
         if (context.isTakeDailyLogin) {
-            Alert.alert('You have already taken the daily login money');
+            Alert.alert(GAME_TEXT_CONSTANTS.WARNING_TITLE_DAILY_LOGIN);
         } else {
             context.setMoney(context.money + moneyPerDay);
             context.setIsDailyLogin(true);
@@ -46,14 +47,14 @@ const DailyLoginScreen: React.FC<Props> = ({ navigation }) => {
             </TouchableOpacity>
             <View style={SCREEN_STYLES.itemCont}>
                 <View style={SCREEN_STYLES.dayItem}>
-                    <Text style={SCREEN_STYLES.dayText}>{'Daily Prize'}</Text>
+                    <Text style={SCREEN_STYLES.dayText}>Daily Prize</Text>
                     <Text style={SCREEN_STYLES.moneyText}>${moneyPerDay}</Text>
                 </View>
             </View>
 
             <ModalButton
                 onPress={handleTakeDailyLogin}
-                buttonText='Take Daily Login'
+                buttonText={GAME_TEXT_CONSTANTS.TAKE_DAILY_LOGIN_BUTTON_TEXT}
             />
         </View>
     );

@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Color } from '../../constants/Color';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { BOTTOM_NAV_STYLES } from '../../styles/AuthStyles';
 
 interface BottomNavTextProps {

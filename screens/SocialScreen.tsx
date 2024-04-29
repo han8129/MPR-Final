@@ -3,7 +3,6 @@ import {
     View,
     FlatList,
     Pressable,
-    StyleSheet,
     Text,
 } from 'react-native';
 import Header from '../components/game/Header';
@@ -12,11 +11,11 @@ import { GameContext } from '../store/GameContext';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import SectionHeader from '../components/game/SectionHeader';
 import { NPC } from '../models/Types';
-import { Color } from '../constants/Color';
 import { getData } from '../services/DataService';
-import Sizes from '../constants/Sizes';
 import ModalContentWrapper from '../components/game/ModelContentWrapper';
 import SocialInteractions from '../components/game/SocialIntercations';
+import { SCREEN } from '../styles/SocialScreenStyles';
+import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 export default function SocialScreen() {
     const context = useContext(GameContext);
@@ -78,8 +77,8 @@ export default function SocialScreen() {
                     userTitle={context.title}
                     balance={context.money}
                 />
-                <SectionHeader heading='Social' />
-                <View style={styles.list}>
+                <SectionHeader heading={GAME_TEXT_CONSTANTS.HEADING_SOCIAL_SECTION} />
+                <View style={SCREEN.list}>
                     <FlatList
                         data={npcList}
                         renderItem={({ item }) => (
@@ -101,40 +100,13 @@ export default function SocialScreen() {
 function Item({ npc, onPress }: { npc: NPC; onPress: () => void }) {
     return (
         <Pressable onPress={onPress}>
-            <View style={[styles.item, GLOBAL_STYLES.flexColumn]}>
-                <View style={[GLOBAL_STYLES.flexRow, styles.cardHeader]}>
-                    <Text style={styles.title}>{npc.name}</Text>
-                    <Text style={styles.type}>{npc.relationshipType}</Text>
+            <View style={[SCREEN.item, GLOBAL_STYLES.flexColumn]}>
+                <View style={[GLOBAL_STYLES.flexRow, SCREEN.cardHeader]}>
+                    <Text style={SCREEN.title}>{npc.name}</Text>
+                    <Text style={SCREEN.type}>{npc.relationshipType}</Text>
                 </View>
-                <Text style={styles.description}>{npc.desc}</Text>
+                <Text style={SCREEN.description}>{npc.desc}</Text>
             </View>
         </Pressable>
     );
 }
-
-const styles = StyleSheet.create({
-    item: {
-        padding: Sizes.lg,
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1,
-    },
-    type: {
-        fontSize: Sizes.lg,
-        fontWeight: 'bold',
-        color: Color.red,
-    },
-    title: {
-        fontSize: Sizes.lg,
-        fontWeight: 'bold',
-    },
-    description: {
-        fontSize: Sizes.lg,
-        marginTop: Sizes.md,
-    },
-    list: {
-        height: '75%',
-    },
-    cardHeader: {
-        justifyContent: 'space-between',
-    },
-});

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Alert } from 'react-native';
-import { Color } from '../constants/Color';
+import { View, ScrollView, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
 import SectionHeader from '../components/game/SectionHeader';
@@ -12,6 +11,7 @@ import CommonModal from '../components/game/CommonModal';
 import LoadingScreen from './LoadingScreen';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import { NavigationProp } from '@react-navigation/native';
+import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 interface Props {
     navigation: NavigationProp<any>; // Define navigation prop type
@@ -45,7 +45,7 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
                 setAvailableEducation(filteredEdus);
                 setIsLoading(false);
             } catch (error) {
-                console.error('Error fetching education data:', error);
+                console.error(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, error);
             }
         };
         // Call the fetchEducationData function
@@ -60,7 +60,7 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
         if (selectedEducation) {
             if (age < selectedEducation.ageNeeded) {
                 Alert.alert(
-                    'You are not old enough to take this course',
+                    GAME_TEXT_CONSTANTS.COURSE_TITLE_FAILED,
                     'You must be at least ' +
                         selectedEducation.ageNeeded +
                         ' years old to take this course'
@@ -70,7 +70,7 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
 
             if (context.money < Math.abs(selectedEducation.effect.money)) {
                 Alert.alert(
-                    'You do not have enough money to take this course',
+                    GAME_TEXT_CONSTANTS.COURSE_TITLE_FAILED,
                     'You need at least $' +
                         Math.abs(selectedEducation.effect.money) +
                         ' to take this course'
@@ -85,7 +85,7 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
                 )
             ) {
                 Alert.alert(
-                    'You do not have the prerequisite for this course',
+                    GAME_TEXT_CONSTANTS.COURSE_TITLE_FAILED,
                     'You must take ' +
                         selectedEducation.prerequisite +
                         ' before you can take this course'
@@ -112,7 +112,9 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
                     balance={context.money}
                 />
                 <ScrollView style={GLOBAL_STYLES.maxWidth}>
-                    <SectionHeader heading='Available Education' />
+                    <SectionHeader
+                        heading={GAME_TEXT_CONSTANTS.HEADING_EDUCATION_SECTION}
+                    />
                     <ListScrollView
                         itemList={availableEducation}
                         onPressItem={handleEduPress}
@@ -122,7 +124,7 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
                     modalObject={selectedEducation}
                     closeModal={() => setSelectedEducation(null)}
                     handlePress={handleTake}
-                    buttonText='Take Course'
+                    buttonText={GAME_TEXT_CONSTANTS.TAKE_COURSE_BUTTON_TEXT}
                 />
             </View>
         </>

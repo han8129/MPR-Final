@@ -10,6 +10,7 @@ import { GameContext } from '../store/GameContext';
 import LoadingScreen from './LoadingScreen';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import CommonModal from '../components/game/CommonModal';
+import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 const CareerScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -31,7 +32,7 @@ const CareerScreen: React.FC = () => {
                 setFilteredJobs(filteredJobs);
                 setIsLoading(false);
             } catch (error) {
-                console.error('Error fetching job data:', error);
+                console.error(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, error);
             }
         };
 
@@ -50,7 +51,7 @@ const CareerScreen: React.FC = () => {
                 context.setTitle(selectedJob.name);
 
                 Alert.alert(
-                    'Job Taken',
+                    GAME_TEXT_CONSTANTS.JOB_TITLE_SUCCESS,
                     'You have successfully taken the job: ' +
                         selectedJob.name +
                         ' and earned $' +
@@ -85,7 +86,7 @@ const CareerScreen: React.FC = () => {
             )
         ) {
             Alert.alert(
-                'You do not have the education for this job',
+                GAME_TEXT_CONSTANTS.JOB_TITLE_FAILED,
                 `You must take ${selectedJob.requirement.education} before you can apply for this job`
             );
             return false;
@@ -93,7 +94,7 @@ const CareerScreen: React.FC = () => {
 
         if (selectedJob.requirement.health > context.health) {
             Alert.alert(
-                'You are not healthy enough for this job',
+                GAME_TEXT_CONSTANTS.JOB_TITLE_FAILED,
                 `You health must be at least ${selectedJob.requirement.health} to apply`
             );
 
@@ -102,10 +103,9 @@ const CareerScreen: React.FC = () => {
 
         if (selectedJob.requirement.smarts > context.smarts) {
             Alert.alert(
-                'You are not smart enough for this job',
+                GAME_TEXT_CONSTANTS.JOB_TITLE_FAILED,
                 `You smart must be at least ${selectedJob.requirement.smarts} to apply`
             );
-
             return false;
         }
 
@@ -118,7 +118,7 @@ const CareerScreen: React.FC = () => {
                 context.jobs.filter((job: Job) => job.name !== selectedJob.name)
             );
             Alert.alert(
-                'Job Quit',
+                GAME_TEXT_CONSTANTS.JOB_TITLE_QUIT,
                 'You have successfully quit the job: ' + selectedJob.name
             );
             setSelectedJob(null);
@@ -139,7 +139,7 @@ const CareerScreen: React.FC = () => {
                     balance={context.money}
                 />
                 <ScrollView style={GLOBAL_STYLES.maxWidth}>
-                    <SectionHeader heading='Available Jobs' />
+                    <SectionHeader heading={GAME_TEXT_CONSTANTS.HEADING_JOB_SECTION} />
                     <ListScrollView
                         itemList={filteredJobs}
                         onPressItem={handleJobPress}
@@ -155,8 +155,8 @@ const CareerScreen: React.FC = () => {
                     }
                     buttonText={
                         context.jobs.includes(selectedJob as never)
-                            ? 'Quit Job'
-                            : 'Apply Job'
+                            ? GAME_TEXT_CONSTANTS.JOB_QUIT_BUTTON_TEXT
+                            : GAME_TEXT_CONSTANTS.JOB_APPLY_BUTTON_TEXT
                     }
                 />
             </View>

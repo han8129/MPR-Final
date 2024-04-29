@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground } from 'react-native';
 import { TOP_IMAGE_STYLES } from '../../styles/AuthStyles';
 
 const image = require('../../assets/images/bg.jpg');

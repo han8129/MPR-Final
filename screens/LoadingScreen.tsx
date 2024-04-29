@@ -1,25 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
+import { SCREEN } from '../styles/LoadingScreenStyles';
+import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 const LoadingScreen: React.FC = () => {
     return (
-        <View style={styles.container}>
+        <View style={SCREEN.container}>
             <ActivityIndicator size='large' color='#0000ff' />
-            <Text style={styles.text}>Loading...</Text>
+            <Text style={SCREEN.text}>{GAME_TEXT_CONSTANTS.LOADING_TEXT}</Text>
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    text: {
-        marginTop: 20,
-        fontSize: 16,
-    },
-});
 
 export default LoadingScreen;

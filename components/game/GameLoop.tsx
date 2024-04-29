@@ -7,7 +7,7 @@ import { getData } from '../../services/DataService';
 import {
     GAME_TEXT_CONSTANTS,
     PLAYER_CONSTANTS,
-} from '../../constants/GameContansts';
+} from '../../constants/GameConstants';
 import useInterval from '../../hooks/useInterval';
 
 export default function GameLoop() {
@@ -128,9 +128,16 @@ export default function GameLoop() {
                 context.setJobs(validJobs);
                 // generate a random integer from 0 to n -1
                 // 20% for an event to happen
-                if ([0].includes(getRandomInt({ min: 0, max: PLAYER_CONSTANTS.MAX_EVENT_PERCENTAGE }))) {
+                if (
+                    [0].includes(
+                        getRandomInt({
+                            min: 0,
+                            max: PLAYER_CONSTANTS.MAX_EVENT_PERCENTAGE,
+                        })
+                    )
+                ) {
                     isPause = true;
-                    applyRandomEvent({health, happiness, smarts, money});
+                    applyRandomEvent({ health, happiness, smarts, money });
                 }
             }
 
@@ -138,7 +145,14 @@ export default function GameLoop() {
             if (!isPause) {
                 // Extracting this into a standalone function does not work
                 // 10% of being approached by someone everyday
-                if ([0].includes(getRandomInt({ min: 0, max: PLAYER_CONSTANTS.MAX_INTERACTION_PERCENTAGE }))) {
+                if (
+                    [0].includes(
+                        getRandomInt({
+                            min: 0,
+                            max: PLAYER_CONSTANTS.MAX_INTERACTION_PERCENTAGE,
+                        })
+                    )
+                ) {
                     isPause = true;
                     const npc: NPC = getRandomElement(npcs);
                     const npcFavor = getFavor(npc);
@@ -152,18 +166,24 @@ export default function GameLoop() {
 
                     health += interaction.effect.health;
 
-                    if (health < PLAYER_CONSTANTS.ZERO) health = PLAYER_CONSTANTS.ZERO;
-                    if (health > PLAYER_CONSTANTS.MAX_HEALTH) health = PLAYER_CONSTANTS.MAX_HEALTH;
+                    if (health < PLAYER_CONSTANTS.ZERO)
+                        health = PLAYER_CONSTANTS.ZERO;
+                    if (health > PLAYER_CONSTANTS.MAX_HEALTH)
+                        health = PLAYER_CONSTANTS.MAX_HEALTH;
 
                     happiness += interaction.effect.happiness;
 
-                    if (happiness < PLAYER_CONSTANTS.ZERO) happiness = PLAYER_CONSTANTS.ZERO;
-                    if (happiness > PLAYER_CONSTANTS.MAX_HAPPINESS) happiness = PLAYER_CONSTANTS.MAX_HAPPINESS;
+                    if (happiness < PLAYER_CONSTANTS.ZERO)
+                        happiness = PLAYER_CONSTANTS.ZERO;
+                    if (happiness > PLAYER_CONSTANTS.MAX_HAPPINESS)
+                        happiness = PLAYER_CONSTANTS.MAX_HAPPINESS;
 
                     smarts += interaction.effect.smarts;
 
-                    if (smarts < PLAYER_CONSTANTS.ZERO) smarts = PLAYER_CONSTANTS.ZERO;
-                    if (smarts > PLAYER_CONSTANTS.MAX_SMARTS) smarts = PLAYER_CONSTANTS.MAX_SMARTS;
+                    if (smarts < PLAYER_CONSTANTS.ZERO)
+                        smarts = PLAYER_CONSTANTS.ZERO;
+                    if (smarts > PLAYER_CONSTANTS.MAX_SMARTS)
+                        smarts = PLAYER_CONSTANTS.MAX_SMARTS;
 
                     context.setHealth(health);
                     context.setHappiness(happiness);
@@ -230,7 +250,7 @@ export default function GameLoop() {
         }
     }
 
-    function applyRandomEvent({health, smarts, money, happiness}: Effect) {
+    function applyRandomEvent({ health, smarts, money, happiness }: Effect) {
         const randIndex = Math.floor(Math.random() * events.length);
         const event: Event = events[randIndex];
         Alert.alert(
@@ -283,7 +303,7 @@ export default function GameLoop() {
             GAME_TEXT_CONSTANTS.DIE_DESC,
             [
                 {
-                    text: GAME_TEXT_CONSTANTS.DIE_YES_TEXT,
+                    text: GAME_TEXT_CONSTANTS.YES_TEXT,
                     onPress: () => {
                         context.setHealth(PLAYER_CONSTANTS.INITIAL_HEALTH);
                         context.setMoney(PLAYER_CONSTANTS.INITIAL_MONEY);
@@ -301,7 +321,7 @@ export default function GameLoop() {
                     },
                 },
                 {
-                    text: GAME_TEXT_CONSTANTS.DIE_NO_TEXT,
+                    text: GAME_TEXT_CONSTANTS.NO_TEXT,
                     onPress: () => {
                         BackHandler.exitApp();
                     },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, ViewStyle, TextStyle } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 import { BUTTON_STYLES } from '../../styles/AuthStyles';
 
 interface CustomButtonProps {

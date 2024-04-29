@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { Relationship } from '../../screens/ActivityScreen';
+import { Relationship } from '../../models/Types';
 import { MODAL_SHARED_STYLE } from '../../styles/ComponentStyles';
 import ModalContentWrapper from './ModelContentWrapper';
 import ModalButton from './ModalButton';

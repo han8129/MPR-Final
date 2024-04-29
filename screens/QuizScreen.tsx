@@ -8,6 +8,7 @@ import { Quiz } from '../models/Types';
 import LoadingScreen from './LoadingScreen';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import { SCREEN } from '../styles/QuizScreenStyles';
+import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 interface Props {
     navigation: any;
@@ -32,7 +33,7 @@ const QuizScreen: React.FC<Props> = ({ navigation, route }) => {
                 );
                 setIsLoading(false);
             } catch (error) {
-                console.error('Error fetching quiz data:', error);
+                console.error(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, error);
             }
         };
         fetchQuizData();
@@ -71,17 +72,17 @@ const QuizScreen: React.FC<Props> = ({ navigation, route }) => {
             ]);
             Alert.alert(
                 `Quiz Success ${correctAnswers}/${quizData?.questions.length}`,
-                'Congratulations! You are qualified to take this course.',
+                GAME_TEXT_CONSTANTS.QUIZ_DESC_SUCCESS,
                 [
                     {
-                        text: 'OK',
+                        text: GAME_TEXT_CONSTANTS.OK_TEXT,
                         onPress: () => navigation.navigate('Education'),
                     },
                 ]
             );
         } else {
             Alert.alert(
-                ` Quiz Failed ${correctAnswers}/${quizData?.questions.length}`,
+                `Quiz Failed ${correctAnswers}/${quizData?.questions.length}`,
                 `You need to get at least ${
                     (quizData?.questions.length ?? 0) / 2
                 } out of ${
@@ -89,7 +90,7 @@ const QuizScreen: React.FC<Props> = ({ navigation, route }) => {
                 } to pass the quiz. Please learn carefully.`,
                 [
                     {
-                        text: 'OK',
+                        text: GAME_TEXT_CONSTANTS.OK_TEXT,
                         onPress: () => navigation.navigate('Education'),
                     },
                 ]
@@ -100,15 +101,15 @@ const QuizScreen: React.FC<Props> = ({ navigation, route }) => {
     const navigateBack = () => {
         // alert user if they try to leave the quiz screen
         Alert.alert(
-            'Warning',
-            'Are you sure you want to leave the quiz? All progress will be lost.',
+            GAME_TEXT_CONSTANTS.WARNING_TITLE,
+            GAME_TEXT_CONSTANTS.WARNING_DESC_EXIT_QUIZ,
             [
                 {
-                    text: 'Yes',
+                    text: GAME_TEXT_CONSTANTS.YES_TEXT,
                     onPress: () => navigation.goBack(),
                 },
                 {
-                    text: 'No',
+                    text: GAME_TEXT_CONSTANTS.NO_TEXT,
                 },
             ]
         );

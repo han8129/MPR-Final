@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import { MODAL_SHARED_STYLE } from '../../styles/ComponentStyles';
 import { Effect } from '../../models/Types';
 

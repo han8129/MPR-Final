@@ -11,7 +11,10 @@ import { User } from '../models/Types';
 import { BottomNavText } from '../components/auth/BottomNavText';
 import { AUTH_STYLES } from '../styles/AuthStyles';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
-import { PLAYER_CONSTANTS } from '../constants/GameContansts';
+import {
+    GAME_TEXT_CONSTANTS,
+    PLAYER_CONSTANTS,
+} from '../constants/GameConstants';
 
 interface Props {
     navigation: any;
@@ -67,10 +70,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     navigation.navigate('Login');
                 }
             } catch (error) {
-                Alert.alert(
-                    'Error occurred during signing up new user',
-                    'Please try again later'
-                );
+                alert(GAME_TEXT_CONSTANTS.ERROR_SIGNUP_RESPONSE);
             }
         }
     };
@@ -113,10 +113,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                         isError={rePasswordError}
                     />
 
-                    <CustomButton onPress={handleSignUp} title='Sign up' />
+                    <CustomButton onPress={handleSignUp} title={GAME_TEXT_CONSTANTS.SIGNUP_BUTTON_TEXT} />
                     <BottomNavText
-                        title='Already have an account?'
-                        text='Login'
+                        title={GAME_TEXT_CONSTANTS.TO_SIGNIN_PROMPT}
+                        text={GAME_TEXT_CONSTANTS.TO_LOGIN_TEXT}
                         onPress={handleLogin}
                     />
                 </View>

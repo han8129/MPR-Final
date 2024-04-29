@@ -13,6 +13,7 @@ import LoadingScreen from './LoadingScreen';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import { PARENT_INFOS } from '../data/dummy-data';
 import { Relationship } from '../models/Types';
+import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 const ActivityScreen: React.FC = () => {
     const context = React.useContext(GameContext);
@@ -45,7 +46,7 @@ const ActivityScreen: React.FC = () => {
                 setFilteredActivities(filteredActivities);
                 setIsLoading(false);
             } catch (error) {
-                console.error('Error fetching activities data:', error);
+                console.error(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, error);
             }
         };
 
@@ -65,7 +66,7 @@ const ActivityScreen: React.FC = () => {
         if (selectedActivity) {
             if (age < selectedActivity.ageNeeded) {
                 Alert.alert(
-                    'You are not old enough to apply for this activity',
+                    GAME_TEXT_CONSTANTS.ERROR_ACTIVITY_AGE,
                     'You must be at least ' +
                         selectedActivity.ageNeeded +
                         ' years old to apply for this activity'
@@ -75,7 +76,7 @@ const ActivityScreen: React.FC = () => {
 
             if (context.money < +selectedActivity.effect.money) {
                 Alert.alert(
-                    'You do not have enough money to apply for this activity',
+                    GAME_TEXT_CONSTANTS.ERROR_ACTIVITY_MONEY,
                     'You need at least $' +
                         selectedActivity.effect.money +
                         ' to apply for this activity'
@@ -117,13 +118,17 @@ const ActivityScreen: React.FC = () => {
                     userTitle={context.title}
                     balance={context.money}
                 />
-                <ScrollView style={{ width: '100%' }}>
-                    <SectionHeader heading='Your Parents' />
+                <ScrollView style={GLOBAL_STYLES.maxWidth}>
+                    <SectionHeader
+                        heading={GAME_TEXT_CONSTANTS.HEADING_PARENT_SECTION}
+                    />
                     <ListScrollView
                         itemList={PARENT_INFOS}
                         onPressItem={handleRelPress}
                     />
-                    <SectionHeader heading='Available Activities' />
+                    <SectionHeader
+                        heading={GAME_TEXT_CONSTANTS.HEADING_ACTIVITY_SECTION}
+                    />
                     <ListScrollView
                         itemList={filteredActivities}
                         onPressItem={handleActivityPress}
@@ -138,7 +143,7 @@ const ActivityScreen: React.FC = () => {
                     modalObject={selectedActivity}
                     closeModal={() => setSelectedActivity(null)}
                     handlePress={handleJoin}
-                    buttonText='Join'
+                    buttonText={GAME_TEXT_CONSTANTS.ACTIVITY_JOIN_BUTTON_TEXT}
                 />
             </View>
         </>

@@ -6,6 +6,7 @@ import { GameContext } from '../../store/GameContext';
 import ModalButton from './ModalButton';
 import { MODAL_SHARED_STYLE } from '../../styles/ComponentStyles';
 import ModalContentWrapper from './ModelContentWrapper';
+import { GAME_TEXT_CONSTANTS } from '../../constants/GameConstants';
 
 interface ExitModalProps {
     isOpened: boolean;
@@ -46,7 +47,7 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
 
     return (
         <ModalContentWrapper
-            title='Are you sure you want to exit?'
+            title={GAME_TEXT_CONSTANTS.WARNING_EXIT_APP}
             closeModal={closeModal}
             isOpened={isOpened}
         >
@@ -83,8 +84,8 @@ const ExitModal: React.FC<ExitModalProps> = ({ isOpened, closeModal }) => {
                 {context.activities ? context.activities.join(', ') : 'None'}
             </Text>
 
-            <ModalButton onPress={ExitAndSave} buttonText='Save and Exit' />
-            <ModalButton onPress={justExit} buttonText='Just Exit' />
+            <ModalButton onPress={ExitAndSave} buttonText={GAME_TEXT_CONSTANTS.SAVE_AND_EXIT_BUTTON_TEXT} />
+            <ModalButton onPress={justExit} buttonText={GAME_TEXT_CONSTANTS.JUST_EXIT_BUTTON_TEXT} />
         </ModalContentWrapper>
     );
 };

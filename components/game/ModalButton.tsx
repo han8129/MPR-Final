@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
-import { MODAL_SHARED_STYLE } from '../../styles/ComponentStyles'; // Import styles from a shared file or define locally
+import { MODAL_SHARED_STYLE } from '../../styles/ComponentStyles'; 
 
 type ActionButtonProps = {
     onPress: () => void;

@@ -8,6 +8,7 @@ import {
 import { GameContext } from '../store/GameContext';
 import ModalButton from '../components/game/ModalButton';
 import { SCREEN_STYLES } from '../styles/ChooseGenderScreenStyles';
+import { GAME_TEXT_CONSTANTS, PLAYER_CONSTANTS } from '../constants/GameConstants';
 
 interface Props {
     navigation: any;
@@ -18,7 +19,7 @@ const ChooseGenderScreen: React.FC<Props> = ({ navigation }) => {
     const [isMale, setIsMale] = useState<boolean>(true);
 
     const handleConfirmGender = () => {
-        context.setGender(isMale ? 'male' : 'female');
+        context.setGender(isMale ? PLAYER_CONSTANTS.GENDER_MALE : PLAYER_CONSTANTS.GENDER_FEMALE);
         context.setIsPause(false);
         navigation.navigate('Game');
     };
@@ -47,7 +48,7 @@ const ChooseGenderScreen: React.FC<Props> = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-            <ModalButton onPress={handleConfirmGender} buttonText='Confirm' />
+            <ModalButton onPress={handleConfirmGender} buttonText={GAME_TEXT_CONSTANTS.CONFIRM_BUTTON_TEXT} />
         </View>
     );
 };

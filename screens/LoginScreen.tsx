@@ -10,6 +10,7 @@ import { Login } from '../services/PlayerService';
 import { BottomNavText } from '../components/auth/BottomNavText';
 import { AUTH_STYLES } from '../styles/AuthStyles';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
+import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 interface Props {
     navigation: any; // Adjust type according to your navigation prop type
@@ -51,8 +52,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     context.setJobs(res.player.jobs);
                     context.setCoursesTaken(res.player.coursesTaken);
                     context.setGender(res.player.gender);
-                    context.setBadDeeds(res.player.badDeeds)
-                    context.setGoodDeeds(res.player.goodDeeds)
+                    context.setBadDeeds(res.player.badDeeds);
+                    context.setGoodDeeds(res.player.goodDeeds);
 
                     if (!res.player.gender) {
                         navigation.navigate('ChooseGender');
@@ -61,9 +62,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                     }
                 }
             } catch (error) {
-                alert(
-                    'An error occurred during login. Please try again later.'
-                );
+                alert(GAME_TEXT_CONSTANTS.ERROR_LOGIN_RESPONSE);
             }
         }
     };
@@ -78,7 +77,9 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
             <View style={GLOBAL_STYLES.container}>
                 <TopBackground />
                 <View style={AUTH_STYLES.inputContainer}>
-                    <Text style={AUTH_STYLES.text}>Log in</Text>
+                    <Text style={AUTH_STYLES.text}>
+                        {GAME_TEXT_CONSTANTS.SIGNIN_BUTTON_TEXT}
+                    </Text>
 
                     <Input
                         value={email}
@@ -95,11 +96,14 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
                         isError={passwordError}
                     />
 
-                    <CustomButton onPress={handleLogin} title='Login' />
+                    <CustomButton
+                        onPress={handleLogin}
+                        title={GAME_TEXT_CONSTANTS.SIGNIN_BUTTON_TEXT}
+                    />
                     <BottomNavText
-                        text='Sign up here'
+                        text={GAME_TEXT_CONSTANTS.TO_SIGNUP_TEXT}
                         onPress={handleSignUp}
-                        title={'Dont have any account ?'}
+                        title={GAME_TEXT_CONSTANTS.TO_SIGN_UP_PROMPT}
                     />
                 </View>
             </View>

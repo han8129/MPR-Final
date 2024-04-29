@@ -27,7 +27,7 @@ const Input = ({
                 />
             </View>
             {isError && (
-                <Text style={{ color: 'red' }}>
+                <Text style={SHARED_INPUT_STYLES.errorText}>
                     Please enter a valid {placeholder.toLowerCase()}.
                 </Text>
             )}
