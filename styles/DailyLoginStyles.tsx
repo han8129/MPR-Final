@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Color } from '../constants/Color';
+import Sizes from '../constants/Sizes';
 
 export const SCREEN_STYLES = StyleSheet.create({
     container: {
@@ -17,16 +18,16 @@ export const SCREEN_STYLES = StyleSheet.create({
         left: 20,
     },
     heading: {
-        fontSize: 24,
+        fontSize: Sizes.xxl,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 100,
-        marginBottom: 20,
+        marginTop: Sizes.xxxl,
+        marginBottom: Sizes.xl,
     },
     daysContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginBottom: 20,
+        marginBottom: Sizes.xl,
     },
     dayItem: {
         alignItems: 'center',
@@ -40,22 +41,22 @@ export const SCREEN_STYLES = StyleSheet.create({
         backgroundColor: '#94A3B8',
     },
     dayText: {
-        fontSize: 24,
+        fontSize: Sizes.xxl,
         fontWeight: 'bold',
     },
     moneyText: {
-        fontSize: 20,
+        fontSize: Sizes.xl,
         color: Color.red,
     },
     buttonContainer: {
         backgroundColor: Color.red,
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-        borderRadius: 8,
+        paddingVertical: Sizes.md,
+        paddingHorizontal: Sizes.xxl,
+        borderRadius: Sizes.md,
         alignSelf: 'center',
     },
     buttonText: {
-        fontSize: 16,
+        fontSize: Sizes.lg,
         fontWeight: 'bold',
         color: 'white',
     },

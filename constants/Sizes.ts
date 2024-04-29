@@ -1,9 +1,9 @@
 const Sizes =  {
-    sm: 3,
-    md: 7,
-    lg: 13,
-    xl: 25,
-    xxl: 51,
+    sm: 5,
+    md: 10,
+    lg: 16,
+    xl: 20,
+    xxl: 26,
     xxxl: 97,
 }
 
