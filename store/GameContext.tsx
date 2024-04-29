@@ -10,7 +10,7 @@ export const GameContext = createContext({
     events: [] as Event[],
     activities: [] as string[],
     days: PLAYER_CONSTANTS.ZERO,
-    jobs: [] as Job[],
+    jobs: new Array<string>(),
     coursesTaken: [] as string[],
     username: '',
     title: PLAYER_CONSTANTS.INITIAL_TITLE,
@@ -22,7 +22,7 @@ export const GameContext = createContext({
     isTakeDailyLogin: false,
     setIsDailyLogin: (e: boolean) => {},
     setUsername: (e: string) => {},
-    setJobs: (e: Job[]) => {},
+    setJobs: (e: string[]) => {},
     setCoursesTaken: (e: string[]) => {},
     setDays: (e: number) => {},
     setHealth: (e: number) => {},
@@ -35,6 +35,10 @@ export const GameContext = createContext({
     setIsPause: (e: boolean) => {},
     setGoodDeeds: (deeds: string[]) => {},
     setBadDeeds: (deeds: string[]) => {},
+    npcs: new Array<NPC>(),
+    setNpcs: (list: NPC[]) => {},
+    careers: new Array<Job>(),
+    setCareers: (c: Job[]) => {},
 });
 
 interface Props {
@@ -49,7 +53,8 @@ export default function GameContextProvider({ children }: Props) {
     const [activities, setActivities] = useState<string[]>([]); // Initialize activities as an empty array
     const [smarts, setSmarts] = useState(PLAYER_CONSTANTS.INITIAL_SMARTS);
     const [days, setDays] = useState(PLAYER_CONSTANTS.INITIAL_DAY);
-    const [jobs, setJobs] = useState<Job[]>([]);
+    const [jobs, setJobs] = useState(new Array<string>());
+    const [careers, setCareers] = useState(new Array<Job>());
     const [username, setUsername] = useState<string>(''); // Initialize username as an empty string
     const [coursesTaken, setCoursesTaken] = useState<string[]>([]);
     const [isTakeDailyLogin, setIsTakeDailyLogin] = useState(false);
@@ -57,9 +62,51 @@ export default function GameContextProvider({ children }: Props) {
     const [gender, setGender] = useState('');
     const [goodDeeds, setGoodDeeds] = useState(new Array<string>());
     const [badDeeds, setBadDeeds] = useState(new Array<string>());
+    const [goodDeeds, setGoodDeeds] = useState(new Array<string>());
+    const [badDeeds, setBadDeeds] = useState(new Array<string>());
     const [events, setEvents] = useState<Event[]>([]);
-
     const [isPause, setIsPause] = useState(true);
+    const [npcs, setNpcs] = useState(new Array<NPC>());
+
+    function setSmartsHandler(e: number) {
+        let newSmarts = e;
+        if (e < PLAYER_CONSTANTS.MIN_SMARTS) {
+            newSmarts = PLAYER_CONSTANTS.MIN_SMARTS;
+        }
+        if (e > PLAYER_CONSTANTS.MAX_SMARTS) {
+            newSmarts = PLAYER_CONSTANTS.MAX_SMARTS;
+        }
+
+        setSmarts(newSmarts);
+    }
+
+    function setHappinessHandler(e: number) {
+        let newHappiness = e;
+        if (e < PLAYER_CONSTANTS.MIN_HAPPINESS) {
+            newHappiness = PLAYER_CONSTANTS.MIN_HAPPINESS;
+        }
+        if (e > PLAYER_CONSTANTS.MAX_HAPPINESS) {
+            newHappiness = PLAYER_CONSTANTS.MAX_HAPPINESS;
+        }
+
+        setHappiness(newHappiness);
+    }
+
+    function setHealthHandler(e: number) {
+        let newHealth = e;
+        if (e < PLAYER_CONSTANTS.MIN_HEALTH) {
+            newHealth = PLAYER_CONSTANTS.MIN_HEALTH;
+        }
+        if (e > PLAYER_CONSTANTS.MAX_HEALTH) {
+            newHealth = PLAYER_CONSTANTS.MAX_HEALTH;
+        }
+
+        setHealth(newHealth);
+    }
+
+    function setMoneyHandler(e: number) {
+        setMoney(e);
+    }
 
     const context = {
         health: health,
@@ -83,10 +130,10 @@ export default function GameContextProvider({ children }: Props) {
         setDays: setDays,
         setJobs: setJobs,
         setCoursesTaken: setCoursesTaken,
-        setHealth: setHealth,
-        setMoney: setMoney,
-        setHappiness: setHappiness,
-        setSmarts: setSmarts,
+        setHealth: setHealthHandler,
+        setMoney: setMoneyHandler,
+        setHappiness: setHappinessHandler,
+        setSmarts: setSmartsHandler,
         setActivities: setActivities,
         isPause: isPause,
         setIsPause: setIsPause,
@@ -94,6 +141,10 @@ export default function GameContextProvider({ children }: Props) {
         setBadDeeds: setBadDeeds,
         goodDeeds: goodDeeds,
         badDeeds: badDeeds,
+        npcs: npcs,
+        setNpcs: setNpcs,
+        careers: careers,
+        setCareers: setCareers,
     };
 
     return (
