@@ -13,7 +13,7 @@ import LoadingScreen from './LoadingScreen';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import { PARENT_INFOS } from '../data/dummy-data';
 import { Relationship } from '../models/Types';
-import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
+import { GAME_TEXT_CONSTANTS, PLAYER_CONSTANTS } from '../constants/GameConstants';
 
 const ActivityScreen: React.FC = () => {
     const context = React.useContext(GameContext);
