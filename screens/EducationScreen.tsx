@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, ScrollView, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
@@ -19,10 +19,7 @@ interface Props {
 
 const EducationScreen: React.FC<Props> = ({ navigation }) => {
     const context = React.useContext(GameContext);
-
-    const [availableEducation, setAvailableEducation] = useState<Education[]>(
-        []
-    );
+    const EDUCATIONS = useRef(new Array<Education>());
 
     const age = Math.floor(context.days / 360);
 
@@ -30,19 +27,17 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
         useState<Education | null>();
     const [isLoading, setIsLoading] = useState(true);
 
+    const availableEduction = EDUCATIONS.current.filter(
+        (edu) =>
+            edu.ageNeeded <= age &&
+            !context.coursesTaken?.includes(edu.name as never)
+    );
+
     useEffect(() => {
         const fetchEducationData = async () => {
             try {
                 // Get the data from Firebase
-                const educationData = await getData<Education>('education');
-
-                // Set the education data in the context
-                const filteredEdus = educationData.filter(
-                    (edu) =>
-                        edu.ageNeeded <= age &&
-                        !context.coursesTaken?.includes(edu.name as never)
-                );
-                setAvailableEducation(filteredEdus);
+                EDUCATIONS.current = await getData<Education>('education');
                 setIsLoading(false);
             } catch (error) {
                 console.error(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, error);
@@ -50,10 +45,12 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
         };
         // Call the fetchEducationData function
         fetchEducationData();
-    }, [context.days, context.coursesTaken, context.money]);
+    }, []);
+
+    useEffect(() => {}, [context.days]);
 
     const handleEduPress = (index: number) => {
-        setSelectedEducation(availableEducation[index]);
+        setSelectedEducation(availableEduction[index]);
     };
 
     const handleTake = () => {
@@ -98,7 +95,6 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
             setSelectedEducation(null);
         }
     };
-
     if (isLoading) {
         return <LoadingScreen />;
     }
@@ -116,7 +112,7 @@ const EducationScreen: React.FC<Props> = ({ navigation }) => {
                         heading={GAME_TEXT_CONSTANTS.HEADING_EDUCATION_SECTION}
                     />
                     <ListScrollView
-                        itemList={availableEducation}
+                        itemList={availableEduction}
                         onPressItem={handleEduPress}
                     />
                 </ScrollView>

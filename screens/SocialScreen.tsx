@@ -4,9 +4,10 @@ import {
     FlatList,
     Pressable,
     Text,
+    Alert,
 } from 'react-native';
 import Header from '../components/game/Header';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { GameContext } from '../store/GameContext';
 import { GLOBAL_STYLES } from '../styles/SharedStyles';
 import SectionHeader from '../components/game/SectionHeader';
@@ -21,21 +22,66 @@ export default function SocialScreen() {
     const context = useContext(GameContext);
     const [npc, setNpc] = useState<NPC | null>(null);
     const [showModel, setShowModel] = useState(false);
-    const [npcList, setNpcList] = useState(new Array<NPC>());
+    const NPCS = useRef(new Array<NPC>());
+
+    const availableNpcs = NPCS.current.filter(
+        (npc) =>
+            npc.age <= Math.floor(context.days / PLAYER_CONSTANTS.DAY_IN_YEAR)
+    );
+
+    const modal =
+        npc == null ? (
+            <></>
+        ) : (
+            <ModalContentWrapper
+                title={npc.name}
+                closeModal={() => setNpc(null)}
+                isOpened={showModel}
+            >
+                <Text>Relationship: {npc.relationshipType}</Text>
+                <Text>Description: {npc.desc}</Text>
+                <Text>Marital Status: {npc.maritalStatus}</Text>
+                <Text>Work: {npc.work}</Text>
+                <SocialInteractions name={npc.name} setDeed={setDeedHandler} />
+            </ModalContentWrapper>
+        );
+
+    const content =
+        availableNpcs.length == 0 ? (
+            <View style={SCROLL_VIEW_STYLES.emptyContainer}>
+                <Text style={SCROLL_VIEW_STYLES.emptyText}>
+                    No items available
+                </Text>
+            </View>
+        ) : (
+            <View style={styles.list}>
+                <FlatList
+                    data={availableNpcs}
+                    renderItem={({ item, index }) => (
+                        <Item
+                            npc={item}
+                            onPress={() => {
+                                setNpc(availableNpcs[index]);
+                            }}
+                        />
+                    )}
+                />
+            </View>
+        );
+
+    useEffect(() => {}, [context.days]);
 
     useEffect(() => {
         getData<NPC>('npc')
-            .then((res) => setNpcList(res))
-            .catch((error) => console.log(error));
+            .then((res) => (NPCS.current = res))
+            .catch((_) =>
+                Alert.alert('Error Connecting to Server', 'Please Try Later')
+            );
     }, []);
 
     useEffect(() => {
         setShowModel(npc == null ? false : true);
     }, [npc]);
-
-    function closeModel() {
-        setNpc(null);
-    }
 
     function setDeedHandler({ name, deed }: { name: string; deed: number }) {
         switch (deed) {
@@ -50,23 +96,6 @@ export default function SocialScreen() {
 
         setNpc(null);
     }
-
-    const modal =
-        npc == null ? (
-            <></>
-        ) : (
-            <ModalContentWrapper
-                title={npc.name}
-                closeModal={closeModel}
-                isOpened={showModel}
-            >
-                <Text>Relationship: {npc.relationshipType}</Text>
-                <Text>Description: {npc.desc}</Text>
-                <Text>Marital Status: {npc.maritalStatus}</Text>
-                <Text>Work: {npc.work}</Text>
-                <SocialInteractions name={npc.name} setDeed={setDeedHandler} />
-            </ModalContentWrapper>
-        );
 
     return (
         <>
@@ -93,6 +122,8 @@ export default function SocialScreen() {
                 </View>
                 {modal}
             </View>
+            {content}
+            {modal}
         </>
     );
 }

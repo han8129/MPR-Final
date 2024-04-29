@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { GameContext } from '../../store/GameContext';
-import { NPC, NPCInteraction, Event, Effect } from '../../models/Types';
+import { NPC, NPCInteraction, Event, Effect, Job } from '../../models/Types';
 import { Alert, BackHandler } from 'react-native';
 import { getRandomElement, getRandomInt } from '../../utils/random';
 import { getData } from '../../services/DataService';
@@ -11,9 +11,8 @@ import {
 import useInterval from '../../hooks/useInterval';
 
 export default function GameLoop() {
-    const [events, setEvents] = useState<Event[]>([]); // Initialize events as an empty array
+    const [events, setEvents] = useState(new Array<Event>()); // Initialize events as an empty array
     const context = useContext(GameContext);
-    const [npcs, setNpcs] = useState(new Array<NPC>());
     const [interactions, setInteractions] = useState(
         new Array<NPCInteraction>()
     );
@@ -28,7 +27,7 @@ export default function GameLoop() {
         context.smarts,
         context.happiness,
         context.money,
-        context.isPause,
+        context.isPause
     ]);
 
     function callback() {
@@ -44,7 +43,7 @@ export default function GameLoop() {
             money += PLAYER_CONSTANTS.MONEY_AT_18;
         }
 
-        if (money == PLAYER_CONSTANTS.ZERO) {
+        if (money <= PLAYER_CONSTANTS.ZERO) {
             health -= PLAYER_CONSTANTS.HEALTH_RATE;
         }
 
@@ -70,30 +69,10 @@ export default function GameLoop() {
             smarts += PLAYER_CONSTANTS.NEW_AGE_VALUE;
         }
 
-        if (health > PLAYER_CONSTANTS.MAX_HEALTH) {
-            health = PLAYER_CONSTANTS.MAX_HEALTH;
-        }
-
-        if (happiness > PLAYER_CONSTANTS.MAX_HAPPINESS) {
-            happiness = PLAYER_CONSTANTS.MAX_HAPPINESS;
-        }
-
-        if (smarts > PLAYER_CONSTANTS.MAX_SMARTS) {
-            smarts = PLAYER_CONSTANTS.MAX_SMARTS;
-        }
-
-        if (health <= PLAYER_CONSTANTS.ZERO) {
+        if (health <= PLAYER_CONSTANTS.MIN_HEALTH) {
             isPause = true;
             resetGame();
             return;
-        }
-
-        if (happiness < PLAYER_CONSTANTS.ZERO) {
-            happiness = PLAYER_CONSTANTS.ZERO;
-        }
-
-        if (smarts < PLAYER_CONSTANTS.ZERO) {
-            smarts = PLAYER_CONSTANTS.ZERO;
         }
 
         // Events only occur after the age of 6
@@ -101,7 +80,7 @@ export default function GameLoop() {
             // Events may occur at the start of the month
             if (dayInMonth > PLAYER_CONSTANTS.DAY_IN_MONTH - 2) {
                 // Each month a job will generate money
-                for (const job of context.jobs) {
+                for (const job of context.careers) {
                     money += job.effect.money;
                     health += job.effect.health;
                     happiness += job.effect.happiness;
@@ -111,7 +90,13 @@ export default function GameLoop() {
                 const validJobs = [];
 
                 // force quit job if requirements are not met
-                for (const job of context.jobs) {
+                const jobs = context.jobs.map((name) =>
+                    context.careers.find((career) => name == career.name)
+                );
+
+                for (const job of jobs) {
+                    if (job == undefined) continue;
+
                     if (
                         health < job.requirement.health ||
                         smarts < job.requirement.smarts
@@ -122,10 +107,11 @@ export default function GameLoop() {
 
                         continue;
                     }
-                    validJobs.push(job);
+                    validJobs.push(job.name);
                 }
 
                 context.setJobs(validJobs);
+
                 // generate a random integer from 0 to n -1
                 // 20% for an event to happen
                 if (
@@ -153,8 +139,16 @@ export default function GameLoop() {
                         })
                     )
                 ) {
+                if (
+                    [0].includes(
+                        getRandomInt({
+                            min: 0,
+                            max: PLAYER_CONSTANTS.MAX_INTERACTION_PERCENTAGE,
+                        })
+                    )
+                ) {
                     isPause = true;
-                    const npc: NPC = getRandomElement(npcs);
+                    const npc: NPC = getRandomElement(context.npcs);
                     const npcFavor = getFavor(npc);
                     if (interactions.length < 1) return;
 
@@ -165,25 +159,8 @@ export default function GameLoop() {
                         getRandomElement(possibleInteractions);
 
                     health += interaction.effect.health;
-
-                    if (health < PLAYER_CONSTANTS.ZERO)
-                        health = PLAYER_CONSTANTS.ZERO;
-                    if (health > PLAYER_CONSTANTS.MAX_HEALTH)
-                        health = PLAYER_CONSTANTS.MAX_HEALTH;
-
                     happiness += interaction.effect.happiness;
-
-                    if (happiness < PLAYER_CONSTANTS.ZERO)
-                        happiness = PLAYER_CONSTANTS.ZERO;
-                    if (happiness > PLAYER_CONSTANTS.MAX_HAPPINESS)
-                        happiness = PLAYER_CONSTANTS.MAX_HAPPINESS;
-
                     smarts += interaction.effect.smarts;
-
-                    if (smarts < PLAYER_CONSTANTS.ZERO)
-                        smarts = PLAYER_CONSTANTS.ZERO;
-                    if (smarts > PLAYER_CONSTANTS.MAX_SMARTS)
-                        smarts = PLAYER_CONSTANTS.MAX_SMARTS;
 
                     context.setHealth(health);
                     context.setHappiness(happiness);
@@ -239,14 +216,12 @@ export default function GameLoop() {
 
     async function fetch() {
         try {
-            setNpcs(await getData<NPC>('npc'));
+            context.setNpcs(await getData<NPC>('npc'));
+            context.setCareers(await getData<Job>('job'));
             setInteractions(await getData<NPCInteraction>('npc interaction'));
             setEvents(await getData<Event>('event'));
         } catch (error) {
-            Alert.alert(
-                'We have trouble connecting to the server',
-                'Please try later'
-            );
+            Alert.alert('Error connecting to the server', 'Please try later');
         }
     }
 
@@ -260,37 +235,16 @@ export default function GameLoop() {
                 text: option.desc,
                 onPress: () => {
                     // Update player stats based on selected option
-                    const newHealth = Math.max(
-                        PLAYER_CONSTANTS.MIN_HEALTH,
-                        Math.min(
-                            PLAYER_CONSTANTS.MAX_HEALTH,
-                            health + option.effect.health
-                        )
-                    );
-                    const newMoney = Math.max(
-                        PLAYER_CONSTANTS.MIN_MONEY,
-                        money + option.effect.money
-                    );
-                    const newHappiness = Math.max(
-                        PLAYER_CONSTANTS.MIN_HAPPINESS,
-                        Math.min(
-                            PLAYER_CONSTANTS.MAX_HAPPINESS,
-                            happiness + option.effect.happiness
-                        )
-                    );
-                    const newSmarts = Math.max(
-                        PLAYER_CONSTANTS.MIN_SMARTS,
-                        Math.min(
-                            PLAYER_CONSTANTS.MAX_SMARTS,
-                            smarts + option.effect.smarts
-                        )
-                    );
+                    health += option.effect.health;
+                    smarts += option.effect.smarts;
+                    money += option.effect.money;
+                    happiness += option.effect.happiness;
 
                     // Update player stats based on selected option
-                    context.setHealth(newHealth);
-                    context.setMoney(newMoney);
-                    context.setHappiness(newHappiness);
-                    context.setSmarts(newSmarts);
+                    context.setHealth(health);
+                    context.setMoney(money);
+                    context.setHappiness(happiness);
+                    context.setSmarts(smarts);
                     context.setIsPause(false);
                 },
             }))

@@ -24,7 +24,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     const context = useContext(GameContext);
 
     const age = Math.floor(context.days / 360); // get quotient
-    const progress = Number((((context.days % 360) / 360) * 100).toFixed(2));
+    const progress = Number((((context.days % 360) / 360) * 100));
 
     const [isExitModalOpened, setIsExitModalOpened] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(true);

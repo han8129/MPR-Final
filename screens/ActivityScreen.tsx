@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, ScrollView, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Header from '../components/game/Header';
@@ -17,33 +17,28 @@ import { GAME_TEXT_CONSTANTS } from '../constants/GameConstants';
 
 const ActivityScreen: React.FC = () => {
     const context = React.useContext(GameContext);
-
     const [selectedRelationship, setSelectedRelationship] =
         useState<Relationship | null>(null);
-
     const [selectedActivity, setSelectedActivity] = useState<Activity | null>(
         null
     );
+    const ACTIVITIES = useRef(new Array<Activity>());
 
-    const age = Math.floor(context.days / 360);
+    const age = Math.floor(context.days / PLAYER_CONSTANTS.DAY_IN_YEAR);
 
-    const [filteredActivities, setFilteredActivities] = useState<Activity[]>(
-        []
+    const availableActivities = ACTIVITIES.current.filter(
+        (activity) =>
+            activity.ageNeeded <= age &&
+                    !context.activities?.includes(activity.name as never)
     );
+
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchActivitiesData = async () => {
             try {
                 // Get the data from Firebase
-                const activitiesData = await getData<Activity>('activity');
-
-                const filteredActivities = activitiesData.filter(
-                    (activity: Activity) =>
-                        activity.ageNeeded <= age &&
-                        !context.activities?.includes(activity.name as never)
-                );
-                setFilteredActivities(filteredActivities);
+                ACTIVITIES.current = await getData<Activity>('activity');
                 setIsLoading(false);
             } catch (error) {
                 console.error(GAME_TEXT_CONSTANTS.ERROR_FETCHING_DATA, error);
@@ -59,7 +54,7 @@ const ActivityScreen: React.FC = () => {
     };
 
     const handleActivityPress = (index: number) => {
-        setSelectedActivity(filteredActivities[index]);
+        setSelectedActivity(availableActivities[index]);
     };
 
     const handleJoin = () => {
@@ -130,7 +125,7 @@ const ActivityScreen: React.FC = () => {
                         heading={GAME_TEXT_CONSTANTS.HEADING_ACTIVITY_SECTION}
                     />
                     <ListScrollView
-                        itemList={filteredActivities}
+                        itemList={availableActivities}
                         onPressItem={handleActivityPress}
                     />
                 </ScrollView>
