@@ -18,7 +18,7 @@ export default function GameLoop() {
     );
 
     useEffect(() => {
-        fetch();
+        fetchData();
     }, []);
 
     useInterval(callback, PLAYER_CONSTANTS.DAY_INTERVAL, context.isPause, [
@@ -27,7 +27,7 @@ export default function GameLoop() {
         context.smarts,
         context.happiness,
         context.money,
-        context.isPause
+        context.isPause,
     ]);
 
     function callback() {
@@ -69,34 +69,33 @@ export default function GameLoop() {
             smarts += PLAYER_CONSTANTS.NEW_AGE_VALUE;
         }
 
-        if (health <= PLAYER_CONSTANTS.MIN_HEALTH) {
+        if (Math.floor(health) <= PLAYER_CONSTANTS.MIN_HEALTH) {
             isPause = true;
             resetGame();
             return;
         }
 
+        const age = Math.floor(days / PLAYER_CONSTANTS.DAY_IN_YEAR)
         // Events only occur after the age of 6
-        if (days > 6 * PLAYER_CONSTANTS.DAY_IN_YEAR) {
+        if (age >= 6 ) {
             // Events may occur at the start of the month
             if (dayInMonth > PLAYER_CONSTANTS.DAY_IN_MONTH - 2) {
                 // Each month a job will generate money
-                for (const job of context.careers) {
+                const validJobs = [];
+
+                // force quit job if requirements are not met
+                const jobs = context.careers.filter((career) =>
+                    context.jobs.includes(career.name)
+                );
+
+                for (const job of jobs) {
                     money += job.effect.money;
                     health += job.effect.health;
                     happiness += job.effect.happiness;
                     smarts += job.effect.smarts;
                 }
 
-                const validJobs = [];
-
-                // force quit job if requirements are not met
-                const jobs = context.jobs.map((name) =>
-                    context.careers.find((career) => name == career.name)
-                );
-
                 for (const job of jobs) {
-                    if (job == undefined) continue;
-
                     if (
                         health < job.requirement.health ||
                         smarts < job.requirement.smarts
@@ -129,6 +128,10 @@ export default function GameLoop() {
 
             // prioritise Event over NPC interaction
             if (!isPause) {
+                // limit npcs based on player age
+                const posisbleNpcs = context.npcs.filter((npc) => npc.age <= age)
+                if (posisbleNpcs.length == 0) return;
+
                 // Extracting this into a standalone function does not work
                 // 10% of being approached by someone everyday
                 if (
@@ -139,16 +142,8 @@ export default function GameLoop() {
                         })
                     )
                 ) {
-                if (
-                    [0].includes(
-                        getRandomInt({
-                            min: 0,
-                            max: PLAYER_CONSTANTS.MAX_INTERACTION_PERCENTAGE,
-                        })
-                    )
-                ) {
                     isPause = true;
-                    const npc: NPC = getRandomElement(context.npcs);
+                    const npc: NPC = getRandomElement(posisbleNpcs);
                     const npcFavor = getFavor(npc);
                     if (interactions.length < 1) return;
 
@@ -214,7 +209,7 @@ export default function GameLoop() {
         );
     }
 
-    async function fetch() {
+    async function fetchData() {
         try {
             context.setNpcs(await getData<NPC>('npc'));
             context.setCareers(await getData<Job>('job'));
