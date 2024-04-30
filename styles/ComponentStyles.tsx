@@ -89,7 +89,7 @@ export const PLAYER_HEADER_STYLES = StyleSheet.create({
         fontWeight: 'bold',
     },
     userTitle: {
-        fontSize: Sizes.xl,
+        fontSize: Sizes.lg,
     },
     balance: {
         fontSize: Sizes.lg,

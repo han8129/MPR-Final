@@ -33,8 +33,7 @@ const CareerScreen: React.FC = () => {
         if (selectedJob) {
             if (validateSelectedJob(selectedJob)) {
                 context.setJobs([...context.jobs, selectedJob.name]);
-                context.setTitle(selectedJob.name);
-
+                
                 Alert.alert(
                     GAME_TEXT_CONSTANTS.JOB_TITLE_SUCCESS,
                     'You have successfully taken the job: ' +

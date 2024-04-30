@@ -12,6 +12,7 @@ export const SCREEN = StyleSheet.create({
         fontSize: Sizes.xxl,
         fontWeight: 'bold',
         marginBottom: Sizes.xl,
+        textAlign: 'center',
     },
     question: {
         fontSize: Sizes.lg,

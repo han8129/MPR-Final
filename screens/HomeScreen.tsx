@@ -73,7 +73,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         if (context.jobs.length > 0) {
             title = ''
             for (const job of context.jobs) {
-                title = job.name;
+                title = job;
             }
         }
         context.setTitle(title);

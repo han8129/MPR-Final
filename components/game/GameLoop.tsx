@@ -189,10 +189,10 @@ export default function GameLoop() {
 
         days += 1;
 
-        context.setHealth(health);
+        context.setHealth(parseFloat(health.toFixed(2)));
         context.setMoney(money);
-        context.setHappiness(happiness);
-        context.setSmarts(smarts);
+        context.setHappiness(parseFloat(happiness.toFixed(2)));
+        context.setSmarts(parseFloat(smarts.toFixed(2)));
         context.setDays(days);
         context.setIsPause(isPause);
     }
@@ -236,10 +236,10 @@ export default function GameLoop() {
                     happiness += option.effect.happiness;
 
                     // Update player stats based on selected option
-                    context.setHealth(health);
+                    context.setHealth(parseFloat(health.toFixed(2)));
                     context.setMoney(money);
-                    context.setHappiness(happiness);
-                    context.setSmarts(smarts);
+                    context.setHappiness(parseFloat(happiness.toFixed(2)));
+                    context.setSmarts(parseFloat(smarts.toFixed(2)));
                     context.setIsPause(false);
                 },
             }))
