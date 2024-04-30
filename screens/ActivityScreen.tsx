@@ -96,7 +96,7 @@ const ActivityScreen: React.FC = () => {
     };
 
     const handleRelInteraction = () => {
-        context.setMoney(context.money + 50);
+        context.setMoney(context.money + 5);
         setSelectedRelationship(null);
     };
 
